@@ -1,6 +1,14 @@
 # MyRPS - A Simple Rock Paper Scissors Game
 **NOTE:** This project is purely for academic purposes for satisfying program requirements for [CMPE 135](http://www.cs.sjsu.edu/~mak/CMPE135/index.html) at San Jose State University  
 
+## How to Run
+Run these commands at root of project to compile and run
+```bash
+make
+./bin/main
+```
+
+
 ## Assignment Task
 - [ ] Implement the first version of the Rock-Paper-Scissors game.
   - [ ] Each game has 20 rounds.
