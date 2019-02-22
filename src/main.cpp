@@ -1,9 +1,16 @@
 #include <iostream>
 
+#include "game.h"
+
 using namespace std;
 
-int main() {
-    cout << "Welcome to MyRPS!" << endl;
+int main()
+{
+  cout << "Welcome to MyRPS!" << endl;
 
-    return 0;
+  myrps::Game this_game;
+
+  this_game.PlayMatch();
+
+  return 0;
 }
