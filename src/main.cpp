@@ -1,6 +1,9 @@
 #include <iostream>
 
-int main()
-{
+using namespace std;
+
+int main() {
+    cout << "Welcome to MyRPS!" << endl;
+
     return 0;
 }
