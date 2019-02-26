@@ -25,9 +25,8 @@ void Game::PlayMatch()
 
 void Game::PlayRound(Move player_move, Move computer_move)
 {
-  // TODO: Uncomment after tostring support added in move.h
-  // cout << "Player chose: " << player_move << endl;
-  // cout << "Computer chose: " << computer_move << endl;
+  cout << "Player chose: " << player_move << endl;
+  cout << "Computer chose: " << computer_move << endl;
 
   if (player_move == Move::kRock)
   {
