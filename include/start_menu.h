@@ -9,29 +9,27 @@
 #include "game.h"
 
 using namespace std;
-using namespace StartOptions;
 
 namespace myrps
 {
-    class StartMenu
-    {
-    public:
-        StartMenu();
-        void displayOptions();
-        void playGame();
-        void setDifficulty(SettingOption choice);
-        void displayDifficulties();
-        SettingOption getCurrentDifficulty();
-        StartOption GetUserChoice(string val);
+class StartMenu
+{
+public:
+  StartMenu();
+  void DisplayOptions();
+  void PlayGame();
+  void SetDifficulty(SettingOption choice);
+  void DisplayDifficulties();
+  SettingOption GetCurrentDifficulty();
+  StartOption GetUserChoice(string val);
 
-    private:
-        vector<StartOption> options;
-        StartOption GetUserChoice();
-        StartOption ValidateUserChoice(string val);
-        SettingOption difficulty;
-        myrps::SettingsMenu settings;
-        myrps::Game game;
-        // Difficulty current_difficulty;
-    };
-}
+private:
+  vector<StartOption> options;
+  StartOption GetUserChoice();
+  StartOption ValidateUserChoice(string val);
+  SettingOption difficulty;
+  myrps::SettingsMenu settings;
+  myrps::Game game;
+};
+} // namespace myrps
 #endif

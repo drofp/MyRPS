@@ -11,7 +11,7 @@ ComputerPlayer::ComputerPlayer()
 {
 }
 
-ComputerPlayer::ComputerPlayer(SettingOptions::SettingOption mode)
+ComputerPlayer::ComputerPlayer(SettingOption mode)
 {
   this->chooser = MakeChooser(mode);
 }
@@ -22,11 +22,11 @@ Move ComputerPlayer::DecideMove()
   return computer_move;
 }
 
-Chooser *ComputerPlayer::MakeChooser(SettingOptions::SettingOption mode)
+Chooser *ComputerPlayer::MakeChooser(SettingOption mode)
 {
   Chooser *chooser;
 
-  if (mode == SettingOptions::SettingOption::D_EASY)
+  if (mode == SettingOption::D_EASY)
     chooser = new RandomChooser();
   else
     cout << "Invalid move chooser!!" << endl;
@@ -34,7 +34,7 @@ Chooser *ComputerPlayer::MakeChooser(SettingOptions::SettingOption mode)
   return chooser;
 }
 
-void ComputerPlayer::SetComputerMode(SettingOptions::SettingOption mode)
+void ComputerPlayer::SetComputerMode(SettingOption mode)
 {
   chooser = MakeChooser(mode);
 }

@@ -10,6 +10,5 @@ class RandomChooser : public myrps::Chooser
 public:
   Move DecideMove();
 };
-}
-
+} // namespace myrps
 #endif

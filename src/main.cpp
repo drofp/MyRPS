@@ -9,6 +9,6 @@ using namespace std;
 int main()
 {
   myrps::StartMenu start;
-  start.displayOptions();
+  start.DisplayOptions();
   return 0;
 }
