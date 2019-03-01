@@ -24,7 +24,7 @@ Move ComputerPlayer::DecideMove()
 
 Chooser *ComputerPlayer::MakeChooser(SettingOption mode)
 {
-  Chooser *chooser;
+  Chooser *chooser = nullptr;
 
   if (mode == SettingOption::D_EASY)
     chooser = new RandomChooser();
