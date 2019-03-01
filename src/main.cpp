@@ -2,20 +2,15 @@
 
 #include "game.h"
 #include "start_menu.h"
+#include "settings_menu.h"
 
 using namespace std;
 
 int main()
 {
-  myrps::StartMenu start;
+  myrps::SettingsMenu start;
 
-  start.displayOptions();
-
-  // cout << "Welcome to MyRPS!" << endl;
-
-  // myrps::Game this_game;
-
-  // this_game.PlayMatch();
+  start.displaySettings();
 
   return 0;
 }
