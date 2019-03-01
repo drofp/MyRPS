@@ -22,14 +22,14 @@ namespace SettingOptions
       D_ERROR,
     };
 
-    static const SettingOption options_list[] = 
+    static const SettingOption settings_list[] = 
     {
         SettingOption::D_EASY, 
         SettingOption::D_MEDIUM, 
         SettingOption::D_HARD,
     };
 
-    static const int num_options = 3;
+    static const int num_settings = 3;
 }
 
 inline ostream& operator<< (ostream& ostr, const SettingOptions::SettingOption difficulty)

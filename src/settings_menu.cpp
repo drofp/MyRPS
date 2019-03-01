@@ -11,32 +11,33 @@ namespace myrps
 {
     SettingsMenu::SettingsMenu()
     {
-        for (int i = 0; i < num_options; i++)
+        for (int i = 0; i < num_settings; i++)
         {
-            settings.push_back(options_list[i]);
+            settings.push_back(settings_list[i]);
         }
     }
 
-    void SettingsMenu::displaySettings()
+    SettingOption SettingsMenu::displaySettings()
     {
         cout << "Select difficulty!" << endl;
         SettingOption user_choice = GetUserChoice();
         switch (user_choice)
         {
             case SettingOption::D_EASY:
-                std::cout << "Easy";
+                std::cout << "Easy" << endl;
                 break;
             case SettingOption::D_MEDIUM:
-                std::cout << "Medium";
+                std::cout << "Medium" << endl;
                 break;
             case SettingOption::D_HARD:
-                std::cout << "Hard";
+                std::cout << "Hard" << endl;
                 break;
 
             default:
                 std::cout << "Whatever";
                 break;
         }
+        return user_choice;
     }
 
     SettingOption SettingsMenu::GetUserChoice()
@@ -46,7 +47,7 @@ namespace myrps
         while(notValid)
         {
             string user_input;
-            cout << "Here are your options:" << endl;
+            cout << "Here are your difficulties:" << endl;
             for(unsigned int i = 0; i < settings.size(); i++)
             {
                 cout << settings[i] << "(" << i << ")" << endl;
