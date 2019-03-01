@@ -9,7 +9,6 @@
 #include "game.h"
 
 using namespace std;
-using namespace StartOptions;
 
 namespace myrps
 {
@@ -31,7 +30,6 @@ namespace myrps
         SettingOption difficulty;
         myrps::SettingsMenu settings;
         myrps::Game game;
-        // Difficulty current_difficulty;
     };
 } // namespace myrps
 #endif

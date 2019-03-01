@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace SettingOptions
+namespace myrps
 {
     enum class SettingOption
     {
@@ -23,19 +23,19 @@ namespace SettingOptions
     };
 
     static const int num_settings = 3;
-} // namespace SettingOptions
+} // namespace myrps
 
-inline ostream& operator<< (ostream& ostr, const SettingOptions::SettingOption difficulty)
+inline ostream& operator<< (ostream& ostr, const myrps::SettingOption difficulty)
 {
   switch (difficulty)
   {
-  case SettingOptions::SettingOption::D_EASY:
+  case myrps::SettingOption::D_EASY:
     ostr << "Easy";
     break;
-  case SettingOptions::SettingOption::D_MEDIUM:
+  case myrps::SettingOption::D_MEDIUM:
     ostr << "Medium";
     break;
-  case SettingOptions::SettingOption::D_HARD:
+  case myrps::SettingOption::D_HARD:
     ostr << "Hard";
     break;
 

@@ -6,7 +6,6 @@
 #include "game.h"
 
 using namespace std;
-using namespace StartOptions;
 
 namespace myrps
 {
@@ -23,7 +22,7 @@ StartMenu::StartMenu()
 
 void StartMenu::displayOptions()
 {
-  cout << "Welcome to MyRPS!" << endl;
+  cout << "Welcome to MyRPS! " << endl;
   StartOption user_choice = GetUserChoice();
   if (user_choice == StartOption::PLAY_GAME)
   {

@@ -5,7 +5,6 @@
 #include "setting_option.h"
 
 using namespace std;
-using namespace SettingOptions;
 
 namespace myrps
 {

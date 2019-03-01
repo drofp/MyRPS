@@ -27,11 +27,11 @@ private:
 
 public:
   Game();
-  Game(SettingOptions::SettingOption mode);
+  Game(SettingOption mode);
   void PlayMatch();
   Move GetPlayerMove();
   Move GetComputerMove();
-  void SetComputerMode(SettingOptions::SettingOption mode);
+  void SetComputerMode(SettingOption mode);
   void SetRoundsPerMatch(int rounds_per_match);
 };
 

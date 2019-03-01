@@ -19,10 +19,10 @@ private:
 
 public:
   ComputerPlayer();
-  ComputerPlayer(SettingOptions::SettingOption mode);
+  ComputerPlayer(SettingOption mode);
   Move DecideMove();
-  Chooser *MakeChooser(SettingOptions::SettingOption mode);
-  void SetComputerMode(SettingOptions::SettingOption mode);
+  Chooser *MakeChooser(SettingOption mode);
+  void SetComputerMode(SettingOption mode);
 };
 } // namespace myrps
 #endif

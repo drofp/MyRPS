@@ -11,9 +11,10 @@ namespace myrps
 {
 Game::Game()
 {
+  this->ai = ComputerPlayer(SettingOption::D_EASY);
 }
 
-Game::Game(SettingOptions::SettingOption computer_mode = SettingOptions::SettingOption::D_EASY)
+Game::Game(SettingOption computer_mode)
 {
   this->ai = ComputerPlayer(computer_mode);
 }
@@ -143,7 +144,7 @@ Move Game::GetComputerMove()
   return computer_move;
 }
 
-void Game::SetComputerMode(SettingOptions::SettingOption mode)
+void Game::SetComputerMode(SettingOption mode)
 {
   ai.SetComputerMode(mode);
 }

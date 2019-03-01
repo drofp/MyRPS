@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace StartOptions
+namespace myrps
 {
 enum class StartOption
 {
@@ -23,20 +23,20 @@ static const StartOption options_list[] =
 };
 
 static const int num_options = 3;
-} // namespace StartOptions
+} // namespace myrps
 
-inline ostream &operator<<(ostream &ostr, const StartOptions::StartOption option)
+inline ostream &operator<<(ostream &ostr, const myrps::StartOption option)
 {
   switch (option)
   {
-  case StartOptions::StartOption::PLAY_GAME:
+  case myrps::StartOption::PLAY_GAME:
     ostr << "Play Game";
     break;
 
-  case StartOptions::StartOption::OPTIONS:
+  case myrps::StartOption::OPTIONS:
     ostr << "Options";
     break;
-  case StartOptions::StartOption::EXIT:
+  case myrps::StartOption::EXIT:
     ostr << "Exit";
     break;
   default:
