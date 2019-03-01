@@ -20,33 +20,33 @@ StartMenu::StartMenu()
   game.SetComputerMode(difficulty);
 }
 
-void StartMenu::displayOptions()
+void StartMenu::DisplayOptions()
 {
   cout << "Welcome to MyRPS! " << endl;
   StartOption user_choice = GetUserChoice();
   if (user_choice == StartOption::PLAY_GAME)
   {
-    playGame();
+    PlayGame();
   }
   else if (user_choice == StartOption::OPTIONS)
   {
-    SettingOption choice = settings.displaySettings();
-    setDifficulty(choice);
-    displayOptions();
+    SettingOption choice = settings.DisplaySettings();
+    SetDifficulty(choice);
+    DisplayOptions();
   }
 }
 
-void StartMenu::playGame()
+void StartMenu::PlayGame()
 {
   game.PlayMatch();
 }
 
-void StartMenu::setDifficulty(SettingOption choice)
+void StartMenu::SetDifficulty(SettingOption choice)
 {
   difficulty = choice;
 }
 
-SettingOption StartMenu::getCurrentDifficulty()
+SettingOption StartMenu::GetCurrentDifficulty()
 {
   return difficulty;
 }

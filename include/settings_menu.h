@@ -13,7 +13,7 @@ class SettingsMenu
 {
 public:
   SettingsMenu();
-  SettingOption displaySettings();
+  SettingOption DisplaySettings();
 
 private:
   vector<SettingOption> settings;

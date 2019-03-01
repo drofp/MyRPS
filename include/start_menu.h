@@ -16,11 +16,11 @@ class StartMenu
 {
 public:
   StartMenu();
-  void displayOptions();
-  void playGame();
-  void setDifficulty(SettingOption choice);
-  void displayDifficulties();
-  SettingOption getCurrentDifficulty();
+  void DisplayOptions();
+  void PlayGame();
+  void SetDifficulty(SettingOption choice);
+  void DisplayDifficulties();
+  SettingOption GetCurrentDifficulty();
   StartOption GetUserChoice(string val);
 
 private:

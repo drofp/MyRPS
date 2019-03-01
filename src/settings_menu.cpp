@@ -16,7 +16,7 @@ SettingsMenu::SettingsMenu()
   }
 }
 
-SettingOption SettingsMenu::displaySettings()
+SettingOption SettingsMenu::DisplaySettings()
 {
   cout << "Select difficulty!" << endl;
   SettingOption user_choice = GetUserChoice();
