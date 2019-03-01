@@ -8,6 +8,15 @@ using namespace std;
 
 namespace myrps
 {
+Game::Game()
+{
+}
+
+Game::Game(int computer_mode = 0)
+{
+  this->ai = ComputerPlayer(computer_mode);
+}
+
 void Game::PlayMatch()
 {
   for (int i = 0; i < rounds_per_match; i++)

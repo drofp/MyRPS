@@ -7,15 +7,16 @@ using namespace std;
 
 int main()
 {
-  myrps::StartMenu start;
+  // myrps::StartMenu start;
 
-  start.displayOptions();
+  // start.displayOptions();
 
-  // cout << "Welcome to MyRPS!" << endl;
+  cout << "Welcome to MyRPS!" << endl;
 
-  // myrps::Game this_game;
+  int computer_chooser_mode = 0;
+  myrps::Game this_game(computer_chooser_mode);
 
-  // this_game.PlayMatch();
+  this_game.PlayMatch();
 
   return 0;
 }

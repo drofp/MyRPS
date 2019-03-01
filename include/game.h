@@ -25,6 +25,8 @@ private:
   void PrintScore();
 
 public:
+  Game();
+  Game(int computer_mode);
   void PlayMatch();
   Move GetPlayerMove();
   Move GetComputerMove();
