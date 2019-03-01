@@ -5,24 +5,27 @@
 
 using namespace std;
 
+namespace myrps
+{
 enum class Move
 {
   kRock,
   kPaper,
   kScissors,
 };
+} // namespace myrps
 
-inline ostream& operator<< (ostream& out, const Move move)
+inline ostream& operator<< (ostream& out, const myrps::Move move)
 {
   switch (move)
   {
-  case Move::kRock:
+  case myrps::Move::kRock:
     out << "Rock";
     break;
-  case Move::kPaper:
+  case myrps::Move::kPaper:
     out << "Paper";
     break;
-  case Move::kScissors:
+  case myrps::Move::kScissors:
     out << "Scissors";
     break;
 
