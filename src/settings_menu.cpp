@@ -75,7 +75,9 @@ SettingOption SettingsMenu::ValidateSetting(string val)
   else if (stoi(val) == 0)
   {
     user_choice = SettingOption::D_EASY;
-  } else if (stoi(val) == 1) {
+  }
+  else if (stoi(val) == 1)
+  {
     user_choice = SettingOption::D_MEDIUM;
   } else {
     //stoi(val) == 2
