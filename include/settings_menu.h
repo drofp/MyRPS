@@ -14,12 +14,11 @@ namespace myrps
     {
     public:
         void displaySettings();
-        void selectSetting();
 
     private:
         vector<SettingOption> settings;
-        // SettingOption GetSetting();
-        // SettingOption ValidateSetting(string val);
+        SettingOption GetUserChoice();
+        SettingOption ValidateSetting(string val);
     };
 }
 #endif
