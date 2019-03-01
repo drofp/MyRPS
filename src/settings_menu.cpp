@@ -79,7 +79,9 @@ SettingOption SettingsMenu::ValidateSetting(string val)
   else if (stoi(val) == 1)
   {
     user_choice = SettingOption::D_MEDIUM;
-  } else {
+  }
+  else
+  {
     //stoi(val) == 2
     user_choice = SettingOption::D_HARD;
   }
