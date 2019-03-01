@@ -94,7 +94,9 @@ StartOption StartMenu::GetUserChoice()
     if(!ValidateUserChoice(user_input))
     {
       cout << "Please enter a valid option\n" << endl;
-    }else{
+    }
+    else
+    {
       user_choice = ConvertUserChoice(user_input);
       cout << endl;
       valid = true;
