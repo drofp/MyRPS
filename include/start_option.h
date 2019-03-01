@@ -20,7 +20,7 @@ static const StartOption options_list[] =
         StartOption::PLAY_GAME,
         StartOption::OPTIONS,
         StartOption::EXIT,
-};
+    };
 
 static const int num_options = 3;
 } // namespace myrps
