@@ -1,16 +1,21 @@
 #include <iostream>
 
 #include "game.h"
+#include "start_menu.h"
 
 using namespace std;
 
 int main()
 {
-  cout << "Welcome to MyRPS!" << endl;
+  myrps::StartMenu start;
 
-  myrps::Game this_game;
+  start.displayOptions();
 
-  this_game.PlayMatch();
+  // cout << "Welcome to MyRPS!" << endl;
+
+  // myrps::Game this_game;
+
+  // this_game.PlayMatch();
 
   return 0;
 }
