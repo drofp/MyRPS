@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "game.h"
+#include "setting_option.h"
 #include "computer_player.h"
 #include <boost/algorithm/string.hpp>
 
@@ -8,6 +9,15 @@ using namespace std;
 
 namespace myrps
 {
+Game::Game()
+{
+}
+
+Game::Game(SettingOptions::SettingOption computer_mode = SettingOptions::SettingOption::D_EASY)
+{
+  this->ai = ComputerPlayer(computer_mode);
+}
+
 void Game::PlayMatch()
 {
   for (int i = 0; i < rounds_per_match; i++)
@@ -133,6 +143,10 @@ Move Game::GetComputerMove()
   return computer_move;
 }
 
+void Game::SetComputerMode(SettingOptions::SettingOption mode)
+{
+  ai.SetComputerMode(mode);
+}
 // TODO: Reverse logic to defensive programming (return false first)
 bool Game::IsValidMove(string user_move)
 {

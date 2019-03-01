@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "computer_player.h"
+#include "setting_option.h"
 
 using namespace std;
 
@@ -25,9 +26,12 @@ private:
   void PrintScore();
 
 public:
+  Game();
+  Game(SettingOptions::SettingOption mode);
   void PlayMatch();
   Move GetPlayerMove();
   Move GetComputerMove();
+  void SetComputerMode(SettingOptions::SettingOption mode);
 };
 
 } // namespace myrps
