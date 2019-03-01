@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "start_option.h"
+#include "settings_menu.h"
 #include "move.h"
 #include "game.h"
 
@@ -18,15 +19,17 @@ namespace myrps
         StartMenu();
         void displayOptions();
         void playGame();
-        bool setDifficulty();
+        void setDifficulty(SettingOption choice);
         void displayDifficulties();
-        int getCurrentDifficulty();
+        SettingOption getCurrentDifficulty();
         StartOption GetUserChoice(string val);
 
     private:
         vector<StartOption> options;
         StartOption GetUserChoice();
         StartOption ValidateUserChoice(string val);
+        SettingOption difficulty;
+        myrps::SettingsMenu settings;
         myrps::Game game;
         // Difficulty current_difficulty;
     };

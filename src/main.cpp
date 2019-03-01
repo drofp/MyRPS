@@ -8,9 +8,7 @@ using namespace std;
 
 int main()
 {
-  myrps::SettingsMenu start;
-
-  start.displaySettings();
-
+  myrps::StartMenu start;
+  start.displayOptions();
   return 0;
 }
