@@ -41,9 +41,9 @@ SettingOption SettingsMenu::DisplaySettings()
 
 SettingOption SettingsMenu::GetUserChoice()
 {
-  bool notValid = true;
+  bool valid = false;
   SettingOption user_choice;
-  while (notValid)
+  while (!valid)
   {
     string user_input;
     cout << "Here are your difficulties:" << endl;
@@ -54,8 +54,13 @@ SettingOption SettingsMenu::GetUserChoice()
     cout << "What would you like to do?: ";
     cin >> user_input;
     user_choice = ValidateSetting(user_input);
-    notValid = (user_choice == SettingOption::D_ERROR);
-    cout << endl;
+    if(user_choice == SettingOption::D_ERROR)
+    {
+      cout << "Please enter a valid difficulty\n" << endl;    
+    }else{
+      valid = true;
+      cout << endl;
+    }
   }
   return user_choice;
 }
@@ -63,7 +68,11 @@ SettingOption SettingsMenu::GetUserChoice()
 SettingOption SettingsMenu::ValidateSetting(string val)
 {
   SettingOption user_choice;
-  if (stoi(val) == 0)
+  if(val != "0" && val != "1" && val != "2")
+  {
+    user_choice = SettingOption::D_ERROR;
+  }
+  else if (stoi(val) == 0)
   {
     user_choice = SettingOption::D_EASY;
   }
@@ -71,13 +80,10 @@ SettingOption SettingsMenu::ValidateSetting(string val)
   {
     user_choice = SettingOption::D_MEDIUM;
   }
-  else if (stoi(val) == 2)
-  {
-    user_choice = SettingOption::D_HARD;
-  }
   else
   {
-    user_choice = SettingOption::D_ERROR;
+    //stoi(val) == 2
+    user_choice = SettingOption::D_HARD;
   }
   return user_choice;
 }

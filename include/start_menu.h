@@ -26,7 +26,8 @@ public:
 private:
   vector<StartOption> options;
   StartOption GetUserChoice();
-  StartOption ValidateUserChoice(string val);
+  StartOption ConvertUserChoice(string val);
+  bool ValidateUserChoice(string val);
   SettingOption difficulty;
   myrps::SettingsMenu settings;
   myrps::Game game;

@@ -51,7 +51,11 @@ SettingOption StartMenu::GetCurrentDifficulty()
   return difficulty;
 }
 
-StartOption StartMenu::ValidateUserChoice(string val)
+bool StartMenu::ValidateUserChoice(string val){
+  return(val == "0" || val == "1" || val == "2");
+}
+
+StartOption StartMenu::ConvertUserChoice(string val)
 {
   StartOption user_choice;
   if (stoi(val) == 0)
@@ -75,9 +79,9 @@ StartOption StartMenu::ValidateUserChoice(string val)
 
 StartOption StartMenu::GetUserChoice()
 {
-  bool notValid = true;
+  bool valid = false;
   StartOption user_choice;
-  while (notValid && user_choice != StartOption::EXIT)
+  while (!valid)
   {
     string user_input;
     cout << "Here are your options:" << endl;
@@ -87,9 +91,16 @@ StartOption StartMenu::GetUserChoice()
     }
     cout << "What would you like to do?: ";
     cin >> user_input;
-    user_choice = ValidateUserChoice(user_input);
-    notValid = (user_choice == StartOption::ERROR);
-    cout << endl;
+    if(!ValidateUserChoice(user_input))
+    {
+      cout << "Please enter a valid option\n" << endl;
+    }
+    else
+    {
+      user_choice = ConvertUserChoice(user_input);
+      cout << endl;
+      valid = true;
+    }
   }
   return user_choice;
 }
