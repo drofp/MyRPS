@@ -11,7 +11,7 @@ ComputerPlayer::ComputerPlayer()
 {
 }
 
-ComputerPlayer::ComputerPlayer(int mode)
+ComputerPlayer::ComputerPlayer(SettingOptions::SettingOption mode)
 {
   this->chooser = MakeChooser(mode);
 }
@@ -22,15 +22,20 @@ Move ComputerPlayer::DecideMove()
   return computer_move;
 }
 
-Chooser *ComputerPlayer::MakeChooser(int mode)
+Chooser *ComputerPlayer::MakeChooser(SettingOptions::SettingOption mode)
 {
   Chooser *chooser;
 
-  if (mode == 0)
+  if (mode == SettingOptions::SettingOption::D_EASY)
     chooser = new RandomChooser();
   else
     cout << "Invalid move chooser!!" << endl;
 
   return chooser;
+}
+
+void ComputerPlayer::SetComputerMode(SettingOptions::SettingOption mode)
+{
+  chooser = MakeChooser(mode);
 }
 } // namespace myrps

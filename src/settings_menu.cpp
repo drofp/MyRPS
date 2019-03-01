@@ -56,6 +56,7 @@ namespace myrps
             cin >> user_input;
             user_choice = ValidateSetting(user_input);
             notValid = (user_choice == SettingOption::D_ERROR);
+            cout << endl;
         }
         return user_choice;
     }

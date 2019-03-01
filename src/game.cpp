@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "game.h"
+#include "setting_option.h"
 #include "computer_player.h"
 #include <boost/algorithm/string.hpp>
 
@@ -12,7 +13,7 @@ Game::Game()
 {
 }
 
-Game::Game(int computer_mode = 0)
+Game::Game(SettingOptions::SettingOption computer_mode = SettingOptions::SettingOption::D_EASY)
 {
   this->ai = ComputerPlayer(computer_mode);
 }
@@ -142,6 +143,10 @@ Move Game::GetComputerMove()
   return computer_move;
 }
 
+void Game::SetComputerMode(SettingOptions::SettingOption mode)
+{
+  ai.SetComputerMode(mode);
+}
 // TODO: Reverse logic to defensive programming (return false first)
 bool Game::IsValidMove(string user_move)
 {

@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "move.h"
+#include "setting_option.h"
 #include "random_chooser.h"
 
 using namespace std;
@@ -18,9 +19,10 @@ private:
 
 public:
   ComputerPlayer();
-  ComputerPlayer(int mode);
+  ComputerPlayer(SettingOptions::SettingOption mode);
   Move DecideMove();
-  Chooser *MakeChooser(int mode);
+  Chooser *MakeChooser(SettingOptions::SettingOption mode);
+  void SetComputerMode(SettingOptions::SettingOption mode);
 };
 
 } // namespace myrps

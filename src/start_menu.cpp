@@ -17,6 +17,8 @@ namespace myrps
         {
             options.push_back(options_list[i]);
         }
+
+        game.SetComputerMode(difficulty);
     }
 
     void StartMenu::displayOptions()
@@ -74,7 +76,7 @@ namespace myrps
     {
         bool notValid = true;
         StartOption user_choice;
-        while(notValid)
+        while(notValid && user_choice !=StartOption::EXIT)
         {
             string user_input;
             cout << "Here are your options:" << endl;
@@ -86,6 +88,7 @@ namespace myrps
             cin >> user_input;
             user_choice = ValidateUserChoice(user_input);
             notValid = (user_choice == StartOption::ERROR);
+            cout << endl;
         }
         return user_choice;
     }
