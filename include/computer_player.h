@@ -14,7 +14,6 @@ namespace myrps
 class ComputerPlayer
 {
 private:
-  Move player_move;
   Chooser *chooser;
 
 public:
