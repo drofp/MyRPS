@@ -12,6 +12,7 @@ namespace myrps
 {
     StartMenu::StartMenu()
     {
+        difficulty = SettingOption::D_EASY;
         for (int i = 0; i < num_options; i++)
         {
             options.push_back(options_list[i]);
@@ -25,6 +26,10 @@ namespace myrps
         if(user_choice == StartOption::PLAY_GAME)
         {
             playGame();
+        }else if(user_choice == StartOption::OPTIONS){
+            SettingOption choice = settings.displaySettings();
+            setDifficulty(choice);
+            displayOptions();
         }
     }
 
@@ -33,10 +38,14 @@ namespace myrps
         game.PlayMatch();
     }
 
-    bool StartMenu::setDifficulty()
+    void StartMenu::setDifficulty(SettingOption choice)
     {
-        //can't do this until enum is done
-        return false;
+        difficulty = choice;
+    }
+
+    SettingOption StartMenu::getCurrentDifficulty()
+    {
+        return difficulty;
     }
 
     StartOption StartMenu::ValidateUserChoice(string val)
