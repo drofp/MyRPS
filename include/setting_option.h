@@ -32,17 +32,17 @@ namespace SettingOptions
     static const int num_options = 3;
 }
 
-inline ostream& operator<< (ostream& ostr, const SettingOption difficulty)
+inline ostream& operator<< (ostream& ostr, const SettingOptions::SettingOption difficulty)
 {
   switch (difficulty)
   {
-  case SettingOption::D_EASY:
+  case SettingOptions::SettingOption::D_EASY:
     ostr << "Easy";
     break;
-  case SettingOption::D_MEDIUM:
+  case SettingOptions::SettingOption::D_MEDIUM:
     ostr << "Medium";
     break;
-  case SettingOption::D_HARD:
+  case SettingOptions::SettingOption::D_HARD:
     ostr << "Hard";
     break;
 

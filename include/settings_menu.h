@@ -14,7 +14,7 @@ namespace myrps
     {
     public:
         void displaySettings();
-
+        SettingsMenu();
     private:
         vector<SettingOption> settings;
         SettingOption GetUserChoice();

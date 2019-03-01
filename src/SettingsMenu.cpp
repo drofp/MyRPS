@@ -13,7 +13,7 @@ namespace myrps
     {
         for (int i = 0; i < num_options; i++)
         {
-            options.push_back(options_list[i]);
+            settings.push_back(options_list[i]);
         }
     }
 
@@ -47,14 +47,14 @@ namespace myrps
         {
             string user_input;
             cout << "Here are your options:" << endl;
-            for(unsigned int i = 0; i < options.size(); i++)
+            for(unsigned int i = 0; i < settings.size(); i++)
             {
-                cout << options[i] << "(" << i << ")" << endl;
+                cout << settings[i] << "(" << i << ")" << endl;
             }
             cout << "What would you like to do?: ";
             cin >> user_input;
             user_choice = ValidateSetting(user_input);
-            notValid = (user_choice == SettingOption::ERROR);
+            notValid = (user_choice == SettingOption::D_ERROR);
         }
         return user_choice;
     }
@@ -77,7 +77,7 @@ namespace myrps
         }
         else
         {
-            user_choice = SettingOption::ERROR;
+            user_choice = SettingOption::D_ERROR;
         }
         return user_choice;
     }
