@@ -5,13 +5,6 @@
 
 using namespace std;
 
-// enum class SettingOption
-// {
-//   D_EASY,
-//   D_MEDIUM,
-//   D_HARD,
-// };
-
 namespace SettingOptions
 {
     enum class SettingOption
