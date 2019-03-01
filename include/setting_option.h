@@ -30,7 +30,7 @@ namespace SettingOptions
     };
 
     static const int num_settings = 3;
-}
+} // namespace SettingOptions
 
 inline ostream& operator<< (ostream& ostr, const SettingOptions::SettingOption difficulty)
 {

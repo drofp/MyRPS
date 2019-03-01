@@ -10,6 +10,5 @@ class Chooser
 public:
   virtual Move DecideMove() = 0;
 };
-}
-
+} // namespace myrps
 #endif

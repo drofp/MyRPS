@@ -31,6 +31,6 @@ inline ostream& operator<< (ostream& out, const Move move)
   }
 
   return out;
-}
+} // namespace myrps
 
 #endif

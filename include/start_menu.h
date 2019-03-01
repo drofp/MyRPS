@@ -33,5 +33,5 @@ namespace myrps
         myrps::Game game;
         // Difficulty current_difficulty;
     };
-}
+} // namespace myrps
 #endif

@@ -24,6 +24,5 @@ public:
   Chooser *MakeChooser(SettingOptions::SettingOption mode);
   void SetComputerMode(SettingOptions::SettingOption mode);
 };
-
 } // namespace myrps
 #endif

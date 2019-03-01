@@ -20,6 +20,7 @@ Game::Game(SettingOptions::SettingOption computer_mode = SettingOptions::Setting
 
 void Game::PlayMatch()
 {
+  cout << "Get ready for a match of " << rounds_per_match << " games! " << endl;
   for (int i = 0; i < rounds_per_match; i++)
   {
     Move player_move = Game::GetPlayerMove();
@@ -35,6 +36,7 @@ void Game::PlayMatch()
 
 void Game::PlayRound(Move player_move, Move computer_move)
 {
+  cout << "Results of round " << round_count << ':' << endl;
   cout << "Player chose: " << player_move << endl;
   cout << "Computer chose: " << computer_move << endl;
 
@@ -115,8 +117,6 @@ Move Game::GetPlayerMove()
     // for UTF-8 support
     boost::algorithm::to_lower(user_input);
 
-    // TODO: clean up print to be consistent and cleaner
-    // maybe have helper function for this
     cout << "You picked: " << user_input << endl;
 
     if (!IsValidMove(user_input))
@@ -147,18 +147,23 @@ void Game::SetComputerMode(SettingOptions::SettingOption mode)
 {
   ai.SetComputerMode(mode);
 }
-// TODO: Reverse logic to defensive programming (return false first)
+
+void Game::SetRoundsPerMatch(int rounds_per_match)
+{
+  this->rounds_per_match = rounds_per_match;
+}
+
 bool Game::IsValidMove(string user_move)
 {
-  if (boost::iequals(user_move, "rock") 
+  if (!(boost::iequals(user_move, "rock") 
   || boost::iequals(user_move, "paper")
   || boost::iequals(user_move, "scissors")
   || boost::iequals(user_move, "r")
   || boost::iequals(user_move, "p")
-  || boost::iequals(user_move, "s"))
-    return true;
+  || boost::iequals(user_move, "s")))
+    return false;
 
-  return false;
+  return true;
 }
 
 void Game::PrintScore()

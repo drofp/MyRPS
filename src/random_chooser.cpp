@@ -12,4 +12,4 @@ namespace myrps
 
     return computer_move;
   }
-}
+} // namespace myrps

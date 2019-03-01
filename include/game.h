@@ -15,8 +15,8 @@ class Game
 private:
   ComputerPlayer ai;
 
-  const int rounds_per_match = 5; // TODO: Why can't make after changing ONLY this value?
-  int round_count = 0;
+  int rounds_per_match = 20;
+  int round_count = 1;
   int player_score = 0;
   int computer_score = 0;
   int tie_game_cnt = 0;
@@ -32,6 +32,7 @@ public:
   Move GetPlayerMove();
   Move GetComputerMove();
   void SetComputerMode(SettingOptions::SettingOption mode);
+  void SetRoundsPerMatch(int rounds_per_match);
 };
 
 } // namespace myrps

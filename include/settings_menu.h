@@ -21,5 +21,5 @@ namespace myrps
         SettingOption GetUserChoice();
         SettingOption ValidateSetting(string val);
     };
-}
+} // namespace myrps
 #endif
