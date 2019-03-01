@@ -10,10 +10,10 @@ make
 
 
 ## Assignment Task
-- [ ] Implement the first version of the Rock-Paper-Scissors game.
-  - [ ] Each game has 20 rounds.
-  - [ ] Prompt the human player for each round’s choice.
-  - [ ] The computer makes a random choice.
+- [x] Implement the first version of the Rock-Paper-Scissors game.
+  - [x] Each game has 20 rounds.
+  - [x] Prompt the human player for each round’s choice.
+  - [x] The computer makes a random choice.
 
 ## Future Improvements
 - [ ] How the opposing (i.e., human) player’s choices are obtained.
