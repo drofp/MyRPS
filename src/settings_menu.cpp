@@ -22,14 +22,14 @@ SettingOption SettingsMenu::DisplaySettings()
   SettingOption user_choice = GetUserChoice();
   switch (user_choice)
   {
-  case SettingOption::D_EASY:
-    std::cout << "Easy" << endl;
+  case SettingOption::D_RANDOM:
+    std::cout << "Random" << endl;
     break;
-  case SettingOption::D_MEDIUM:
-    std::cout << "Medium" << endl;
+  case SettingOption::D_SMART:
+    std::cout << "Smart" << endl;
     break;
-  case SettingOption::D_HARD:
-    std::cout << "Hard" << endl;
+  case SettingOption::D_GENIUS:
+    std::cout << "Genius" << endl;
     break;
 
   default:
@@ -74,16 +74,16 @@ SettingOption SettingsMenu::ValidateSetting(string val)
   }
   else if (stoi(val) == 0)
   {
-    user_choice = SettingOption::D_EASY;
+    user_choice = SettingOption::D_RANDOM;
   }
   else if (stoi(val) == 1)
   {
-    user_choice = SettingOption::D_MEDIUM;
+    user_choice = SettingOption::D_SMART;
   }
   else
   {
     //stoi(val) == 2
-    user_choice = SettingOption::D_HARD;
+    user_choice = SettingOption::D_GENIUS;
   }
   return user_choice;
 }
