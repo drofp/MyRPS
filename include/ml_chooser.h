@@ -8,6 +8,7 @@
 #include <string>
 
 #include "chooser.h"
+#include "game.h"
 
 using namespace std;
 
@@ -17,12 +18,15 @@ class MLChooser : public myrps::Chooser
 {
 public:
   MLChooser();
-  MLChooser(int n);
+  MLChooser(Game current_game, int n);
   Move DecideMove();
 private:
   unordered_map<string, int> hist_data;
+  Game current_game;
+  int n; // number of previous games recorded
 
-  bool PopulateHistogram();
+  unordered_map<string, int> GetHistData();
+  void WriteHistData();
   Move GetMostLikelyMove(string last_n_moves);
   static bool CompareMoveFreq(pair<string, int> &a,
     pair<string, int> &b);

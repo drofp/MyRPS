@@ -4,9 +4,36 @@ using namespace std;
 
 namespace myrps
 {
+  MLChooser::MLChooser()
+  {
+  }
+
+  MLChooser::MLChooser(Game current_game, int n)
+  {
+    if (n < 1)
+      cout << "Invalid value of N! Please select value greater than 0." << endl;
+    
+    this->current_game = current_game;
+    this->n = n;
+    // TODO: instantiate `hist_data` with file read in GetHistData()
+  }
+
+  unordered_map<string, int> GetHistData()
+  {
+    // IF EXISTS, Read from freq (map structured CSV) to get freq data
+    // IF EXISTS, Read from raw data to construct freq data
+    // ELSE, initialize `hist_data` to empty map
+  }
+
   Move MLChooser::DecideMove()
   {
     Move computer_move = Move::kScissors;
+    if (hist_data.empty())
+    {
+      computer_move = 
+        static_cast<Move>(rand() % static_cast<int>(Move::kScissors));
+      return computer_move;
+    }
 
     return computer_move;
   }
