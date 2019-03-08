@@ -27,6 +27,7 @@ private:
 
   unordered_map<string, int> GetHistData();
   void WriteHistData();
+  Move GetWinningMove(Move most_likely_move);
   Move GetMostLikelyMove(string last_n_moves);
   static bool CompareMoveFreq(pair<string, int> &a,
     pair<string, int> &b);

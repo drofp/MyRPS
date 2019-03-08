@@ -44,6 +44,9 @@ namespace myrps
       return computer_move;
     }
 
+    // IF current move is less than n, use random algo (add to above IF condition)
+    // ELSE GetWinningMove(), and return it
+
     return computer_move;
   }
 
