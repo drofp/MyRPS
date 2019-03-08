@@ -18,18 +18,18 @@ namespace myrps
     vector<pair<string, int>> possible_moves = 
       MLChooser::GetPossibleChoices(last_n_moves);
 
-      // sort(possible_moves.begin(), possible_moves.end(), 
-      //   this->CompareMoveFreq);
+      sort(possible_moves.begin(), possible_moves.end(), 
+        MLChooser::CompareMoveFreq);
 
     return most_likely_move;
   }
 
-  // bool MLChooser::CompareMoveFreq(unordered_map<string, int> &a,
-  //   unordered_map<string, int> &b)
-  //   {
+  bool MLChooser::CompareMoveFreq(pair<string, int> &a,
+    pair<string, int> &b)
+    {
 
-  //     return a. > b->first;
-  //   }
+      return a.first > b.first;
+    }
 
   // TODO: Replace with search algorithm for expandability. Maybe store hist as 
   // tree for improved search time.
@@ -60,7 +60,6 @@ namespace myrps
     unordered_map<string, int>::iterator it = hist_data.find(permutation);
     if (it != hist_data.end())
     {
-      // possible_choice[permutation] = hist_data.find(permutation)->second;
       possible_choices.push_back(
         make_pair(permutation, hist_data.find(permutation)->second));
     }
