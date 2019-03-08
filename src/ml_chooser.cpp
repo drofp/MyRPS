@@ -20,9 +20,18 @@ namespace myrps
 
   unordered_map<string, int> GetHistData()
   {
-    // IF EXISTS, Read from freq (map structured CSV) to get freq data
-    // IF EXISTS, Read from raw data to construct freq data
+    // IF FILE EXISTS, Read from freq data (map structured CSV) to get freq data
+    // IF FILE EXISTS, Read from raw data to construct freq data
     // ELSE, initialize `hist_data` to empty map
+  }
+
+  // TODO: improve speed with sorted data to reduce to O(n*lg(n))
+  void WriteHistData()
+  {
+    // IF FILE EXISTS, for every element in `hist_data`
+    //  IF element in file, add `hist_data` count to file count
+    //  ELSE append new element to end of file
+    // ELSE create file and write entire `hist_data` to file
   }
 
   Move MLChooser::DecideMove()
