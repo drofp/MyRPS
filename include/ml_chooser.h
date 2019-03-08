@@ -24,7 +24,7 @@ private:
 
   bool PopulateHistogram();
   Move GetMostLikelyMove(string last_n_moves);
-  bool CompareMoveFreq(pair<string, int> &a,
+  static bool CompareMoveFreq(pair<string, int> &a,
     pair<string, int> &b);
   vector<pair<string, int>>
     GetPossibleChoices(string last_n_moves);

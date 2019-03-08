@@ -21,6 +21,16 @@ namespace myrps
       sort(possible_moves.begin(), possible_moves.end(), 
         MLChooser::CompareMoveFreq);
 
+    char most_likely_move_str = possible_moves.at(0).first.back();
+    if (most_likely_move_str == 'r')
+      most_likely_move = Move::kRock;
+    else if (most_likely_move_str == 'p')
+      most_likely_move = Move::kPaper;
+    else if (most_likely_move_str == 's')
+      most_likely_move = Move::kScissors;
+    else
+      cout << "No valid most likely move.." << endl;
+    
     return most_likely_move;
   }
 
