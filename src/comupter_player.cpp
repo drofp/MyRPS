@@ -26,7 +26,7 @@ Chooser *ComputerPlayer::MakeChooser(SettingOption mode)
 {
   Chooser *chooser = nullptr;
 
-  if (mode == SettingOption::D_EASY)
+  if (mode == SettingOption::D_RANDOM)
     chooser = new RandomChooser();
   else
     cout << "Invalid move chooser!!" << endl;
