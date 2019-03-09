@@ -168,11 +168,6 @@ namespace myrps
 
   void MLChooser::WriteHistData()
   {
-    // IF FILE EXISTS, for every element in `hist_data`
-    //  IF element in file, add `hist_data` count to file count
-    //  ELSE append new element to end of file
-    // ELSE create file and write entire `hist_data` to file
-
     if (MLChooser::MLDirectoryExists())
     {
       if (MLChooser::MLFileNExists())
