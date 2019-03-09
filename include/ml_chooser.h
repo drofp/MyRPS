@@ -30,6 +30,7 @@ public:
 
 private:
   unordered_map<string, int> hist_data;
+  unordered_map<string, int> old_hist_data;
   Game current_game;
   int n; // number of previous games recorded
   queue<Move> last_n_minus_one_q;
@@ -42,6 +43,7 @@ private:
   unordered_map<string, int> GenerateHistData();
 
   void WriteHistData();
+  void UpdateHistData();
 
   Move GetWinningMove(Move most_likely_move);
   Move GetMostLikelyMove(string last_n_minus_one_moves);

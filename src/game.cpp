@@ -149,6 +149,11 @@ int Game::GetRoundCount()
   return round_count;
 }
 
+int Game::GetRoundsPerMatch()
+{
+  return Game::rounds_per_match;
+}
+
 void Game::SetComputerMode(SettingOption mode)
 {
   ai.SetComputerMode(mode);

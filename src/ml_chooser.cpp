@@ -13,6 +13,7 @@ namespace myrps
     this->current_game = current_game;
     this->n = n;
     this->hist_data = MLChooser::GetHistData();
+    this->old_hist_data = this->hist_data;
   }
 
   Move MLChooser::DecideMove()
@@ -67,6 +68,8 @@ namespace myrps
       //   hist = GenerateHistData(); // from raw data
       // }
     }
+
+    MLChooser::WriteHistData();
 
     return hist;
   }
@@ -163,13 +166,46 @@ namespace myrps
   // {
   // }
 
-  // TODO(drofp): improve speed with sorted data to reduce to O(n*lg(n))
   void MLChooser::WriteHistData()
   {
     // IF FILE EXISTS, for every element in `hist_data`
     //  IF element in file, add `hist_data` count to file count
     //  ELSE append new element to end of file
     // ELSE create file and write entire `hist_data` to file
+
+    if (MLChooser::MLDirectoryExists())
+    {
+      if (MLChooser::MLFileNExists())
+      {
+        MLChooser::UpdateHistData();
+      }
+    }
+  }
+
+  void MLChooser::UpdateHistData()
+  {
+    string ml_file_name = "ml_data/ml_data_" + to_string(n);
+    ofstream file;
+    file.open(ml_file_name, ofstream::out | ofstream::trunc);
+
+    int game_cnt = 0;
+    for (pair<string, int> perm_to_freq : hist_data)
+    {
+      if (old_hist_data.find(perm_to_freq.first) == old_hist_data.end())
+      {
+        file << perm_to_freq.first << ':' << perm_to_freq.second;
+      }
+      else
+      {
+        file << perm_to_freq.first << ':'
+             << old_hist_data[perm_to_freq.first] + perm_to_freq.second;
+      }
+
+      if (game_cnt < current_game.GetRoundsPerMatch())
+        file << ',';
+    }
+
+    file.close();
   }
 
   Move MLChooser::GetWinningMove(Move most_likely_move)

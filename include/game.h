@@ -32,6 +32,7 @@ public:
   Move GetPlayerMove();
   Move GetComputerMove();
   int GetRoundCount();
+  int GetRoundsPerMatch();
   void SetComputerMode(SettingOption mode);
   void SetRoundsPerMatch(int rounds_per_match);
 };
