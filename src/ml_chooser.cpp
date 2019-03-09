@@ -17,6 +17,9 @@ namespace myrps
 
   Move MLChooser::DecideMove()
   {
+    Move winning_move;
+    Move most_likely_move;
+    
     Move computer_move = Move::kScissors;
     if (hist_data.empty())
     {
@@ -25,10 +28,27 @@ namespace myrps
       return computer_move;
     }
 
-    // IF current move is less than n, use random algo (add to above IF condition)
-    // ELSE GetWinningMove(), and return it
+    if (current_game.GetRoundCount() < n)
+    {
+      // default random algorithm
+      computer_move =
+          static_cast<Move>(rand() % static_cast<int>(Move::kScissors));
+      
+      last_n_minus_one_q.push(current_game.GetPlayerMove());
+      last_n_minus_one_q.push(computer_move);
 
-    return computer_move;
+      return computer_move;
+    }
+    else
+    {
+      string last_n_minus_one_moves = 
+        MLChooser::GetLastNMinusOneMoves(last_n_minus_one_q);
+      most_likely_move = MLChooser::GetMostLikelyMove(last_n_minus_one_moves);
+      winning_move = MLChooser::GetWinningMove(most_likely_move);
+    }
+    
+
+    return winning_move;
   }
 
   unordered_map<string, int> MLChooser::GetHistData()
@@ -152,6 +172,22 @@ namespace myrps
     // ELSE create file and write entire `hist_data` to file
   }
 
+  Move MLChooser::GetWinningMove(Move most_likely_move)
+  {
+    Move winning_move = Move::kRock;
+
+    if (most_likely_move == Move::kRock)
+      winning_move = Move::kPaper;
+    else if (most_likely_move == Move::kPaper)
+      winning_move = Move::kScissors;
+    else if (most_likely_move == Move::kScissors)
+      winning_move = Move::kRock;
+    else
+      cout << "No winning move found! Using default rock" << endl;
+    
+    return winning_move;
+  }
+
   Move MLChooser::GetMostLikelyMove(string last_n_minus_one_moves)
   {
     Move most_likely_move = Move::kRock;
@@ -173,6 +209,33 @@ namespace myrps
       cout << "No valid most likely move. Defaulting to Rock" << endl;
     
     return most_likely_move;
+  }
+
+  // TODO(drofp): Enhance memory performance to use iterable container for 
+  // queue instead of copying over the queue for the sake of iterating.
+  string MLChooser::GetLastNMinusOneMoves(queue<Move> q)
+  {
+    string last_n_minus_one_moves = "";
+    queue<Move> copied_q = q;
+    Move current_move;
+
+    while (!copied_q.empty())
+    {
+      current_move = copied_q.front();
+
+      if (current_move == Move::kRock)
+        last_n_minus_one_moves += 'r';
+      else if (current_move == Move::kPaper)
+        last_n_minus_one_moves += 'p';
+      else if (current_move == Move::kScissors)
+        last_n_minus_one_moves += 's';
+      else
+        cout << "Invalid move in queue!!!" << endl;
+      
+      copied_q.pop();
+    }
+
+    return last_n_minus_one_moves;
   }
 
   bool MLChooser::CompareMoveFreq(pair<string, int> &a,

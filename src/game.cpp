@@ -144,6 +144,11 @@ Move Game::GetComputerMove()
   return computer_move;
 }
 
+int Game::GetRoundCount()
+{
+  return round_count;
+}
+
 void Game::SetComputerMode(SettingOption mode)
 {
   ai.SetComputerMode(mode);
