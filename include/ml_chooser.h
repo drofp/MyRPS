@@ -2,6 +2,7 @@
 #define ML_CHOOSER_H
 
 #include <iostream>
+#include <fstream>
 #include <unordered_map>
 #include <vector>
 #include <algorithm>
@@ -20,7 +21,6 @@ namespace myrps
 class MLChooser : public myrps::Chooser
 {
 public:
-  MLChooser();
   MLChooser(Game current_game, int n);
   Move DecideMove();
 
@@ -31,13 +31,21 @@ private:
   Game current_game;
   int n; // number of previous games recorded
 
+  bool MLDirectoryExists();
+  bool MLFileNExists();
+  unordered_map<string, int> ReadHistData();
+  vector<string> TokenizeHistData();
+  unordered_map<string, int> ParseHistData(vector<string> raw_pairs);
+  unordered_map<string, int> GenerateHistData();
+
   void WriteHistData();
+
   Move GetWinningMove(Move most_likely_move);
-  Move GetMostLikelyMove(string last_n_moves);
+  Move GetMostLikelyMove(string last_n_minus_one_moves);
   static bool CompareMoveFreq(pair<string, int> &a,
     pair<string, int> &b);
   vector<pair<string, int>>
-    GetPossibleChoices(string last_n_moves);
+    GetPossibleChoices(string last_n_minus_one_moves);
   void
     InsertPossibleChoice(vector<pair<string, int>> &possible_choices,
                           string permutation);

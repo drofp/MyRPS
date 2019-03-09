@@ -10,11 +10,11 @@ using namespace std;
 
 int main()
 {
-  // myrps::StartMenu start;
-  // start.DisplayOptions();
+  myrps::StartMenu start;
+  start.DisplayOptions();
 
-  myrps::MLChooser ml_chooser;
-  unordered_map<string, int> test_map = ml_chooser.GetHistData();
+  // myrps::MLChooser ml_chooser;
+  // unordered_map<string, int> test_map = ml_chooser.GetHistData();
 
 
   return 0;
