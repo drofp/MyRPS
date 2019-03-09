@@ -1,4 +1,5 @@
 #include "ml_chooser.h"
+#include "game.h"
 
 using namespace std;
 
@@ -15,14 +16,35 @@ namespace myrps
     
     this->current_game = current_game;
     this->n = n;
-    // TODO: instantiate `hist_data` with file read in GetHistData()
+    this->hist_data = MLChooser::GetHistData();
   }
 
-  unordered_map<string, int> GetHistData()
+  unordered_map<string, int> MLChooser::GetHistData()
   {
     // IF FILE EXISTS, Read from freq data (map structured CSV) to get freq data
     // IF FILE EXISTS, Read from raw data to construct freq data
-    // ELSE, initialize `hist_data` to empty map
+    // ELSE, initialize `hist_data` to empty map 
+
+    const char* ml_data_directory = "ml_data";
+
+    struct stat info;
+    if (stat(ml_data_directory, &info) != 0)
+    {
+      // can't access directory, so create one
+      if (mkdir(ml_data_directory, 0777) == -1)
+      {
+        cerr << "Can't access or create directory error: "
+             << strerror(errno) << endl;
+      }
+      else
+      {
+        cout << "Directory '" << ml_data_directory << "' created." << endl;
+      }
+        
+    }
+
+    unordered_map<string, int> m;
+    return m;
   }
 
   // TODO: improve speed with sorted data to reduce to O(n*lg(n))
@@ -52,7 +74,7 @@ namespace myrps
 
   Move MLChooser::GetMostLikelyMove(string last_n_moves)
   {
-    Move most_likely_move;
+    Move most_likely_move = Move::kRock;
 
     vector<pair<string, int>> possible_moves = 
       MLChooser::GetPossibleChoices(last_n_moves);
@@ -68,7 +90,7 @@ namespace myrps
     else if (most_likely_move_str == 's')
       most_likely_move = Move::kScissors;
     else
-      cout << "No valid most likely move.." << endl;
+      cout << "No valid most likely move. Defaulting to Rock" << endl;
     
     return most_likely_move;
   }

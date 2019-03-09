@@ -7,6 +7,9 @@
 #include <algorithm>
 #include <string>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+
 #include "chooser.h"
 #include "game.h"
 
@@ -20,12 +23,14 @@ public:
   MLChooser();
   MLChooser(Game current_game, int n);
   Move DecideMove();
+
+  unordered_map<string, int> GetHistData();
+
 private:
   unordered_map<string, int> hist_data;
   Game current_game;
   int n; // number of previous games recorded
 
-  unordered_map<string, int> GetHistData();
   void WriteHistData();
   Move GetWinningMove(Move most_likely_move);
   Move GetMostLikelyMove(string last_n_moves);
