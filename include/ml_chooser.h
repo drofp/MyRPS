@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <string>
 #include <queue>
+#include <cstring>
 
 #include <sys/types.h>
 #include <sys/stat.h>
