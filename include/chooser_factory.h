@@ -9,7 +9,7 @@ namespace myrps
 class ChooserFactory
 {
 public:
-  static Chooser *MakeChooser(SettingOption choice);
+  static Chooser *MakeChooser(SettingOption choice, int round_count);
 };
 }
 #endif

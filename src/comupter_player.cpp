@@ -2,7 +2,6 @@
 #include <cstdlib>
 
 #include "computer_player.h"
-#include "chooser_factory.h"
 
 using namespace std;
 
@@ -12,19 +11,20 @@ ComputerPlayer::ComputerPlayer()
 {
 }
 
-ComputerPlayer::ComputerPlayer(SettingOption mode)
+ComputerPlayer::ComputerPlayer(SettingOption mode, int round_count)
 {
-  this->chooser = ChooserFactory::MakeChooser(mode);
+  this->round_count = round_count;
+  this->chooser = ChooserFactory::MakeChooser(mode, round_count);
 }
 
-Move ComputerPlayer::DecideMove()
+Move ComputerPlayer::DecideMove(Move player_move)
 {
-  Move computer_move = chooser->DecideMove();
+  Move computer_move = chooser->DecideMove(player_move);
   return computer_move;
 }
 
 void ComputerPlayer::SetComputerMode(SettingOption mode)
 {
-  chooser = ChooserFactory::MakeChooser(mode);
+  chooser = ChooserFactory::MakeChooser(mode, round_count);
 }
 } // namespace myrps

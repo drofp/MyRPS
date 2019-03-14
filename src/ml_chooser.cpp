@@ -1,22 +1,17 @@
 #include "ml_chooser.h"
-#include "game.h"
 
 using namespace std;
 
 namespace myrps
 {
-  MLChooser::MLChooser(Game current_game, int n)
+  MLChooser::MLChooser(int round_count)
   {
-    if (n < 1)
-      cout << "Invalid value of N! Please select value greater than 0." << endl;
-    
-    this->current_game = current_game;
-    this->n = n;
+    this->n = 5; // default value. must be greater than 1
     this->hist_data = MLChooser::GetHistData();
     this->old_hist_data = this->hist_data;
   }
 
-  Move MLChooser::DecideMove()
+  Move MLChooser::DecideMove(Move player_move)
   {
     Move winning_move;
     Move most_likely_move;
@@ -29,13 +24,13 @@ namespace myrps
       return computer_move;
     }
 
-    if (current_game.GetRoundCount() < n)
+    if (round_count < n)
     {
       // default random algorithm
       computer_move =
           static_cast<Move>(rand() % static_cast<int>(Move::kScissors));
       
-      last_n_minus_one_q.push(current_game.GetPlayerMove());
+      last_n_minus_one_q.push(player_move);
       last_n_minus_one_q.push(computer_move);
 
       return computer_move;
@@ -196,7 +191,7 @@ namespace myrps
              << old_hist_data[perm_to_freq.first] + perm_to_freq.second;
       }
 
-      if (game_cnt < current_game.GetRoundsPerMatch())
+      if (game_cnt < round_count)
         file << ',';
     }
 

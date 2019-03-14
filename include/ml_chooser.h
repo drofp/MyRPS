@@ -14,7 +14,6 @@
 #include <sys/stat.h>
 
 #include "chooser.h"
-#include "game.h"
 #include "move.h"
 
 using namespace std;
@@ -24,16 +23,16 @@ namespace myrps
 class MLChooser : public myrps::Chooser
 {
 public:
-  MLChooser(Game current_game, int n);
-  Move DecideMove();
+  MLChooser(int round_count);
+  Move DecideMove(Move player_move);
 
   unordered_map<string, int> GetHistData();
 
 private:
   unordered_map<string, int> hist_data;
   unordered_map<string, int> old_hist_data;
-  Game current_game;
   int n; // number of previous games recorded
+  int round_count;
   queue<Move> last_n_minus_one_q;
 
   bool MLDirectoryExists();
