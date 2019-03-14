@@ -44,6 +44,7 @@ void StartMenu::PlayGame()
 void StartMenu::SetDifficulty(SettingOption choice)
 {
   difficulty = choice;
+  game.SetComputerMode(difficulty);
 }
 
 SettingOption StartMenu::GetCurrentDifficulty()

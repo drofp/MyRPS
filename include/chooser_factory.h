@@ -2,13 +2,14 @@
 #define CHOOSER_FACTORY_H_
 
 #include "chooser.h"
+#include "setting_option.h"
 
 namespace myrps
 {
 class ChooserFactory
 {
 public:
-    static Chooser *makeChooser(string choice);
+  static Chooser *MakeChooser(SettingOption choice);
 };
 }
 #endif
