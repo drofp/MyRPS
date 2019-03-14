@@ -11,7 +11,7 @@ namespace myrps
 {
 StartMenu::StartMenu()
 {
-  difficulty = SettingOption::D_RANDOM;
+  difficulty = SettingOption::kRandom;
   for (int i = 0; i < num_options; i++)
   {
     options.push_back(options_list[i]);

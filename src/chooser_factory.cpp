@@ -10,15 +10,15 @@ using namespace myrps;
 
 Chooser *ChooserFactory::MakeChooser(SettingOption choice)
 {
-  if(choice == SettingOption::D_RANDOM)
+  if(choice == SettingOption::kRandom)
   {
     return new RandomChooser();
   }
-  else if(choice == SettingOption::D_SMART)
+  else if(choice == SettingOption::kSmart)
   {
     return new RandomChooser();
   }
-  else if(choice == SettingOption::D_GENIUS)
+  else if(choice == SettingOption::kGenius)
   {
     return new RandomChooser();
   }

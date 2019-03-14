@@ -11,7 +11,7 @@ namespace myrps
 {
 Game::Game()
 {
-  this->ai = ComputerPlayer(SettingOption::D_RANDOM);
+  this->ai = ComputerPlayer(SettingOption::kRandom);
 }
 
 Game::Game(SettingOption computer_mode)
