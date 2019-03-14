@@ -11,7 +11,7 @@ namespace myrps
 {
 StartMenu::StartMenu()
 {
-  difficulty = SettingOption::D_EASY;
+  difficulty = SettingOption::kRandom;
   for (int i = 0; i < num_options; i++)
   {
     options.push_back(options_list[i]);
@@ -44,6 +44,7 @@ void StartMenu::PlayGame()
 void StartMenu::SetDifficulty(SettingOption choice)
 {
   difficulty = choice;
+  game.SetComputerMode(difficulty);
 }
 
 SettingOption StartMenu::GetCurrentDifficulty()

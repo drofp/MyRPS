@@ -22,14 +22,14 @@ SettingOption SettingsMenu::DisplaySettings()
   SettingOption user_choice = GetUserChoice();
   switch (user_choice)
   {
-  case SettingOption::D_EASY:
-    std::cout << "Easy" << endl;
+  case SettingOption::kRandom:
+    std::cout << "Random" << endl;
     break;
-  case SettingOption::D_MEDIUM:
-    std::cout << "Medium" << endl;
+  case SettingOption::kSmart:
+    std::cout << "Smart" << endl;
     break;
-  case SettingOption::D_HARD:
-    std::cout << "Hard" << endl;
+  case SettingOption::kGenius:
+    std::cout << "Genius" << endl;
     break;
 
   default:
@@ -54,7 +54,7 @@ SettingOption SettingsMenu::GetUserChoice()
     cout << "What would you like to do?: ";
     cin >> user_input;
     user_choice = ValidateSetting(user_input);
-    if(user_choice == SettingOption::D_ERROR)
+    if(user_choice == SettingOption::kError)
     {
       cout << "Please enter a valid difficulty\n" << endl;    
     }else{
@@ -70,20 +70,20 @@ SettingOption SettingsMenu::ValidateSetting(string val)
   SettingOption user_choice;
   if(val != "0" && val != "1" && val != "2")
   {
-    user_choice = SettingOption::D_ERROR;
+    user_choice = SettingOption::kError;
   }
   else if (stoi(val) == 0)
   {
-    user_choice = SettingOption::D_EASY;
+    user_choice = SettingOption::kRandom;
   }
   else if (stoi(val) == 1)
   {
-    user_choice = SettingOption::D_MEDIUM;
+    user_choice = SettingOption::kSmart;
   }
   else
   {
     //stoi(val) == 2
-    user_choice = SettingOption::D_HARD;
+    user_choice = SettingOption::kGenius;
   }
   return user_choice;
 }

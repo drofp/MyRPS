@@ -20,7 +20,6 @@ public:
   ComputerPlayer();
   ComputerPlayer(SettingOption mode);
   Move DecideMove();
-  Chooser *MakeChooser(SettingOption mode);
   void SetComputerMode(SettingOption mode);
 };
 } // namespace myrps

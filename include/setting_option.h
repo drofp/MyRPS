@@ -9,17 +9,17 @@ namespace myrps
 {
 enum class SettingOption
 {
-  D_EASY,
-  D_MEDIUM,
-  D_HARD,
-  D_ERROR,
+  kRandom,
+  kSmart,
+  kGenius,
+  kError,
 };
 
 static const SettingOption settings_list[] =
     {
-        SettingOption::D_EASY,
-        SettingOption::D_MEDIUM,
-        SettingOption::D_HARD,
+        SettingOption::kRandom,
+        SettingOption::kSmart,
+        SettingOption::kGenius,
     };
 
 static const int num_settings = 3;
@@ -29,14 +29,14 @@ inline ostream &operator<<(ostream &ostr, const myrps::SettingOption difficulty)
 {
   switch (difficulty)
   {
-  case myrps::SettingOption::D_EASY:
-    ostr << "Easy";
+  case myrps::SettingOption::kRandom:
+    ostr << "Random";
     break;
-  case myrps::SettingOption::D_MEDIUM:
-    ostr << "Medium";
+  case myrps::SettingOption::kSmart:
+    ostr << "Smart";
     break;
-  case myrps::SettingOption::D_HARD:
-    ostr << "Hard";
+  case myrps::SettingOption::kGenius:
+    ostr << "Genius";
     break;
 
   default:
