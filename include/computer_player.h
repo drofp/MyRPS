@@ -1,8 +1,6 @@
 #ifndef COMPUTER_PLAYER_H
 #define COMPUTER_PLAYER_H
 
-#include <iostream>
-
 #include "move.h"
 #include "setting_option.h"
 #include "chooser_factory.h"
@@ -19,11 +17,11 @@ class ComputerPlayer
 {
 private:
   Chooser *chooser;
-  int round_count;
+  int rounds_per_match;
 
 public:
   ComputerPlayer();
-  ComputerPlayer(SettingOption mode, int round_count);
+  ComputerPlayer(SettingOption mode, int rounds_per_match);
   Move DecideMove(Move player_move);
   void SetComputerMode(SettingOption mode);
 };

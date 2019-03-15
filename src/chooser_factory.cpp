@@ -3,7 +3,7 @@
 using namespace std;
 using namespace myrps;
 
-Chooser *ChooserFactory::MakeChooser(SettingOption choice, int round_count)
+Chooser *ChooserFactory::MakeChooser(SettingOption choice, int rounds_per_match)
 {
   if(choice == SettingOption::kRandom)
   {
@@ -11,7 +11,7 @@ Chooser *ChooserFactory::MakeChooser(SettingOption choice, int round_count)
   }
   else if(choice == SettingOption::kSmart)
   {
-    return new MLChooser(round_count);
+    return new MLChooser(rounds_per_match);
   }
   else if(choice == SettingOption::kGenius)
   {

@@ -6,10 +6,10 @@ ComputerPlayer::ComputerPlayer()
 {
 }
 
-ComputerPlayer::ComputerPlayer(SettingOption mode, int round_count)
+ComputerPlayer::ComputerPlayer(SettingOption mode, int rounds_per_match)
 {
-  this->round_count = round_count;
-  this->chooser = ChooserFactory::MakeChooser(mode, round_count);
+  this->rounds_per_match = rounds_per_match;
+  this->chooser = ChooserFactory::MakeChooser(mode, rounds_per_match);
 }
 
 Move ComputerPlayer::DecideMove(Move player_move)
@@ -20,6 +20,6 @@ Move ComputerPlayer::DecideMove(Move player_move)
 
 void ComputerPlayer::SetComputerMode(SettingOption mode)
 {
-  chooser = ChooserFactory::MakeChooser(mode, round_count);
+  chooser = ChooserFactory::MakeChooser(mode, rounds_per_match);
 }
 } // namespace myrps

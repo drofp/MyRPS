@@ -14,7 +14,7 @@ namespace myrps
 class ChooserFactory
 {
 public:
-  static Chooser *MakeChooser(SettingOption choice, int round_count);
+  static Chooser *MakeChooser(SettingOption choice, int rounds_per_match);
 };
 }
 #endif

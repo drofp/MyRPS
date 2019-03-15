@@ -23,7 +23,7 @@ namespace myrps
 class MLChooser : public myrps::Chooser
 {
 public:
-  MLChooser(int round_count);
+  MLChooser(int rounds_per_match);
   Move DecideMove(Move player_move);
 
   unordered_map<string, int> GetHistData();
@@ -32,6 +32,7 @@ private:
   unordered_map<string, int> hist_data;
   unordered_map<string, int> old_hist_data;
   int n; // number of previous games recorded
+  int rounds_per_match;
   int round_count;
   queue<Move> last_n_minus_one_q;
 
@@ -48,6 +49,7 @@ private:
   Move GetWinningMove(Move most_likely_move);
   Move GetMostLikelyMove(string last_n_minus_one_moves);
   string GetLastNMinusOneMoves(queue<Move> q);
+  void AddLastNMovesToHist(string last_n_minus_one_moves, Move curr_move);
   static bool CompareMoveFreq(pair<string, int> &a,
     pair<string, int> &b);
   vector<pair<string, int>>
@@ -55,6 +57,8 @@ private:
   void
     InsertPossibleChoice(vector<pair<string, int>> &possible_choices,
                           string permutation);
+
+  void PrintHistData();
 };
 }
 
