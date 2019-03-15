@@ -1,12 +1,11 @@
 #include "ml_chooser.h"
 
-using namespace std;
-
 namespace myrps
 {
   MLChooser::MLChooser(int round_count)
   {
     this->n = 5; // default value. must be greater than 1
+    this->round_count = round_count;
     this->hist_data = MLChooser::GetHistData();
     this->old_hist_data = this->hist_data;
   }

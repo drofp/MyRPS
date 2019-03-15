@@ -8,6 +8,9 @@
 #include "chooser_factory.h"
 #include "random_chooser.h"
 
+#include <iostream>
+#include <cstdlib>
+
 using namespace std;
 
 namespace myrps

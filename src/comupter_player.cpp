@@ -1,9 +1,4 @@
-#include <iostream>
-#include <cstdlib>
-
 #include "computer_player.h"
-
-using namespace std;
 
 namespace myrps
 {

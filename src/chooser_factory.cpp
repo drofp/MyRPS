@@ -1,9 +1,4 @@
 #include "chooser_factory.h"
-#include "setting_option.h"
-#include "random_chooser.h"
-#include "ml_chooser.h"
-
-#include <iostream>
 
 using namespace std;
 using namespace myrps;

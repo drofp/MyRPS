@@ -6,6 +6,7 @@
 #include "computer_player.h"
 #include "setting_option.h"
 
+#include <iostream>
 #include <boost/algorithm/string.hpp>
 
 using namespace std;
