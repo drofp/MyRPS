@@ -83,9 +83,11 @@ namespace myrps
       }
       // else
       // {
-      //   hist = GenerateHistData(); // from raw data
+      //   hist = GenerateHistData(); // from raw data 
       // }
     }
+
+    cout << endl;
 
     return hist;
   }
@@ -144,18 +146,15 @@ namespace myrps
   // relationship.
   vector<string> MLChooser::TokenizeHistData()
   {
-    cout << "starting tokenizer..." << endl;
+    cout << "Starting tokenizer..." << endl;
     string ml_file_name = "ml_data/ml_data_" + to_string(n) + ".csv";
     ifstream file(ml_file_name);
-
-    cout << "successfully opened file!" << endl;
 
     vector<string> raw_pairs;
     string freq_token = "";
 
     while (getline(file, freq_token, ','))
     {
-      cout << "getting pair: " << freq_token << endl;
       raw_pairs.push_back(freq_token);
     }
 
@@ -167,6 +166,7 @@ namespace myrps
   // Parse formatted set of N games to frequency string into map format.
   unordered_map<string, int> MLChooser::ParseHistData(vector<string> raw_pairs)
   {
+    cout << "Parsing histogram data..." << endl;
     unordered_map<string, int> hist;
     string prev_n_moves;
     int freq;
@@ -175,12 +175,9 @@ namespace myrps
     string freq_str;
     for (string &s : raw_pairs)
       {
-        cout << "parsing: " << s << endl; 
         prev_n_moves = s.substr(0, s.find(delimeter));
-        cout << "prev_n_moves: " << prev_n_moves << endl;
         
         freq_str = s.substr(s.find(delimeter)+1, s.size());
-        cout << "freq_str: " << freq_str << endl;
         freq = stoi(freq_str);
 
         hist[prev_n_moves] = freq;
@@ -249,8 +246,6 @@ namespace myrps
     else
       cout << "No winning move found! Using default rock" << endl;
     
-    cout << "MOST LIKELY: " << most_likely_move << endl;
-    cout << "WINNING MOVE: " << winning_move << endl;
     return winning_move;
   }
 

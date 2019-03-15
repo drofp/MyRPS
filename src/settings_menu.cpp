@@ -23,13 +23,10 @@ SettingOption SettingsMenu::DisplaySettings()
   switch (user_choice)
   {
   case SettingOption::kRandom:
-    std::cout << "Random" << endl;
+    std::cout << "Now using algorithm: " << SettingOption::kRandom << endl;
     break;
   case SettingOption::kSmart:
-    std::cout << "Smart" << endl;
-    break;
-  case SettingOption::kGenius:
-    std::cout << "Genius" << endl;
+    std::cout << "Now using algorithm: " << SettingOption::kSmart << endl;
     break;
 
   default:
@@ -47,7 +44,7 @@ SettingOption SettingsMenu::GetUserChoice()
   {
     string user_input;
     cout << "Here are your difficulties:" << endl;
-    for (unsigned int i = 0; i < settings.size(); i++)
+    for (unsigned int i = 0; i < settings.size()-1; i++)
     {
       cout << settings[i] << "(" << i << ")" << endl;
     }
@@ -57,7 +54,9 @@ SettingOption SettingsMenu::GetUserChoice()
     if(user_choice == SettingOption::kError)
     {
       cout << "Please enter a valid difficulty\n" << endl;    
-    }else{
+    }
+    else
+    {
       valid = true;
       cout << endl;
     }
@@ -68,7 +67,7 @@ SettingOption SettingsMenu::GetUserChoice()
 SettingOption SettingsMenu::ValidateSetting(string val)
 {
   SettingOption user_choice;
-  if(val != "0" && val != "1" && val != "2")
+  if(val != "0" && val != "1")
   {
     user_choice = SettingOption::kError;
   }
@@ -80,11 +79,7 @@ SettingOption SettingsMenu::ValidateSetting(string val)
   {
     user_choice = SettingOption::kSmart;
   }
-  else
-  {
-    //stoi(val) == 2
-    user_choice = SettingOption::kGenius;
-  }
+
   return user_choice;
 }
 
