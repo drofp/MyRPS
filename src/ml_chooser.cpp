@@ -125,7 +125,7 @@ namespace myrps
   // doesn't exist, create a file for ML Data.
   bool MLChooser::MLFileNExists()
   {
-    string file_name = "ml_data/ml_data_" + to_string(n);
+    string file_name = "ml_data/ml_data_" + to_string(n) + ".csv";
     struct stat buffer;
 
     return stat(file_name.c_str(), &buffer) == 0;
@@ -145,7 +145,7 @@ namespace myrps
   vector<string> MLChooser::TokenizeHistData()
   {
     cout << "starting tokenizer..." << endl;
-    string ml_file_name = "ml_data/ml_data_" + to_string(n);
+    string ml_file_name = "ml_data/ml_data_" + to_string(n) + ".csv";
     ifstream file(ml_file_name);
 
     cout << "successfully opened file!" << endl;
@@ -215,7 +215,7 @@ namespace myrps
   // writes frequency data to a file to be read for next match
   void MLChooser::UpdateHistData()
   {
-    string ml_file_name = "ml_data/ml_data_" + to_string(n);
+    string ml_file_name = "ml_data/ml_data_" + to_string(n) + ".csv";
     cout << "Writing frequency data to file: " << ml_file_name << endl;
 
     ofstream file;
@@ -224,23 +224,10 @@ namespace myrps
     file.open(ml_file_name, ofstream::out | ofstream::trunc);
 
     int token_cnt = 1;
-    cout << "==========sizeof hist_data: " << hist_data.size() << endl;
+    
     for (pair<string, int> perm_to_freq : hist_data)
     {
-      cout << "===============writing to file! " << endl;
-      if (old_hist_data.find(perm_to_freq.first) == old_hist_data.end())
-      {
-        file << perm_to_freq.first << ':' << perm_to_freq.second;
-      }
-      else
-      {
-        // OLD: adding onto old hist data
-        // file << perm_to_freq.first << ':'
-        //      << old_hist_data[perm_to_freq.first] + perm_to_freq.second;
-        file << perm_to_freq.first << ':'
-             << perm_to_freq.second;
-      }
-
+      file << perm_to_freq.first << ':' << perm_to_freq.second;
       if (token_cnt < hist_data.size())
         file << ',';
       token_cnt++;
