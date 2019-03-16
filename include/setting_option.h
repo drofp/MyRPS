@@ -11,7 +11,6 @@ enum class SettingOption
 {
   kRandom,
   kSmart,
-  kGenius,
   kError,
 };
 
@@ -19,7 +18,6 @@ static const SettingOption settings_list[] =
     {
         SettingOption::kRandom,
         SettingOption::kSmart,
-        SettingOption::kGenius,
     };
 
 static const int num_settings = 3;
@@ -34,9 +32,6 @@ inline ostream &operator<<(ostream &ostr, const myrps::SettingOption difficulty)
     break;
   case myrps::SettingOption::kSmart:
     ostr << "Smart";
-    break;
-  case myrps::SettingOption::kGenius:
-    ostr << "Genius";
     break;
 
   default:

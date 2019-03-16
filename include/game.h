@@ -6,6 +6,9 @@
 #include "computer_player.h"
 #include "setting_option.h"
 
+#include <iostream>
+#include <boost/algorithm/string.hpp>
+
 using namespace std;
 
 namespace myrps
@@ -30,7 +33,7 @@ public:
   Game(SettingOption mode);
   void PlayMatch();
   Move GetPlayerMove();
-  Move GetComputerMove();
+  Move GetComputerMove(Move player_move);
   int GetRoundCount();
   int GetRoundsPerMatch();
   void SetComputerMode(SettingOption mode);

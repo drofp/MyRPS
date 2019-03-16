@@ -1,9 +1,4 @@
-#include <iostream>
-
 #include "game.h"
-#include "setting_option.h"
-#include "computer_player.h"
-#include <boost/algorithm/string.hpp>
 
 using namespace std;
 
@@ -11,12 +6,12 @@ namespace myrps
 {
 Game::Game()
 {
-  this->ai = ComputerPlayer(SettingOption::kRandom);
+  this->ai = ComputerPlayer(SettingOption::kRandom, rounds_per_match);
 }
 
 Game::Game(SettingOption computer_mode)
 {
-  this->ai = ComputerPlayer(computer_mode);
+  this->ai = ComputerPlayer(computer_mode, rounds_per_match);
 }
 
 void Game::PlayMatch()
@@ -25,7 +20,7 @@ void Game::PlayMatch()
   for (int i = 0; i < rounds_per_match; i++)
   {
     Move player_move = Game::GetPlayerMove();
-    Move computer_move = Game::GetComputerMove();
+    Move computer_move = Game::GetComputerMove(player_move);
 
     Game::PlayRound(player_move, computer_move);
   }
@@ -138,9 +133,9 @@ Move Game::GetPlayerMove()
   return player_move;
 }
 
-Move Game::GetComputerMove()
+Move Game::GetComputerMove(Move player_move)
 {
-  Move computer_move = ai.DecideMove();
+  Move computer_move = ai.DecideMove(player_move);
   return computer_move;
 }
 

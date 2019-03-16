@@ -1,14 +1,9 @@
 #include "chooser_factory.h"
-#include "setting_option.h"
-#include "random_chooser.h"
-#include "ml_chooser.h"
-
-#include <iostream>
 
 using namespace std;
 using namespace myrps;
 
-Chooser *ChooserFactory::MakeChooser(SettingOption choice)
+Chooser *ChooserFactory::MakeChooser(SettingOption choice, int rounds_per_match)
 {
   if(choice == SettingOption::kRandom)
   {
@@ -16,11 +11,7 @@ Chooser *ChooserFactory::MakeChooser(SettingOption choice)
   }
   else if(choice == SettingOption::kSmart)
   {
-    return new RandomChooser();
-  }
-  else if(choice == SettingOption::kGenius)
-  {
-    return new RandomChooser();
+    return new MLChooser(rounds_per_match);
   }
   else
   {

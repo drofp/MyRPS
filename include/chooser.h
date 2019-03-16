@@ -8,7 +8,7 @@ namespace myrps
 class Chooser
 {
 public:
-  virtual Move DecideMove() = 0;
+  virtual Move DecideMove(Move player_move) = 0;
 };
 } // namespace myrps
 #endif

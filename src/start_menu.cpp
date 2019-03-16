@@ -2,8 +2,6 @@
 #include <boost/algorithm/string.hpp>
 
 #include "start_menu.h"
-#include "start_option.h"
-#include "game.h"
 
 using namespace std;
 

@@ -1,56 +1,74 @@
 #include "ml_chooser.h"
-#include "game.h"
-
-using namespace std;
 
 namespace myrps
 {
-  MLChooser::MLChooser(Game current_game, int n)
+  MLChooser::MLChooser(int rounds_per_match)
   {
-    if (n < 1)
-      cout << "Invalid value of N! Please select value greater than 0." << endl;
-    
-    this->current_game = current_game;
-    this->n = n;
+    this->n = 5; // default value. must be greater than 1
+    this->rounds_per_match = rounds_per_match;
     this->hist_data = MLChooser::GetHistData();
     this->old_hist_data = this->hist_data;
   }
 
-  Move MLChooser::DecideMove()
+  Move MLChooser::DecideMove(Move player_move)
   {
-    Move winning_move;
+    Move winning_move = Move::kScissors;
     Move most_likely_move;
-    
-    Move computer_move = Move::kScissors;
-    if (hist_data.empty())
-    {
-      computer_move =
-          static_cast<Move>(rand() % static_cast<int>(Move::kScissors));
-      return computer_move;
-    }
 
-    if (current_game.GetRoundCount() < n)
+    if (round_count < n / 2)
     {
       // default random algorithm
-      computer_move =
+      cout << "defaulting to random algo" << endl;
+      winning_move =
           static_cast<Move>(rand() % static_cast<int>(Move::kScissors));
-      
-      last_n_minus_one_q.push(current_game.GetPlayerMove());
-      last_n_minus_one_q.push(computer_move);
-
-      return computer_move;
     }
     else
     {
+      cout << "using smart algo" << endl;
       string last_n_minus_one_moves = 
         MLChooser::GetLastNMinusOneMoves(last_n_minus_one_q);
+      
+      MLChooser::AddLastNMovesToHist(last_n_minus_one_moves, player_move);
+
       most_likely_move = MLChooser::GetMostLikelyMove(last_n_minus_one_moves);
       winning_move = MLChooser::GetWinningMove(most_likely_move);
     }
     
+    last_n_minus_one_q.push(player_move);
+    last_n_minus_one_q.push(winning_move);
 
+    round_count++;
+    cout << "rounds_per_match is: " << rounds_per_match << endl;
+    if (round_count == rounds_per_match)
+      MLChooser::WriteHistData();
+    
     return winning_move;
   }
+
+  void MLChooser::AddLastNMovesToHist(
+    string last_n_minus_one_moves,
+    Move curr_move)
+    {
+      string last_n_moves = "";
+
+      if (curr_move == Move::kRock)
+        last_n_moves = last_n_minus_one_moves + 'r';
+      else if (curr_move == Move::kPaper)
+        last_n_moves = last_n_minus_one_moves + 'p';
+      else if (curr_move == Move::kScissors)
+        last_n_moves = last_n_minus_one_moves + 's';
+      else
+        cout << "Invalid move" << endl;
+      
+      if (hist_data.find(last_n_moves) == hist_data.end())
+      {
+        hist_data.insert(make_pair(last_n_moves, 1));
+      }
+      else
+      {
+        hist_data[last_n_moves]++;
+      }
+    }
 
   unordered_map<string, int> MLChooser::GetHistData()
   {
@@ -65,11 +83,11 @@ namespace myrps
       }
       // else
       // {
-      //   hist = GenerateHistData(); // from raw data
+      //   hist = GenerateHistData(); // from raw data 
       // }
     }
 
-    MLChooser::WriteHistData();
+    cout << endl;
 
     return hist;
   }
@@ -109,7 +127,7 @@ namespace myrps
   // doesn't exist, create a file for ML Data.
   bool MLChooser::MLFileNExists()
   {
-    string file_name = "ml_data/ml_data_" + to_string(n);
+    string file_name = "ml_data/ml_data_" + to_string(n) + ".csv";
     struct stat buffer;
 
     return stat(file_name.c_str(), &buffer) == 0;
@@ -128,14 +146,17 @@ namespace myrps
   // relationship.
   vector<string> MLChooser::TokenizeHistData()
   {
-    string ml_file_name = "ml_data/ml_data_" + to_string(n);
+    cout << "Starting tokenizer..." << endl;
+    string ml_file_name = "ml_data/ml_data_" + to_string(n) + ".csv";
     ifstream file(ml_file_name);
 
     vector<string> raw_pairs;
     string freq_token = "";
 
     while (getline(file, freq_token, ','))
+    {
       raw_pairs.push_back(freq_token);
+    }
 
     file.close();
 
@@ -145,15 +166,20 @@ namespace myrps
   // Parse formatted set of N games to frequency string into map format.
   unordered_map<string, int> MLChooser::ParseHistData(vector<string> raw_pairs)
   {
+    cout << "Parsing histogram data..." << endl;
     unordered_map<string, int> hist;
     string prev_n_moves;
     int freq;
     char delimeter = ':';
 
+    string freq_str;
     for (string &s : raw_pairs)
       {
         prev_n_moves = s.substr(0, s.find(delimeter));
-        freq = stoi(s.substr(s.find(delimeter), s.size()));
+        
+        freq_str = s.substr(s.find(delimeter)+1, s.size());
+        freq = stoi(freq_str);
+
         hist[prev_n_moves] = freq;
       }
 
@@ -172,32 +198,36 @@ namespace myrps
     {
       if (MLChooser::MLFileNExists())
       {
+        cout << "ML File Exists!" << endl;
+        MLChooser::UpdateHistData();
+      }
+      else
+      {
+        cout << "ML File doesn't exist yet. Writing to new file" << endl;
         MLChooser::UpdateHistData();
       }
     }
   }
 
+  // writes frequency data to a file to be read for next match
   void MLChooser::UpdateHistData()
   {
-    string ml_file_name = "ml_data/ml_data_" + to_string(n);
+    string ml_file_name = "ml_data/ml_data_" + to_string(n) + ".csv";
+    cout << "Writing frequency data to file: " << ml_file_name << endl;
+
     ofstream file;
+
+    // clear file first before overwritting
     file.open(ml_file_name, ofstream::out | ofstream::trunc);
 
-    int game_cnt = 0;
+    int token_cnt = 1;
+    
     for (pair<string, int> perm_to_freq : hist_data)
     {
-      if (old_hist_data.find(perm_to_freq.first) == old_hist_data.end())
-      {
-        file << perm_to_freq.first << ':' << perm_to_freq.second;
-      }
-      else
-      {
-        file << perm_to_freq.first << ':'
-             << old_hist_data[perm_to_freq.first] + perm_to_freq.second;
-      }
-
-      if (game_cnt < current_game.GetRoundsPerMatch())
+      file << perm_to_freq.first << ':' << perm_to_freq.second;
+      if (token_cnt < hist_data.size())
         file << ',';
+      token_cnt++;
     }
 
     file.close();
@@ -248,9 +278,10 @@ namespace myrps
   {
     string last_n_minus_one_moves = "";
     queue<Move> copied_q = q;
+    int amount_to_copy = n;
     Move current_move;
 
-    while (!copied_q.empty())
+    while (amount_to_copy > 0)
     {
       current_move = copied_q.front();
 
@@ -263,8 +294,12 @@ namespace myrps
       else
         cout << "Invalid move in queue!!!" << endl;
       
+      amount_to_copy--;
       copied_q.pop();
     }
+
+    q.pop();
+    q.pop();
 
     return last_n_minus_one_moves;
   }
@@ -273,7 +308,7 @@ namespace myrps
     pair<string, int> &b)
     {
 
-      return a.first > b.first;
+      return a.second > b.second;
     }
 
   // TODO: Replace with search algorithm for expandability. Maybe store hist as 
@@ -313,5 +348,15 @@ namespace myrps
       possible_choices.push_back(
         make_pair(permutation, 0));
     }
+  }
+
+  void MLChooser::PrintHistData()
+  {
+    cout << "hist_data:";
+    for (pair<string, int> perm_to_freq : hist_data)
+    {
+      cout << " " << perm_to_freq.first << ":" << perm_to_freq.second << ",";
+    }
+    cout << endl;
   }
 }
