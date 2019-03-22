@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 
 #include "chooser.h"
+#include "file_writer.h"
 #include "move.h"
 
 using namespace std;
@@ -174,6 +175,8 @@ private:
   void
     InsertPossibleChoice(vector<pair<string, int>> &possible_choices,
                           string permutation);
+
+  FileWriter file_writer;
 
   /**
    * Prints hist_data map contents.

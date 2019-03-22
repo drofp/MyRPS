@@ -5,6 +5,7 @@ namespace myrps
   MLChooser::MLChooser(int rounds_per_match)
   {
     this->n = 5; // default value. must be greater than 1
+    this->file_writer = FileWriter("ml_data_" + to_string(n) + ".csv", "ml_data");
     this->rounds_per_match = rounds_per_match;
     this->hist_data = MLChooser::GetHistData();
     this->old_hist_data = this->hist_data;
@@ -74,13 +75,13 @@ namespace myrps
   {
     unordered_map<string, int> hist;
 
-    if (MLChooser::MLDirectoryExists())
+    if (file_writer.FileExists())
     {
-      if (MLChooser::MLFileNExists())
-      {
+      // if (MLChooser::MLFileNExists())
+      // {
         cout << "File exists! Initializing frequency data..." << endl;
         hist = MLChooser::ReadHistData();
-      }
+      // }
       // else
       // {
       //   hist = GenerateHistData(); // from raw data 
@@ -194,43 +195,31 @@ namespace myrps
 
   void MLChooser::WriteHistData()
   {
-    if (MLChooser::MLDirectoryExists())
-    {
-      if (MLChooser::MLFileNExists())
-      {
-        cout << "ML File Exists!" << endl;
-        MLChooser::UpdateHistData();
-      }
-      else
-      {
-        cout << "ML File doesn't exist yet. Writing to new file" << endl;
-        MLChooser::UpdateHistData();
-      }
-    }
+    MLChooser::UpdateHistData();
   }
 
   // writes frequency data to a file to be read for next match
   void MLChooser::UpdateHistData()
   {
-    string ml_file_name = "ml_data/ml_data_" + to_string(n) + ".csv";
+    string ml_file_name = "data/ml_data/ml_data_" + to_string(n) + ".csv";
     cout << "Writing frequency data to file: " << ml_file_name << endl;
 
     ofstream file;
 
     // clear file first before overwritting
     file.open(ml_file_name, ofstream::out | ofstream::trunc);
-
+    file.close();
     int token_cnt = 1;
     
     for (pair<string, int> perm_to_freq : hist_data)
     {
-      file << perm_to_freq.first << ':' << perm_to_freq.second;
+      file_writer.writeToFile(perm_to_freq.first + ":" 
+        + to_string(perm_to_freq.second));
+
       if (token_cnt < hist_data.size())
-        file << ',';
+        file_writer.writeToFile(",");
       token_cnt++;
     }
-
-    file.close();
   }
 
   Move MLChooser::GetWinningMove(Move most_likely_move)

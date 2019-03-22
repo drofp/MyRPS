@@ -5,7 +5,6 @@
 #include <cstring>
 #include <fstream>
 #include <sys/stat.h>
-#include <boost/filesystem.hpp>
 
 using namespace std;
 
@@ -14,13 +13,15 @@ namespace myrps
 class FileWriter
 {
 public:
-  FileWriter(string file_name, string directory);
+  FileWriter() {}
+  FileWriter(string file_name, string directory) : 
+    file_name(file_name), directory("data/" + directory) {EnsureFileExists();}
   void SetFileName(string file_name);
   void writeToFile(string payload);
-private:
-  void EnsureFileExists();
   bool DirectoryExists();
   bool FileExists();
+private:
+  void EnsureFileExists();
   string file_name;
   string directory;
 };

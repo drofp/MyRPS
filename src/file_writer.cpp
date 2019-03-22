@@ -4,12 +4,6 @@ using namespace std;
 
 namespace myrps
 {
-FileWriter::FileWriter(string file_name, string directory)
-{
-  this->file_name = file_name;
-  this->directory = "data/" + directory;
-  EnsureFileExists();
-}
 
 void FileWriter::SetFileName(string file_name)
 {
@@ -18,7 +12,7 @@ void FileWriter::SetFileName(string file_name)
 
 void FileWriter::writeToFile(string payload)
 {
-  string file_to_write = this->directory + this->file_name;
+  string file_to_write = this->directory + "/" + this->file_name;
   ofstream file;
 
   file.open(file_to_write, ofstream::out | ofstream::app);
@@ -36,7 +30,8 @@ void FileWriter::EnsureFileExists()
       cmd = "mkdir -p " + this->directory;
       system(cmd.c_str());
     }
-    cmd = "touch " + this->directory + this->file_name;
+    cmd = "touch " + this->directory + "/" + this->file_name;
+    system(cmd.c_str());
   }
 }
 
