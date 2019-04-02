@@ -3,19 +3,34 @@
 #include "game.h"
 #include "start_menu.h"
 #include "settings_menu.h"
-
 #include "ml_chooser.h"
+
+#include "my_rps.h"
 
 using namespace std;
 
-int main()
+wxIMPLEMENT_APP(ButtonDemo);
+
+bool ButtonDemo::OnInit()
 {
-  myrps::StartMenu start;
-  start.DisplayOptions();
+    if (!wxApp::OnInit()) return false;
 
-  // myrps::MLChooser ml_chooser;
-  // unordered_map<string, int> test_map = ml_chooser.GetHistData();
+    DemoFrame *frame = new DemoFrame("Button Demo");
+    frame->Show(true);
 
-
-  return 0;
+    return true;
 }
+
+// int main()
+// {
+//   myrps::StartMenu start;
+//   start.DisplayOptions();
+
+//   // myrps::MLChooser ml_chooser;
+//   // unordered_map<string, int> test_map = ml_chooser.GetHistData();
+
+
+//   return 0;
+// }
+
+
