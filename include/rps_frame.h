@@ -5,19 +5,12 @@
 
 namespace myrps
 {
-class DemoFrame : public wxFrame
+class RpsFrame : public wxFrame
 {
 public:
-    /**
-     * Constructor.
-     * @param title the window title.
-     */
-    DemoFrame(const wxString& title);
+    RpsFrame(const wxString& title);
 
-    /**
-     * Destructor.
-     */
-    virtual ~DemoFrame();
+    virtual ~RpsFrame();
 
     /**
      * Event handler for the About menu item.
@@ -35,7 +28,7 @@ private:
     // The event table that maps events to their handlers.
     wxDECLARE_EVENT_TABLE();
 
-    ButtonPanel *button_panel;
+    RpsPanel *rps_panel;
 
     /**
      * Initialize the contents of the application frame.
@@ -62,4 +55,4 @@ enum
 
 } // namespace myrps
 
-#endif /* DEMOFRAME_H_ */
+#endif /* RpsFRAME_H_ */

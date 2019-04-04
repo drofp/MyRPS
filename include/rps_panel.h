@@ -22,7 +22,7 @@ private:
   wxStaticText *button_chosen_text;
 
   void init();
-  void update_button_choice_text(const Move move)
+  void update_button_choice_text(const Move move);
 };
 } // namespace myrps
 

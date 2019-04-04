@@ -6,19 +6,24 @@
 #include "ml_chooser.h"
 
 #include "my_rps.h"
+#include "rps_frame.h"
 
 using namespace std;
+using myrps::MyRps;
 
-wxIMPLEMENT_APP(ButtonDemo);
+wxIMPLEMENT_APP(MyRps);
 
-bool ButtonDemo::OnInit()
+namespace myrps
+{
+bool MyRps::OnInit()
 {
     if (!wxApp::OnInit()) return false;
 
-    DemoFrame *frame = new DemoFrame("Button Demo");
+    RpsFrame *frame = new RpsFrame("Rps Demo");
     frame->Show(true);
 
     return true;
+}
 }
 
 // int main()

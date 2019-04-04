@@ -1,5 +1,7 @@
 #include "rps_panel.h"
 
+using myrps::RpsPanel;
+
 namespace myrps
 {
 void RpsPanel::init()
@@ -12,11 +14,11 @@ void RpsPanel::init()
     wxStaticText *choose_text = new wxStaticText(button_panel, wxID_ANY,
                                                  "Choose:");
     wxButton *rock_button     = new wxButton(button_panel, wxID_ANY,
-                                             "Rock");
+                                             choice_to_wxString(Move::kRock));
     wxButton *paper_button    = new wxButton(button_panel, wxID_ANY,
-                                             "Paper");
+                                             choice_to_wxString(Move::kPaper));
     wxButton *scissors_button = new wxButton(button_panel, wxID_ANY,
-                                             "Scissors");
+                                             choice_to_wxString(Move::kScissors));
 
     rock_button->Bind    (wxEVT_BUTTON, &RpsPanel::on_rock, this);
     paper_button->Bind   (wxEVT_BUTTON, &RpsPanel::on_paper, this);

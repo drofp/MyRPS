@@ -1,6 +1,8 @@
 #ifndef MOVE_H
 #define MOVE_H
 
+#include "wx/wx.h"
+
 #include <ostream>
 
 using namespace std;
@@ -13,6 +15,8 @@ enum class Move
   kPaper,
   kScissors,
 };
+
+wxString move_to_wxString(Move move);
 } // namespace myrps
 
 inline ostream& operator<< (ostream& out, const myrps::Move move)
@@ -34,6 +38,6 @@ inline ostream& operator<< (ostream& out, const myrps::Move move)
   }
 
   return out;
-} // namespace myrps
+}
 
 #endif
