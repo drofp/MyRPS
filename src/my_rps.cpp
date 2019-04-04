@@ -24,7 +24,7 @@ bool MyRps::OnInit()
 
     return true;
 }
-}
+} // namespace myrps
 
 // int main()
 // {
