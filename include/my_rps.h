@@ -8,7 +8,7 @@ namespace myrps
 class MyRps : public wxApp
 {
 public:
-  virtual bool OnInit() wxOVERRIDE;
+  virtual bool OnInit() override;
 };
 } // namespace myrps
 
