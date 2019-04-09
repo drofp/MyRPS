@@ -25,15 +25,15 @@ private:
   int tie_game_cnt = 0;
 
   bool IsValidMove(string user_move);
-  void PlayRound(Move player_move, Move computer_move);
+  void PlayRound(MoveChoice player_move, MoveChoice computer_move);
   void PrintScore();
 
 public:
   Game();
   Game(SettingOption mode);
   void PlayMatch();
-  Move GetPlayerMove();
-  Move GetComputerMove(Move player_move);
+  MoveChoice GetPlayerMove();
+  MoveChoice GetComputerMove(MoveChoice player_move);
   int GetRoundCount();
   int GetRoundsPerMatch();
   void SetComputerMode(SettingOption mode);

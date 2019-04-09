@@ -14,11 +14,11 @@ void RpsPanel::init()
     wxStaticText *choose_text = new wxStaticText(button_panel, wxID_ANY,
                                                  "Choose:");
     wxButton *rock_button     = new wxButton(button_panel, wxID_ANY,
-                                             move_to_wxString(Move::kRock));
+                                             move_to_wxString(MoveChoice::kRock));
     wxButton *paper_button    = new wxButton(button_panel, wxID_ANY,
-                                             move_to_wxString(Move::kPaper));
+                                             move_to_wxString(MoveChoice::kPaper));
     wxButton *scissors_button = new wxButton(button_panel, wxID_ANY,
-                                             move_to_wxString(Move::kScissors));
+                                             move_to_wxString(MoveChoice::kScissors));
 
     rock_button->Bind    (wxEVT_BUTTON, &RpsPanel::on_rock, this);
     paper_button->Bind   (wxEVT_BUTTON, &RpsPanel::on_paper, this);
@@ -54,20 +54,20 @@ void RpsPanel::init()
 
 void RpsPanel::on_rock(wxCommandEvent& event)
 {
-    update_button_move_text(Move::kRock);
+    update_button_move_text(MoveChoice::kRock);
 }
 
 void RpsPanel::on_paper(wxCommandEvent& event)
 {
-    update_button_move_text(Move::kPaper);
+    update_button_move_text(MoveChoice::kPaper);
 }
 
 void RpsPanel::on_scissors(wxCommandEvent& event)
 {
-    update_button_move_text(Move::kScissors);
+    update_button_move_text(MoveChoice::kScissors);
 }
 
-void RpsPanel::update_button_move_text(const Move move)
+void RpsPanel::update_button_move_text(const MoveChoice move)
 {
     button_chosen_text->SetLabelText(move_to_wxString(move));
 }

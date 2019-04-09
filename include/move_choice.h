@@ -1,5 +1,5 @@
-#ifndef MOVE_H
-#define MOVE_H
+#ifndef MOVE_CHOICE_H
+#define MOVE_CHOICE_H
 
 #include "wx/wx.h"
 
@@ -9,27 +9,27 @@ using namespace std;
 
 namespace myrps
 {
-enum class Move
+enum class MoveChoice
 {
   kRock,
   kPaper,
   kScissors,
 };
 
-wxString move_to_wxString(Move move);
+wxString move_to_wxString(MoveChoice move);
 } // namespace myrps
 
-inline ostream& operator<< (ostream& out, const myrps::Move move)
+inline ostream& operator<< (ostream& out, const myrps::MoveChoice move)
 {
   switch (move)
   {
-  case myrps::Move::kRock:
+  case myrps::MoveChoice::kRock:
     out << "Rock";
     break;
-  case myrps::Move::kPaper:
+  case myrps::MoveChoice::kPaper:
     out << "Paper";
     break;
-  case myrps::Move::kScissors:
+  case myrps::MoveChoice::kScissors:
     out << "Scissors";
     break;
 

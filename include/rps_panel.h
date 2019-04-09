@@ -2,7 +2,7 @@
 #define RPS_PANEL_H
 
 #include "my_rps.h"
-#include "move.h"
+#include "move_choice.h"
 
 namespace myrps
 {
@@ -22,7 +22,7 @@ private:
   wxStaticText *button_chosen_text;
 
   void init();
-  void update_button_move_text(const Move move);
+  void update_button_move_text(const MoveChoice move);
 };
 } // namespace myrps
 

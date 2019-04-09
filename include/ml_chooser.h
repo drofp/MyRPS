@@ -14,7 +14,7 @@
 #include <sys/stat.h>
 
 #include "chooser.h"
-#include "move.h"
+#include "move_choice.h"
 
 using namespace std;
 
@@ -31,7 +31,7 @@ public:
    * GetWinningMove to guess it's move. Defaults to random if
    * the round count is < n / 2.
    */
-  Move DecideMove(Move player_move);
+  MoveChoice DecideMove(MoveChoice player_move);
 
 
   /**
@@ -73,7 +73,7 @@ private:
    * Layout is |player|computer|player etc...
    * Added to with each player computer matchup.
    */
-  queue<Move> last_n_minus_one_q;
+  queue<MoveChoice> last_n_minus_one_q;
 
   /**
    * This function tries to make a directory ml_data and
@@ -129,7 +129,7 @@ private:
    * Takes a parameter which is the player's most likely move and returns
    * the inverse of the move for the computer to choose.
    */
-  Move GetWinningMove(Move most_likely_move);
+  MoveChoice GetWinningMove(MoveChoice most_likely_move);
 
   /**
    * This function takes the last n - 1 moves and from there uses 
@@ -137,20 +137,20 @@ private:
    * guesses based on frequency, and looks at the guess with the most 
    * frequency to determine as the most likely move.
    */
-  Move GetMostLikelyMove(string last_n_minus_one_moves);
+  MoveChoice GetMostLikelyMove(string last_n_minus_one_moves);
 
   /**
    * Takes a queue of Move values and converts them to a 
    * string. The size of q is n - 1, and the length of 
    * the result string is n - 1.
    */
-  string GetLastNMinusOneMoves(queue<Move> q);
+  string GetLastNMinusOneMoves(queue<MoveChoice> q);
 
   /**
    * Adds current move to a string that holds the last n - 1 moves
    * updates entry in history data by 1
    */
-  void AddLastNMovesToHist(string last_n_minus_one_moves, Move curr_move);
+  void AddLastNMovesToHist(string last_n_minus_one_moves, MoveChoice curr_move);
 
   /**
    * Helper function to sort vector of pair<string,int>

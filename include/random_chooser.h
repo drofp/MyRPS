@@ -8,7 +8,7 @@ namespace myrps
 class RandomChooser : public myrps::Chooser
 {
 public:
-  Move DecideMove(Move player_move);
+  MoveChoice DecideMove(MoveChoice player_move);
 };
 } // namespace myrps
 #endif

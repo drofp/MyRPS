@@ -1,14 +1,14 @@
 #ifndef CHOOSER_H
 #define CHOOSER_H
 
-#include "move.h"
+#include "move_choice.h"
 
 namespace myrps
 {
 class Chooser
 {
 public:
-  virtual Move DecideMove(Move player_move) = 0;
+  virtual MoveChoice DecideMove(MoveChoice player_move) = 0;
 };
 } // namespace myrps
 #endif
