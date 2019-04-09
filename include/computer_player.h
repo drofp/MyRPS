@@ -1,7 +1,7 @@
 #ifndef COMPUTER_PLAYER_H
 #define COMPUTER_PLAYER_H
 
-#include "move.h"
+#include "move_choice.h"
 #include "setting_option.h"
 #include "chooser_factory.h"
 #include "random_chooser.h"
@@ -22,7 +22,7 @@ private:
 public:
   ComputerPlayer();
   ComputerPlayer(SettingOption mode, int rounds_per_match);
-  Move DecideMove(Move player_move);
+  MoveChoice DecideMove(MoveChoice player_move);
   void SetComputerMode(SettingOption mode);
 };
 } // namespace myrps

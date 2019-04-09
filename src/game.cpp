@@ -19,8 +19,8 @@ void Game::PlayMatch()
   cout << "Get ready for a match of " << rounds_per_match << " games! " << endl;
   for (int i = 0; i < rounds_per_match; i++)
   {
-    Move player_move = Game::GetPlayerMove();
-    Move computer_move = Game::GetComputerMove(player_move);
+    MoveChoice player_move = Game::GetPlayerMove();
+    MoveChoice computer_move = Game::GetComputerMove(player_move);
 
     Game::PlayRound(player_move, computer_move);
   }
@@ -30,20 +30,20 @@ void Game::PlayMatch()
   cout << "Thanks for playing MyRPS!!!" << endl;
 }
 
-void Game::PlayRound(Move player_move, Move computer_move)
+void Game::PlayRound(MoveChoice player_move, MoveChoice computer_move)
 {
   cout << "Results of round " << round_count << ':' << endl;
   cout << "Player chose: " << player_move << endl;
   cout << "Computer chose: " << computer_move << endl;
 
-  if (player_move == Move::kRock)
+  if (player_move == MoveChoice::kRock)
   {
-    if (computer_move == Move::kScissors)
+    if (computer_move == MoveChoice::kScissors)
     {
       cout << "Player wins!" << endl;
       player_score++;
     }
-    else if (computer_move == Move::kPaper)
+    else if (computer_move == MoveChoice::kPaper)
     {
       cout << "Player loses..." << endl;
       computer_score++;
@@ -54,14 +54,14 @@ void Game::PlayRound(Move player_move, Move computer_move)
       tie_game_cnt++;
     }
   }
-  else if (player_move == Move::kPaper)
+  else if (player_move == MoveChoice::kPaper)
   {
-    if (computer_move == Move::kRock)
+    if (computer_move == MoveChoice::kRock)
     {
       cout << "Player wins!" << endl;
       player_score++;
     }
-    else if (computer_move == Move::kScissors)
+    else if (computer_move == MoveChoice::kScissors)
     {
       cout << "Player loses..." << endl;
       computer_score++;
@@ -72,14 +72,14 @@ void Game::PlayRound(Move player_move, Move computer_move)
       tie_game_cnt++;
     }
   }
-  else if (player_move == Move::kScissors)
+  else if (player_move == MoveChoice::kScissors)
   {
-    if (computer_move == Move::kPaper)
+    if (computer_move == MoveChoice::kPaper)
     {
       cout << "Player wins!" << endl;
       player_score++;
     }
-    else if (computer_move == Move::kRock)
+    else if (computer_move == MoveChoice::kRock)
     {
       cout << "Player loses..." << endl;
       computer_score++;
@@ -95,9 +95,9 @@ void Game::PlayRound(Move player_move, Move computer_move)
   round_count++;
 }
 
-Move Game::GetPlayerMove()
+MoveChoice Game::GetPlayerMove()
 {
-  Move player_move;
+  MoveChoice player_move;
 
   bool still_playing = true;
   string user_input;
@@ -120,11 +120,11 @@ Move Game::GetPlayerMove()
     else
     {
       if (user_input == "rock" || strcmp(user_input.c_str(), "r") == 0)
-        player_move = Move::kRock;
+        player_move = MoveChoice::kRock;
       else if (user_input == "paper" || strcmp(user_input.c_str(), "p") == 0)
-        player_move = Move::kPaper;
+        player_move = MoveChoice::kPaper;
       else if (user_input == "scissors" || strcmp(user_input.c_str(), "s") == 0)
-        player_move = Move::kScissors;
+        player_move = MoveChoice::kScissors;
 
       still_playing = false;
     }
@@ -133,9 +133,9 @@ Move Game::GetPlayerMove()
   return player_move;
 }
 
-Move Game::GetComputerMove(Move player_move)
+MoveChoice Game::GetComputerMove(MoveChoice player_move)
 {
-  Move computer_move = ai.DecideMove(player_move);
+  MoveChoice computer_move = ai.DecideMove(player_move);
   return computer_move;
 }
 

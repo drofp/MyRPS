@@ -6,9 +6,9 @@ using namespace std;
 
 namespace myrps
 {
-  Move RandomChooser::DecideMove(Move player_move)
+  MoveChoice RandomChooser::DecideMove(MoveChoice player_move)
   {
-    Move computer_move = static_cast<Move>(rand() % static_cast<int>(Move::kScissors));
+    MoveChoice computer_move = static_cast<MoveChoice>(rand() % static_cast<int>(MoveChoice::kScissors));
 
     return computer_move;
   }

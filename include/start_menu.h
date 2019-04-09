@@ -5,7 +5,7 @@
 
 #include "start_option.h"
 #include "settings_menu.h"
-#include "move.h"
+#include "move_choice.h"
 #include "game.h"
 
 using namespace std;

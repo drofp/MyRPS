@@ -10,17 +10,17 @@ namespace myrps
     this->old_hist_data = this->hist_data;
   }
 
-  Move MLChooser::DecideMove(Move player_move)
+  MoveChoice MLChooser::DecideMove(MoveChoice player_move)
   {
-    Move winning_move = Move::kScissors;
-    Move most_likely_move;
+    MoveChoice winning_move = MoveChoice::kScissors;
+    MoveChoice most_likely_move;
 
     if (round_count < n / 2)
     {
       // default random algorithm
       cout << "defaulting to random algo" << endl;
       winning_move =
-          static_cast<Move>(rand() % static_cast<int>(Move::kScissors));
+          static_cast<MoveChoice>(rand() % static_cast<int>(MoveChoice::kScissors));
     }
     else
     {
@@ -47,15 +47,15 @@ namespace myrps
 
   void MLChooser::AddLastNMovesToHist(
     string last_n_minus_one_moves,
-    Move curr_move)
+    MoveChoice curr_move)
     {
       string last_n_moves = "";
 
-      if (curr_move == Move::kRock)
+      if (curr_move == MoveChoice::kRock)
         last_n_moves = last_n_minus_one_moves + 'r';
-      else if (curr_move == Move::kPaper)
+      else if (curr_move == MoveChoice::kPaper)
         last_n_moves = last_n_minus_one_moves + 'p';
-      else if (curr_move == Move::kScissors)
+      else if (curr_move == MoveChoice::kScissors)
         last_n_moves = last_n_minus_one_moves + 's';
       else
         cout << "Invalid move" << endl;
@@ -233,25 +233,25 @@ namespace myrps
     file.close();
   }
 
-  Move MLChooser::GetWinningMove(Move most_likely_move)
+  MoveChoice MLChooser::GetWinningMove(MoveChoice most_likely_move)
   {
-    Move winning_move = Move::kRock;
+    MoveChoice winning_move = MoveChoice::kRock;
 
-    if (most_likely_move == Move::kRock)
-      winning_move = Move::kPaper;
-    else if (most_likely_move == Move::kPaper)
-      winning_move = Move::kScissors;
-    else if (most_likely_move == Move::kScissors)
-      winning_move = Move::kRock;
+    if (most_likely_move == MoveChoice::kRock)
+      winning_move = MoveChoice::kPaper;
+    else if (most_likely_move == MoveChoice::kPaper)
+      winning_move = MoveChoice::kScissors;
+    else if (most_likely_move == MoveChoice::kScissors)
+      winning_move = MoveChoice::kRock;
     else
       cout << "No winning move found! Using default rock" << endl;
     
     return winning_move;
   }
 
-  Move MLChooser::GetMostLikelyMove(string last_n_minus_one_moves)
+  MoveChoice MLChooser::GetMostLikelyMove(string last_n_minus_one_moves)
   {
-    Move most_likely_move = Move::kRock;
+    MoveChoice most_likely_move = MoveChoice::kRock;
 
     vector<pair<string, int>> possible_moves = 
       MLChooser::GetPossibleChoices(last_n_minus_one_moves);
@@ -261,11 +261,11 @@ namespace myrps
 
     char most_likely_move_str = possible_moves.at(0).first.back();
     if (most_likely_move_str == 'r')
-      most_likely_move = Move::kRock;
+      most_likely_move = MoveChoice::kRock;
     else if (most_likely_move_str == 'p')
-      most_likely_move = Move::kPaper;
+      most_likely_move = MoveChoice::kPaper;
     else if (most_likely_move_str == 's')
-      most_likely_move = Move::kScissors;
+      most_likely_move = MoveChoice::kScissors;
     else
       cout << "No valid most likely move. Defaulting to Rock" << endl;
     
@@ -274,22 +274,22 @@ namespace myrps
 
   // TODO(drofp): Enhance memory performance to use iterable container for 
   // queue instead of copying over the queue for the sake of iterating.
-  string MLChooser::GetLastNMinusOneMoves(queue<Move> q)
+  string MLChooser::GetLastNMinusOneMoves(queue<MoveChoice> q)
   {
     string last_n_minus_one_moves = "";
-    queue<Move> copied_q = q;
+    queue<MoveChoice> copied_q = q;
     int amount_to_copy = n;
-    Move current_move;
+    MoveChoice current_move;
 
     while (amount_to_copy > 0)
     {
       current_move = copied_q.front();
 
-      if (current_move == Move::kRock)
+      if (current_move == MoveChoice::kRock)
         last_n_minus_one_moves += 'r';
-      else if (current_move == Move::kPaper)
+      else if (current_move == MoveChoice::kPaper)
         last_n_minus_one_moves += 'p';
-      else if (current_move == Move::kScissors)
+      else if (current_move == MoveChoice::kScissors)
         last_n_minus_one_moves += 's';
       else
         cout << "Invalid move in queue!!!" << endl;

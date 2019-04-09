@@ -6,7 +6,7 @@ SRC		:= src
 INCLUDE	:= include
 LIB		:= lib
 
-LIBRARIES	:=
+LIBRARIES	:= `wx-config --libs` `wx-config --cxxflags`
 EXECUTABLE	:= main
 
 
