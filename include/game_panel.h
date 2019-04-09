@@ -3,6 +3,9 @@
 
 #include "my_rps.h"
 #include "move_choice.h"
+#include "game.h"
+
+#include <string>
 
 namespace myrps
 {
@@ -19,9 +22,12 @@ public:
   void on_scissors(wxCommandEvent& event);
 private:
   wxStaticText *button_chosen_text;
+  wxStaticText *round_count_text;
+  int cnt = 1;
 
   void init();
   void update_button_move_text(const MoveChoice move);
+  void update_round_count_text(const int round_count);
 };
 } // namespace myrps
 
