@@ -22,7 +22,7 @@ void Game::PlayMatch()
     MoveChoice player_move = Game::GetPlayerMove();
     MoveChoice computer_move = Game::GetComputerMove(player_move);
 
-    Game::PlayRound(player_move, computer_move);
+    Game::DisplayRound(player_move, computer_move);
   }
 
   Game::PrintScore();
@@ -30,69 +30,75 @@ void Game::PlayMatch()
   cout << "Thanks for playing MyRPS!!!" << endl;
 }
 
-void Game::PlayRound(MoveChoice player_move, MoveChoice computer_move)
+void Game::DisplayRound(MoveChoice player_move, MoveChoice computer_move)
+{
+  string win_result = PlayRound(player_move, computer_move);
+  cout << win_result << endl;
+  cout << endl;
+}
+
+string Game::PlayRound(MoveChoice player_move, MoveChoice computer_move)
 {
   cout << "Results of round " << round_count << ':' << endl;
   cout << "Player chose: " << player_move << endl;
   cout << "Computer chose: " << computer_move << endl;
 
+  round_count++;
+
   if (player_move == MoveChoice::kRock)
   {
     if (computer_move == MoveChoice::kScissors)
     {
-      cout << "Player wins!" << endl;
       player_score++;
+      return "Player wins!";
     }
     else if (computer_move == MoveChoice::kPaper)
     {
-      cout << "Player loses..." << endl;
       computer_score++;
+      return "Player loses...";
     }
     else
     {
-      cout << "Tie game!!!" << endl;
       tie_game_cnt++;
+      return "Tie game!!!";
     }
   }
   else if (player_move == MoveChoice::kPaper)
   {
     if (computer_move == MoveChoice::kRock)
     {
-      cout << "Player wins!" << endl;
       player_score++;
+      return "Player wins!";
     }
     else if (computer_move == MoveChoice::kScissors)
     {
-      cout << "Player loses..." << endl;
       computer_score++;
+      return "Player loses...";
     }
     else
     {
-      cout << "Tie game!!!" << endl;
       tie_game_cnt++;
+      return "Tie game!!!";
     }
   }
   else if (player_move == MoveChoice::kScissors)
   {
     if (computer_move == MoveChoice::kPaper)
     {
-      cout << "Player wins!" << endl;
       player_score++;
+      return "Player wins!";
     }
     else if (computer_move == MoveChoice::kRock)
     {
-      cout << "Player loses..." << endl;
       computer_score++;
+      return "Player loses...";
     }
     else
     {
-      cout << "Tie game!!!" << endl;
       tie_game_cnt++;
+      return "Tie game!!!";
     }
   }
-
-  cout << endl;
-  round_count++;
 }
 
 MoveChoice Game::GetPlayerMove()
@@ -139,15 +145,11 @@ MoveChoice Game::GetComputerMove(MoveChoice player_move)
   return computer_move;
 }
 
-int Game::GetRoundCount()
-{
-  return round_count;
-}
-
-int Game::GetRoundsPerMatch()
-{
-  return Game::rounds_per_match;
-}
+int Game::GetPlayerScore()    {return player_score;}
+int Game::GetComputerScore()   {return computer_score;}
+int Game::GetTieGameCnt()     {return tie_game_cnt;}
+int Game::GetRoundCount()     {return round_count;}
+int Game::GetRoundsPerMatch() {return Game::rounds_per_match;}
 
 void Game::SetComputerMode(SettingOption mode)
 {

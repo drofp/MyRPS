@@ -85,7 +85,7 @@ void GamePanel::GenerateChosenMovePanel(wxPanel* chosen_panel)
   wxSizer *chosen_sizer = new wxGridSizer(2, 0, 5);
 
   wxStaticText *chosen_move_text = new wxStaticText(chosen_panel, wxID_ANY,
-                                               "Chosen move:");
+                                               "Player's move:");
   button_chosen_text = new wxStaticText(chosen_panel, wxID_ANY, "");
   button_chosen_text->SetFont(button_chosen_text->GetFont().Larger());
 
@@ -209,15 +209,15 @@ void GamePanel::UpdateButtonMoveText(const MoveChoice move)
 // Plays game and updates text appropriately
 void GamePanel::UpdateGameInfoText(const MoveChoice move)
 {
-  // MoveChoice computer_move = game.GetComputerMove(move);
+  MoveChoice computer_move = game->GetComputerMove(move);
 
   round_count_text->SetLabelText(std::to_string(round_count++));
-  // // computer_prediction_text->SetLabelText(move_to_wxString(computer_move));  
-  // computer_choice_text->SetLabelText(computer_move);
-  // display_winner_text->SetLabelText(game.PlayRound(move, computer_move));
-  // player_win_cnt_text->SetLabelText();
-  // comp_win_cnt_text->SetLabelText();
-  // tie_cnt_text->SetLabelText();
+  computer_prediction_text->SetLabelText(move_to_wxString(computer_move));  
+  computer_choice_text->SetLabelText(move_to_wxString(computer_move));
+  display_winner_text->SetLabelText(game->PlayRound(move, computer_move));
+  player_win_cnt_text->SetLabelText(std::to_string(game->GetPlayerScore()));
+  comp_win_cnt_text->SetLabelText(std::to_string(game->GetComputerScore()));
+  tie_cnt_text->SetLabelText(std::to_string(game->GetTieGameCnt()));
 }
 
 } // namespace myrps
