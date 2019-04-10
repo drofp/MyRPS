@@ -145,30 +145,30 @@ void GamePanel::init()
 
 void GamePanel::OnRock(wxCommandEvent &event)
 {
-  update_button_move_text(MoveChoice::kRock);
-  update_round_count_text(cnt++);
+  UpdateButtonMoveText(MoveChoice::kRock);
+  UpdateGameInfoText(cnt++);
 }
 
 void GamePanel::OnPaper(wxCommandEvent &event)
 {
-  update_button_move_text(MoveChoice::kPaper);
-  update_round_count_text(cnt++);
+  UpdateButtonMoveText(MoveChoice::kPaper);
+  UpdateGameInfoText(cnt++);
 }
 
 void GamePanel::OnScissors(wxCommandEvent &event)
 {
-  update_button_move_text(MoveChoice::kScissors);
-  update_round_count_text(cnt++);
+  UpdateButtonMoveText(MoveChoice::kScissors);
+  UpdateGameInfoText(cnt++);
 }
 
-void GamePanel::update_button_move_text(const MoveChoice move)
+void GamePanel::UpdateButtonMoveText(const MoveChoice move)
 {
   button_chosen_text->SetLabelText(move_to_wxString(move));
 }
 
-void GamePanel::update_round_count_text(const int round_count)
+void GamePanel::UpdateGameInfoText(const int round_count)
 {
-  round_count_text->SetLabelText(std::to_string(round_count));
+  computer_prediction_text->SetLabelText(std::to_string(round_count));
 }
 
 } // namespace myrps

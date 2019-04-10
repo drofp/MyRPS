@@ -37,8 +37,8 @@ private:
   void GenerateGameInfoPanel(wxPanel* game_info_panel);
   void AddSubPanelsToMainPanel(vector<wxPanel *> panels, wxSizer* sizer);
 
-  void update_button_move_text(const MoveChoice move);
-  void update_round_count_text(const int round_count);
+  void UpdateButtonMoveText(const MoveChoice move);
+  void UpdateGameInfoText(const int round_count);
 };
 } // namespace myrps
 
