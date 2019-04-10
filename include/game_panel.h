@@ -22,10 +22,20 @@ public:
   void on_scissors(wxCommandEvent& event);
 private:
   wxStaticText *button_chosen_text;
+
   wxStaticText *round_count_text;
+  wxStaticText *computer_prediction_text;
+  wxStaticText *computer_choice_text;
+  wxStaticText *display_winner_text;
+  wxStaticText *game_spec_text;
+
   int cnt = 1;
 
   void init();
+  void GenerateButtonPanel(wxPanel* button_panel);
+  void GenerateChosenMovePanel(wxPanel* chosen_panel);
+  void GenerateGameInfo(wxPanel* game_info_panel);
+
   void update_button_move_text(const MoveChoice move);
   void update_round_count_text(const int round_count);
 };

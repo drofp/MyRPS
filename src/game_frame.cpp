@@ -6,7 +6,7 @@ using myrps::GameFrame;
 wxBEGIN_EVENT_TABLE(GameFrame, wxFrame)
   EVT_MENU(GAME_Quit, GameFrame::on_quit)
   EVT_MENU(GAME_About, GameFrame::on_about)
-  wxEND_EVENT_TABLE()
+wxEND_EVENT_TABLE()
 
 namespace myrps
 {
