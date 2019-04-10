@@ -2,6 +2,7 @@
 #define START_OPTION_H_
 
 #include <ostream>
+#include "wx/wx.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ static const StartOption options_list[] =
         StartOption::EXIT,
     };
 
+wxString move_to_wxString(StartOption choice);
 static const int num_options = 3;
 } // namespace myrps
 
