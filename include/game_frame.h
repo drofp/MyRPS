@@ -44,6 +44,8 @@ private:
      * Initialize the application frame's sizer.
      */
   void init_sizer();
+
+  void InitGame();
 };
 
 // IDs for the menu commands.

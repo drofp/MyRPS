@@ -17,28 +17,38 @@ public:
     init();
   }
 
+  Game SetGame(Game* g);
+
   void OnRock(wxCommandEvent& event);
   void OnPaper(wxCommandEvent& event);
   void OnScissors(wxCommandEvent& event);
 private:
+  Game* game;
+
   wxStaticText *button_chosen_text;
 
   wxStaticText *round_count_text;
   wxStaticText *computer_prediction_text;
   wxStaticText *computer_choice_text;
   wxStaticText *display_winner_text;
-  wxStaticText *game_spec_text;
+  wxStaticText *player_win_cnt_text;
+  wxStaticText *comp_win_cnt_text;
+  wxStaticText *tie_cnt_text;
 
-  int cnt = 1;
+  int round_count = 1;
 
   void init();
+  void PlayGame();
+  MoveChoice GetPlayerMove();
+  MoveChoice GetComputerMove();
+
   void GenerateButtonPanel(wxPanel* button_panel);
   void GenerateChosenMovePanel(wxPanel* chosen_panel);
   void GenerateGameInfoPanel(wxPanel* game_info_panel);
   void AddSubPanelsToMainPanel(vector<wxPanel *> panels, wxSizer* sizer);
 
   void UpdateButtonMoveText(const MoveChoice move);
-  void UpdateGameInfoText(const int round_count);
+  void UpdateGameInfoText(const MoveChoice move);
 };
 } // namespace myrps
 

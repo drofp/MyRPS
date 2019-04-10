@@ -4,11 +4,11 @@ using myrps::GameFrame;
 
 // The event table.
 wxBEGIN_EVENT_TABLE(GameFrame, wxFrame)
-  EVT_MENU(GAME_Quit, GameFrame::on_quit)
-  EVT_MENU(GAME_About, GameFrame::on_about)
-wxEND_EVENT_TABLE()
+    EVT_MENU(GAME_Quit, GameFrame::on_quit)
+        EVT_MENU(GAME_About, GameFrame::on_about)
+            wxEND_EVENT_TABLE()
 
-namespace myrps
+                namespace myrps
 {
   const int SIDE_MARGINS = 40;
 
@@ -32,9 +32,16 @@ namespace myrps
   {
     init_menu_bar();
     init_sizer();
+    InitGame();
 
     wxSize size = GetBestSize();
     SetMinClientSize(size);
+  }
+
+  void GameFrame::InitGame()
+  {
+    Game* g = new Game();
+    game_panel->SetGame(g);
   }
 
   void GameFrame::init_menu_bar()

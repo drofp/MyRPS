@@ -4,6 +4,53 @@ using myrps::GamePanel;
 
 namespace myrps
 {
+void GamePanel::init()
+{
+  // main sizer
+  wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+
+  // buttons panel
+  wxPanel *button_panel = new wxPanel(this, wxID_ANY);
+  GenerateButtonPanel(button_panel);
+
+  // chosen move panel
+  wxPanel *chosen_panel = new wxPanel(this, wxID_ANY);
+  GenerateChosenMovePanel(chosen_panel);
+
+  // game info panel
+  wxPanel *game_info_panel = new wxPanel(this, wxID_ANY);
+  GenerateGameInfoPanel(game_info_panel);
+
+  vector<wxPanel *> panels;
+  panels.push_back(button_panel);
+  panels.push_back(chosen_panel);
+  panels.push_back(game_info_panel);
+
+  AddSubPanelsToMainPanel(panels, sizer);
+
+  SetSizer(sizer);
+}
+
+// void GamePanel::PlayGame()
+// {
+//   cout << "Get ready for a match of " << rounds_per_match << " games! " << endl;
+//   for (int i = 0; i < rounds_per_match; i++)
+//   {
+//     MoveChoice player_move = GetPlayerMove();
+//     MoveChoice computer_move = GetComputerMove(player_move);
+
+//     game.PlayRound(player_move, computer_move);
+//   }
+
+//   game.PrintScore();
+
+//   cout << "Thanks for playing MyRPS!!!" << endl;
+// }
+
+Game GamePanel::SetGame(Game* g)
+{
+  game = g;
+}
 
 void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
 {
@@ -75,16 +122,30 @@ void GamePanel::GenerateGameInfoPanel(wxPanel* game_info_panel)
 
   wxStaticText *display_winner_label_text 
                   = new wxStaticText(game_info_panel, wxID_ANY,
-                                    "Computer's choice:");
+                                    "Round winner:");
   display_winner_text = new wxStaticText(game_info_panel, wxID_ANY, "");
   display_winner_text->SetFont(
                           computer_choice_text->GetFont().Larger());
 
-  wxStaticText *game_spec_label_text 
+  wxStaticText *player_win_cnt_label_text
                   = new wxStaticText(game_info_panel, wxID_ANY,
-                                    "Computer's choice:");
-  game_spec_text = new wxStaticText(game_info_panel, wxID_ANY, "");
-  game_spec_text->SetFont(
+                                    "Player wins:");
+  player_win_cnt_text = new wxStaticText(game_info_panel, wxID_ANY, "");
+  player_win_cnt_text->SetFont(
+                          computer_choice_text->GetFont().Larger());
+
+  wxStaticText *comp_win_cnt_label_text
+                  = new wxStaticText(game_info_panel, wxID_ANY,
+                                    "Computer wins:");
+  comp_win_cnt_text = new wxStaticText(game_info_panel, wxID_ANY, "");
+  comp_win_cnt_text->SetFont(
+                          computer_choice_text->GetFont().Larger());
+
+  wxStaticText *tie_cnt_label_text
+                  = new wxStaticText(game_info_panel, wxID_ANY,
+                                    "Tie games:");
+  tie_cnt_text = new wxStaticText(game_info_panel, wxID_ANY, "");
+  tie_cnt_text->SetFont(
                           computer_choice_text->GetFont().Larger());
 
   game_info_sizer->Add(current_round_label_text, 0, wxALIGN_RIGHT, 0);
@@ -99,8 +160,14 @@ void GamePanel::GenerateGameInfoPanel(wxPanel* game_info_panel)
   game_info_sizer->Add(display_winner_label_text, 0, wxALIGN_RIGHT, 0);
   game_info_sizer->Add(display_winner_text, 0, 0, 0);
   game_info_sizer->AddSpacer(20);
-  game_info_sizer->Add(game_spec_label_text, 0, wxALIGN_RIGHT, 0);
-  game_info_sizer->Add(game_spec_text, 0, 0, 0);
+  game_info_sizer->Add(player_win_cnt_label_text, 0, wxALIGN_RIGHT, 0);
+  game_info_sizer->Add(player_win_cnt_text, 0, 0, 0);
+  game_info_sizer->AddSpacer(20);
+  game_info_sizer->Add(comp_win_cnt_label_text, 0, wxALIGN_RIGHT, 0);
+  game_info_sizer->Add(comp_win_cnt_text, 0, 0, 0);
+  game_info_sizer->AddSpacer(20);
+  game_info_sizer->Add(tie_cnt_label_text, 0, wxALIGN_RIGHT, 0);
+  game_info_sizer->Add(tie_cnt_text, 0, 0, 0);
   game_info_sizer->AddSpacer(20);
 
   game_info_panel->SetSizer(game_info_sizer);
@@ -116,49 +183,22 @@ void GamePanel::AddSubPanelsToMainPanel(vector<wxPanel *> panels,
   }
 }
 
-void GamePanel::init()
-{
-  // main sizer
-  wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-
-  // buttons panel
-  wxPanel *button_panel = new wxPanel(this, wxID_ANY);
-  GenerateButtonPanel(button_panel);
-
-  // chosen move panel
-  wxPanel *chosen_panel = new wxPanel(this, wxID_ANY);
-  GenerateChosenMovePanel(chosen_panel);
-
-  // game info panel
-  wxPanel *game_info_panel = new wxPanel(this, wxID_ANY);
-  GenerateGameInfoPanel(game_info_panel);
-
-  vector<wxPanel *> panels;
-  panels.push_back(button_panel);
-  panels.push_back(chosen_panel);
-  panels.push_back(game_info_panel);
-
-  AddSubPanelsToMainPanel(panels, sizer);
-
-  SetSizer(sizer);
-}
-
 void GamePanel::OnRock(wxCommandEvent &event)
 {
   UpdateButtonMoveText(MoveChoice::kRock);
-  UpdateGameInfoText(cnt++);
+  UpdateGameInfoText(MoveChoice::kRock);
 }
 
 void GamePanel::OnPaper(wxCommandEvent &event)
 {
   UpdateButtonMoveText(MoveChoice::kPaper);
-  UpdateGameInfoText(cnt++);
+  UpdateGameInfoText(MoveChoice::kPaper);
 }
 
 void GamePanel::OnScissors(wxCommandEvent &event)
 {
   UpdateButtonMoveText(MoveChoice::kScissors);
-  UpdateGameInfoText(cnt++);
+  UpdateGameInfoText(MoveChoice::kScissors);
 }
 
 void GamePanel::UpdateButtonMoveText(const MoveChoice move)
@@ -166,9 +206,18 @@ void GamePanel::UpdateButtonMoveText(const MoveChoice move)
   button_chosen_text->SetLabelText(move_to_wxString(move));
 }
 
-void GamePanel::UpdateGameInfoText(const int round_count)
+// Plays game and updates text appropriately
+void GamePanel::UpdateGameInfoText(const MoveChoice move)
 {
-  computer_prediction_text->SetLabelText(std::to_string(round_count));
+  // MoveChoice computer_move = game.GetComputerMove(move);
+
+  round_count_text->SetLabelText(std::to_string(round_count++));
+  // // computer_prediction_text->SetLabelText(move_to_wxString(computer_move));  
+  // computer_choice_text->SetLabelText(computer_move);
+  // display_winner_text->SetLabelText(game.PlayRound(move, computer_move));
+  // player_win_cnt_text->SetLabelText();
+  // comp_win_cnt_text->SetLabelText();
+  // tie_cnt_text->SetLabelText();
 }
 
 } // namespace myrps
