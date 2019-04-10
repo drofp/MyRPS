@@ -17,9 +17,9 @@ public:
     init();
   }
 
-  void on_rock(wxCommandEvent& event);
-  void on_paper(wxCommandEvent& event);
-  void on_scissors(wxCommandEvent& event);
+  void OnRock(wxCommandEvent& event);
+  void OnPaper(wxCommandEvent& event);
+  void OnScissors(wxCommandEvent& event);
 private:
   wxStaticText *button_chosen_text;
 
@@ -34,7 +34,8 @@ private:
   void init();
   void GenerateButtonPanel(wxPanel* button_panel);
   void GenerateChosenMovePanel(wxPanel* chosen_panel);
-  void GenerateGameInfo(wxPanel* game_info_panel);
+  void GenerateGameInfoPanel(wxPanel* game_info_panel);
+  void AddSubPanelsToMainPanel(vector<wxPanel *> panels, wxSizer* sizer);
 
   void update_button_move_text(const MoveChoice move);
   void update_round_count_text(const int round_count);

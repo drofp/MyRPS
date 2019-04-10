@@ -18,9 +18,9 @@ void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
   wxButton *scissors_button = new wxButton(button_panel, wxID_ANY,
                                            move_to_wxString(MoveChoice::kScissors));
 
-  rock_button->Bind(wxEVT_BUTTON, &GamePanel::on_rock, this);
-  paper_button->Bind(wxEVT_BUTTON, &GamePanel::on_paper, this);
-  scissors_button->Bind(wxEVT_BUTTON, &GamePanel::on_scissors, this);
+  rock_button->Bind(wxEVT_BUTTON, &GamePanel::OnRock, this);
+  paper_button->Bind(wxEVT_BUTTON, &GamePanel::OnPaper, this);
+  scissors_button->Bind(wxEVT_BUTTON, &GamePanel::OnScissors, this);
 
   button_sizer->Add(choose_text, 0, 0, 0);
   button_sizer->AddSpacer(5);
@@ -48,21 +48,8 @@ void GamePanel::GenerateChosenMovePanel(wxPanel* chosen_panel)
   chosen_panel->SetSizer(chosen_sizer);
 }
 
-void GamePanel::init()
+void GamePanel::GenerateGameInfoPanel(wxPanel* game_info_panel)
 {
-  // main panel
-  wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-
-  // buttons' panel
-  wxPanel *button_panel = new wxPanel(this, wxID_ANY);
-  GenerateButtonPanel(button_panel);
-
-  // chosen move panel
-  wxPanel *chosen_panel = new wxPanel(this, wxID_ANY);
-  GenerateChosenMovePanel(chosen_panel);
-
-  // which round currently being played panel
-  wxPanel *game_info_panel = new wxPanel(this, wxID_ANY);
   wxSizer *game_info_sizer = new wxGridSizer(3, 1, 4);
 
   wxStaticText *current_round_label_text 
@@ -117,31 +104,58 @@ void GamePanel::init()
   game_info_sizer->AddSpacer(20);
 
   game_info_panel->SetSizer(game_info_sizer);
+}
 
-  // put everything into main panel
-  sizer->Add(button_panel, 0, wxALIGN_CENTER, 0);
-  sizer->AddSpacer(20);
-  sizer->Add(chosen_panel, 0, wxALIGN_CENTER, 0);
-  sizer->AddSpacer(20);
-  sizer->Add(game_info_panel, 0, wxALIGN_CENTER, 0);
-  sizer->AddSpacer(20);
+void GamePanel::AddSubPanelsToMainPanel(vector<wxPanel *> panels, 
+                                        wxSizer* sizer)
+{
+  for (wxPanel* panel : panels)
+  {
+    sizer->Add(panel, 0, wxALIGN_CENTER, 0);
+    sizer->AddSpacer(20);
+  }
+}
+
+void GamePanel::init()
+{
+  // main sizer
+  wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+
+  // buttons panel
+  wxPanel *button_panel = new wxPanel(this, wxID_ANY);
+  GenerateButtonPanel(button_panel);
+
+  // chosen move panel
+  wxPanel *chosen_panel = new wxPanel(this, wxID_ANY);
+  GenerateChosenMovePanel(chosen_panel);
+
+  // game info panel
+  wxPanel *game_info_panel = new wxPanel(this, wxID_ANY);
+  GenerateGameInfoPanel(game_info_panel);
+
+  vector<wxPanel *> panels;
+  panels.push_back(button_panel);
+  panels.push_back(chosen_panel);
+  panels.push_back(game_info_panel);
+
+  AddSubPanelsToMainPanel(panels, sizer);
 
   SetSizer(sizer);
 }
 
-void GamePanel::on_rock(wxCommandEvent &event)
+void GamePanel::OnRock(wxCommandEvent &event)
 {
   update_button_move_text(MoveChoice::kRock);
   update_round_count_text(cnt++);
 }
 
-void GamePanel::on_paper(wxCommandEvent &event)
+void GamePanel::OnPaper(wxCommandEvent &event)
 {
   update_button_move_text(MoveChoice::kPaper);
   update_round_count_text(cnt++);
 }
 
-void GamePanel::on_scissors(wxCommandEvent &event)
+void GamePanel::OnScissors(wxCommandEvent &event)
 {
   update_button_move_text(MoveChoice::kScissors);
   update_round_count_text(cnt++);
