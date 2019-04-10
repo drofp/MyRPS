@@ -6,7 +6,7 @@
 // #include "ml_chooser.h"
 
 #include "my_rps.h"
-#include "rps_frame.h"
+#include "start_menu_frame.h"
 
 using namespace std;
 using myrps::MyRps;
@@ -19,7 +19,7 @@ bool MyRps::OnInit()
 {
     if (!wxApp::OnInit()) return false;
 
-    RpsFrame *frame = new RpsFrame("Rps Demo");
+    StartMenuFrame *frame = new StartMenuFrame("Rps Demo");
     frame->Show(true);
 
     return true;
