@@ -24,6 +24,7 @@ public:
   ComputerPlayer(SettingOption mode, int rounds_per_match);
   MoveChoice DecideMove(MoveChoice player_move);
   void SetComputerMode(SettingOption mode);
+  MoveChoice GetPredictedMove(MoveChoice player_move);
 };
 } // namespace myrps
 #endif

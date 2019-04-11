@@ -9,6 +9,7 @@ class RandomChooser : public myrps::Chooser
 {
 public:
   MoveChoice DecideMove(MoveChoice player_move);
+  MoveChoice GetPredictedMove(MoveChoice player_move);
 };
 } // namespace myrps
 #endif

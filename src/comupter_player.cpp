@@ -22,4 +22,9 @@ void ComputerPlayer::SetComputerMode(SettingOption mode)
 {
   chooser = ChooserFactory::MakeChooser(mode, rounds_per_match);
 }
+
+MoveChoice ComputerPlayer::GetPredictedMove(MoveChoice player_move)
+{
+  return chooser->GetPredictedMove(player_move);
+}
 } // namespace myrps

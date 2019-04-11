@@ -40,6 +40,8 @@ public:
    */
   unordered_map<string, int> GetHistData();
 
+  MoveChoice GetPredictedMove(MoveChoice player_move);
+
 private:
   
   /**
