@@ -41,6 +41,7 @@ public:
   int GetTieGameCnt();
   int GetRoundCount();
   int GetRoundsPerMatch();
+  MoveChoice GetComputerPrediction(const MoveChoice player_move);
 
   void SetComputerMode(SettingOption mode);
   void SetRoundsPerMatch(int rounds_per_match);

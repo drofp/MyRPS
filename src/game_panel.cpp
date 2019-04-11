@@ -207,17 +207,19 @@ void GamePanel::UpdateButtonMoveText(const MoveChoice move)
 }
 
 // Plays game and updates text appropriately
-void GamePanel::UpdateGameInfoText(const MoveChoice move)
+void GamePanel::UpdateGameInfoText(const MoveChoice player_move)
 {
-  MoveChoice computer_move = game->GetComputerMove(move);
+  MoveChoice computer_move = game->GetComputerMove(player_move);
+  MoveChoice computer_prediction = game->GetComputerPrediction(player_move);
 
-  round_count_text->SetLabelText(std::to_string(round_count++));
-  computer_prediction_text->SetLabelText(move_to_wxString(computer_move));  
+  round_count_text->SetLabelText(std::to_string(game->GetRoundCount()));
+  computer_prediction_text->SetLabelText(move_to_wxString(computer_prediction));
   computer_choice_text->SetLabelText(move_to_wxString(computer_move));
-  display_winner_text->SetLabelText(game->PlayRound(move, computer_move));
+  display_winner_text->SetLabelText(game->PlayRound(player_move, computer_move));
   player_win_cnt_text->SetLabelText(std::to_string(game->GetPlayerScore()));
   comp_win_cnt_text->SetLabelText(std::to_string(game->GetComputerScore()));
   tie_cnt_text->SetLabelText(std::to_string(game->GetTieGameCnt()));
 }
+
 
 } // namespace myrps

@@ -12,4 +12,9 @@ namespace myrps
 
     return computer_move;
   }
+
+  MoveChoice RandomChooser::GetPredictedMove(MoveChoice player_move)
+  {
+    return MoveChoice::kScissors;
+  }
 } // namespace myrps

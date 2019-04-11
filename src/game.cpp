@@ -151,6 +151,11 @@ int Game::GetTieGameCnt()     {return tie_game_cnt;}
 int Game::GetRoundCount()     {return round_count;}
 int Game::GetRoundsPerMatch() {return Game::rounds_per_match;}
 
+MoveChoice Game::GetComputerPrediction(const MoveChoice player_move)
+{
+  return ai.GetPredictedMove(player_move);
+}
+
 void Game::SetComputerMode(SettingOption mode)
 {
   ai.SetComputerMode(mode);

@@ -249,6 +249,14 @@ namespace myrps
     return winning_move;
   }
 
+  MoveChoice MLChooser::GetPredictedMove(MoveChoice player_move)
+  {
+    string last_n_minus_one_moves = GetLastNMinusOneMoves(last_n_minus_one_q);
+    AddLastNMovesToHist(last_n_minus_one_moves, player_move);
+    MoveChoice most_likely_move = GetMostLikelyMove(last_n_minus_one_moves);
+
+    return most_likely_move;
+  }
   MoveChoice MLChooser::GetMostLikelyMove(string last_n_minus_one_moves)
   {
     MoveChoice most_likely_move = MoveChoice::kRock;
