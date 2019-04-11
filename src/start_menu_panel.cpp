@@ -17,20 +17,15 @@ void StartMenuPanel::init()
                                              move_to_wxString(StartOption::PLAY_GAME));
     wxButton *options_button = new wxButton(button_panel, wxID_ANY,
                                              move_to_wxString(StartOption::OPTIONS));
-    wxButton *exit_button = new wxButton(button_panel, wxID_ANY,
-                                             move_to_wxString(StartOption::EXIT));
 
     play_game_button->Bind(wxEVT_BUTTON, &StartMenuPanel::on_play_game, this);
     options_button->Bind(wxEVT_BUTTON, &StartMenuPanel::on_options, this);
-    exit_button->Bind(wxEVT_BUTTON, &StartMenuPanel::on_exit, this);
 
     button_sizer->Add(choose_text, 0, 0, 0);
     button_sizer->AddSpacer(5);
     button_sizer->Add(play_game_button, 0, 0, 0);
     button_sizer->AddSpacer(5);
     button_sizer->Add(options_button, 0, 0, 0);
-    button_sizer->AddSpacer(5);
-    button_sizer->Add(exit_button, 0, 0, 0);
     button_panel->SetSizer(button_sizer);
 
     wxPanel *chosen_panel = new wxPanel(this, wxID_ANY);
@@ -60,11 +55,6 @@ void StartMenuPanel::on_play_game(wxCommandEvent& event)
 void StartMenuPanel::on_options(wxCommandEvent& event)
 {
     update_button_move_text(StartOption::OPTIONS);
-}
-
-void StartMenuPanel::on_exit(wxCommandEvent& event)
-{
-    update_button_move_text(StartOption::EXIT);
 }
 
 void StartMenuPanel::update_button_move_text(const StartOption choice)
