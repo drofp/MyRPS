@@ -17,7 +17,8 @@ public:
     init();
   }
 
-  Game SetGame(Game* g);
+  void SetGame(Game* g);
+  void SetComputerMode(SettingOption mode);
 
   void OnRock(wxCommandEvent& event);
   void OnPaper(wxCommandEvent& event);

@@ -31,25 +31,14 @@ void GamePanel::init()
   SetSizer(sizer);
 }
 
-// void GamePanel::PlayGame()
-// {
-//   cout << "Get ready for a match of " << rounds_per_match << " games! " << endl;
-//   for (int i = 0; i < rounds_per_match; i++)
-//   {
-//     MoveChoice player_move = GetPlayerMove();
-//     MoveChoice computer_move = GetComputerMove(player_move);
-
-//     game.PlayRound(player_move, computer_move);
-//   }
-
-//   game.PrintScore();
-
-//   cout << "Thanks for playing MyRPS!!!" << endl;
-// }
-
-Game GamePanel::SetGame(Game* g)
+void GamePanel::SetGame(Game* g)
 {
   game = g;
+}
+
+void GamePanel::SetComputerMode(SettingOption mode)
+{
+  game->SetComputerMode(mode);
 }
 
 void GamePanel::GenerateButtonPanel(wxPanel* button_panel)

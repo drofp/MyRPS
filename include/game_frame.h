@@ -24,6 +24,11 @@ public:
      */
   void on_quit(wxCommandEvent &event);
 
+  /**
+    * Set the game's computer decision mode.
+    */
+  void SetComputerMode(SettingOption mode);
+
 private:
   // The event table that maps events to their handlers.
   wxDECLARE_EVENT_TABLE();
@@ -45,6 +50,9 @@ private:
      */
   void init_sizer();
 
+   /**
+    * Initialize the application's first game.
+    */
   void InitGame();
 };
 
