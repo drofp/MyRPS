@@ -43,9 +43,29 @@ void GamePanel::SetComputerMode(SettingOption mode)
 
 void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
 {
-  wxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
+  wxSizer *button_sizer = new wxBoxSizer(wxVERTICAL);
 
+  wxSizer *start_sizer = new wxBoxSizer(wxHORIZONTAL);
+  wxSizer *game_sizer = new wxBoxSizer(wxHORIZONTAL);
   ///// Start Menu Section /////
+  wxStaticText *start_text = new wxStaticText(button_panel, wxID_ANY,
+                                               "Welcome to MyRPS!");
+  wxButton *play_game_button = new wxButton(button_panel, wxID_ANY,
+                                       move_to_wxString(StartOption::PLAY_GAME));
+  wxButton *options_button = new wxButton(button_panel, wxID_ANY,
+                                        move_to_wxString(StartOption::OPTIONS));
+
+  play_game_button->Bind(wxEVT_BUTTON, &GamePanel::OnPlayGame, this);
+  options_button->Bind(wxEVT_BUTTON, &GamePanel::OnOptions, this);
+
+  start_sizer->Add(start_text, 0, 0, 0);
+  start_sizer->AddSpacer(5);
+  start_sizer->Add(play_game_button, 0, 0, 0);
+  start_sizer->AddSpacer(5);
+  start_sizer->Add(options_button, 0, 0, 0);
+
+  button_sizer->Add(start_sizer);
+  button_sizer->AddSpacer(10);
 
   ///// Options Menu Section /////
 
@@ -63,13 +83,15 @@ void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
   paper_button->Bind(wxEVT_BUTTON, &GamePanel::OnPaper, this);
   scissors_button->Bind(wxEVT_BUTTON, &GamePanel::OnScissors, this);
 
-  button_sizer->Add(choose_text, 0, 0, 0);
-  button_sizer->AddSpacer(5);
-  button_sizer->Add(rock_button, 0, 0, 0);
-  button_sizer->AddSpacer(5);
-  button_sizer->Add(paper_button, 0, 0, 0);
-  button_sizer->AddSpacer(5);
-  button_sizer->Add(scissors_button, 0, 0, 0);
+  game_sizer->Add(choose_text, 0, 0, 0);
+  game_sizer->AddSpacer(5);
+  game_sizer->Add(rock_button, 0, 0, 0);
+  game_sizer->AddSpacer(5);
+  game_sizer->Add(paper_button, 0, 0, 0);
+  game_sizer->AddSpacer(5);
+  game_sizer->Add(scissors_button, 0, 0, 0);
+
+  button_sizer->Add(game_sizer);
 
   button_panel->SetSizer(button_sizer);
 }
@@ -200,6 +222,25 @@ void GamePanel::UpdateButtonMoveText(const MoveChoice move)
   button_chosen_text->SetLabelText(move_to_wxString(move));
 }
 
+void GamePanel::OnPlayGame(wxCommandEvent& event)
+{
+
+}
+
+void GamePanel::OnOptions(wxCommandEvent& event)
+{
+
+}
+
+void GamePanel::OnRandom(wxCommandEvent& event)
+{
+
+}
+
+void GamePanel::OnSmart(wxCommandEvent& event)
+{
+
+}
 // Plays game and updates text appropriately
 // 
 // NOTE: Should check if round_count has reached max number of rounds at end of 

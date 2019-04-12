@@ -4,6 +4,7 @@
 #include "my_rps.h"
 #include "move_choice.h"
 #include "start_option.h"
+#include "setting_option.h"
 #include "game.h"
 
 #include <string>
