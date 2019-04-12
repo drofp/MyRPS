@@ -2,6 +2,7 @@
 #define SETTING_OPTION_H
 
 #include <ostream>
+#include "wx/wx.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ static const SettingOption settings_list[] =
         SettingOption::kSmart,
     };
 
+wxString move_to_wxString(SettingOption choice);
 static const int num_settings = 3;
 } // namespace myrps
 
