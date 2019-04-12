@@ -3,6 +3,7 @@
 
 #include "my_rps.h"
 #include "move_choice.h"
+#include "start_option.h"
 #include "game.h"
 
 #include <string>
@@ -17,6 +18,15 @@ public:
     init();
   }
 
+  ///// Start Menu Section /////
+  void OnPlayGame(wxCommandEvent& event);
+  void OnOptions(wxCommandEvent& event);
+
+  ///// Options Menu Section /////
+  void OnRandom(wxCommandEvent& event);
+  void OnSmart(wxCommandEvent& event);
+
+  ///// Game Section /////
   void SetGame(Game* g);
   void SetComputerMode(SettingOption mode);
 
@@ -48,8 +58,12 @@ private:
   void GenerateGameInfoPanel(wxPanel* game_info_panel);
   void AddSubPanelsToMainPanel(vector<wxPanel *> panels, wxSizer* sizer);
 
+  void SelectPlayGameButton(const StartOption option);
+  void SelectOptionsButton(const StartOption option);
   void UpdateButtonMoveText(const MoveChoice move);
   void UpdateGameInfoText(const MoveChoice move);
+
+  void FinishGame();
 };
 } // namespace myrps
 

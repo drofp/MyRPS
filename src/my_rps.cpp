@@ -5,9 +5,8 @@
 // #include "settings_menu.h"
 // #include "ml_chooser.h"
 
-#include "my_rps.h"
-#include "start_menu_frame.h"
 #include "game_frame.h"
+#include "my_rps.h"
 
 using namespace std;
 using myrps::MyRps;
@@ -20,11 +19,8 @@ bool MyRps::OnInit()
 {
     if (!wxApp::OnInit()) return false;
 
-    // GameFrame *gframe = new GameFrame("what");
-    // gframe->Show(true);
-
-    StartMenuFrame *frame = new StartMenuFrame("Rps Demo");
-    frame->Show(true);
+    GameFrame *gframe = new GameFrame("what");
+    gframe->Show(true);
 
     return true;
 }

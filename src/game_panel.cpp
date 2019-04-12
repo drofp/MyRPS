@@ -45,6 +45,11 @@ void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
 {
   wxSizer *button_sizer = new wxBoxSizer(wxHORIZONTAL);
 
+  ///// Start Menu Section /////
+
+  ///// Options Menu Section /////
+
+  ///// Game Section /////
   wxStaticText *choose_text = new wxStaticText(button_panel, wxID_ANY,
                                                "Choose:");
   wxButton *rock_button = new wxButton(button_panel, wxID_ANY,
@@ -196,6 +201,10 @@ void GamePanel::UpdateButtonMoveText(const MoveChoice move)
 }
 
 // Plays game and updates text appropriately
+// 
+// NOTE: Should check if round_count has reached max number of rounds at end of 
+// this function. Feel free to use the FinishGame() method to encapsulate all 
+// necessary cleanup and control passing code.
 void GamePanel::UpdateGameInfoText(const MoveChoice player_move)
 {
   MoveChoice computer_move = game->GetComputerMove(player_move);
