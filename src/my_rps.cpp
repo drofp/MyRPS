@@ -6,7 +6,7 @@
 // #include "ml_chooser.h"
 
 #include "my_rps.h"
-#include "start_menu_frame.h"
+#include "settingOption_frame.h"
 
 using namespace std;
 using myrps::MyRps;
@@ -19,7 +19,7 @@ bool MyRps::OnInit()
 {
     if (!wxApp::OnInit()) return false;
 
-    StartMenuFrame *frame = new StartMenuFrame("Rps Demo");
+    SettingOptionFrame *frame = new SettingOptionFrame("Rps Difficulty Demo");
     frame->Show(true);
 
     return true;
