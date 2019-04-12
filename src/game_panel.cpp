@@ -18,8 +18,8 @@ void GamePanel::init()
   GenerateChosenMovePanel(chosen_panel);
 
   // game info panel
-  wxPanel *game_info_panel = new wxPanel(this, wxID_ANY);
-  GenerateGameInfoPanel(game_info_panel);
+  game_info_panel = new wxPanel(this, wxID_ANY);
+  GenerateGameInfoPanel();
 
   vector<wxPanel *> panels;
   panels.push_back(button_panel);
@@ -43,11 +43,12 @@ void GamePanel::SetComputerMode(SettingOption mode)
 
 void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
 {
-  wxSizer *button_sizer = new wxBoxSizer(wxVERTICAL);
+  ///// Main Button Sizer /////
+  button_sizer = new wxBoxSizer(wxVERTICAL);
 
-  wxSizer *start_sizer = new wxBoxSizer(wxHORIZONTAL);
-  wxSizer *game_sizer = new wxBoxSizer(wxHORIZONTAL);
   ///// Start Menu Section /////
+  start_sizer = new wxBoxSizer(wxHORIZONTAL);
+
   wxStaticText *start_text = new wxStaticText(button_panel, wxID_ANY,
                                                "Welcome to MyRPS!");
   wxButton *play_game_button = new wxButton(button_panel, wxID_ANY,
@@ -68,8 +69,34 @@ void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
   button_sizer->AddSpacer(10);
 
   ///// Options Menu Section /////
+  options_sizer = new wxBoxSizer(wxHORIZONTAL);
+  wxStaticText *option_text = new wxStaticText(button_panel, wxID_ANY,
+                                              "Choose difficulty level:");
+  wxButton *random_button = new wxButton(button_panel, wxID_ANY,
+                                            move_to_wxString(SettingOption::kRandom));
+  wxButton *smart_button = new wxButton(button_panel, wxID_ANY,
+                                            move_to_wxString(SettingOption::kSmart));
+
+  random_button->Bind(wxEVT_BUTTON, &GamePanel::OnRandom, this);
+  smart_button->Bind(wxEVT_BUTTON, &GamePanel::OnSmart, this);
+  
+  options_sizer->Add(option_text, 0, 0, 0);
+  options_sizer->AddSpacer(10);
+  options_sizer->Add(random_button, 0, 0, 0);
+  options_sizer->AddSpacer(5);
+  options_sizer->Add(smart_button, 0, 0, 0);
+
+  // options_sizer->Hide();
+  
+  button_sizer->Add(options_sizer);
+  
+  SetOptionsVisibility(false);
+
+  button_sizer->AddSpacer(10);
 
   ///// Game Section /////
+  game_sizer = new wxBoxSizer(wxHORIZONTAL);
+
   wxStaticText *choose_text = new wxStaticText(button_panel, wxID_ANY,
                                                "Choose:");
   wxButton *rock_button = new wxButton(button_panel, wxID_ANY,
@@ -111,7 +138,7 @@ void GamePanel::GenerateChosenMovePanel(wxPanel* chosen_panel)
   chosen_panel->SetSizer(chosen_sizer);
 }
 
-void GamePanel::GenerateGameInfoPanel(wxPanel* game_info_panel)
+void GamePanel::GenerateGameInfoPanel()
 {
   wxSizer *game_info_sizer = new wxGridSizer(3, 1, 4);
 
@@ -241,6 +268,27 @@ void GamePanel::OnSmart(wxCommandEvent& event)
 {
 
 }
+
+
+void GamePanel::SetStartMenuVisibility(bool is_shown)
+{
+  button_sizer->Hide(start_sizer, is_shown);
+  button_sizer->Layout();
+}
+
+void GamePanel::SetOptionsVisibility(bool is_shown)
+{
+  button_sizer->Hide(options_sizer, is_shown);
+  button_sizer->Layout();
+}
+
+void GamePanel::SetGameVisibility(bool is_shown)
+{
+  is_shown ? game_info_panel->Show() : game_info_panel->Hide();
+  button_sizer->Hide(game_sizer, is_shown);
+  button_sizer->Layout();
+}
+
 // Plays game and updates text appropriately
 // 
 // NOTE: Should check if round_count has reached max number of rounds at end of 

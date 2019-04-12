@@ -47,6 +47,16 @@ private:
   wxStaticText *comp_win_cnt_text;
   wxStaticText *tie_cnt_text;
 
+  //Main sizer for GUI Buttons
+  wxSizer *button_sizer;
+
+  //Sizer for start, option and game buttons
+  wxSizer *start_sizer;
+  wxSizer *options_sizer;
+  wxSizer *game_sizer;
+
+  wxPanel *game_info_panel;
+
   int round_count = 1;
 
   void init();
@@ -56,7 +66,7 @@ private:
 
   void GenerateButtonPanel(wxPanel* button_panel);
   void GenerateChosenMovePanel(wxPanel* chosen_panel);
-  void GenerateGameInfoPanel(wxPanel* game_info_panel);
+  void GenerateGameInfoPanel();
   void AddSubPanelsToMainPanel(vector<wxPanel *> panels, wxSizer* sizer);
 
   void SelectPlayGameButton(const StartOption option);
@@ -64,6 +74,10 @@ private:
   void UpdateButtonMoveText(const MoveChoice move);
   void UpdateGameInfoText(const MoveChoice move);
 
+  void SetStartMenuVisibility(bool is_shown);
+  void SetOptionsVisibility(bool is_shown);
+  void SetGameVisibility(bool is_shown);
+  
   void FinishGame();
 };
 } // namespace myrps
