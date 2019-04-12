@@ -65,7 +65,6 @@ private:
   MoveChoice GetComputerMove();
 
   void GenerateButtonPanel(wxPanel* button_panel);
-  void GenerateChosenMovePanel(wxPanel* chosen_panel);
   void GenerateGameInfoPanel();
   void AddSubPanelsToMainPanel(vector<wxPanel *> panels, wxSizer* sizer);
 

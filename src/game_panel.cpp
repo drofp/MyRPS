@@ -13,9 +13,6 @@ void GamePanel::init()
   wxPanel *button_panel = new wxPanel(this, wxID_ANY);
   GenerateButtonPanel(button_panel);
 
-  // chosen move panel
-  wxPanel *chosen_panel = new wxPanel(this, wxID_ANY);
-  GenerateChosenMovePanel(chosen_panel);
 
   // game info panel
   game_info_panel = new wxPanel(this, wxID_ANY);
@@ -23,11 +20,11 @@ void GamePanel::init()
 
   vector<wxPanel *> panels;
   panels.push_back(button_panel);
-  panels.push_back(chosen_panel);
   panels.push_back(game_info_panel);
 
   AddSubPanelsToMainPanel(panels, sizer);
 
+  // SetGameVisibility(false);
   SetSizer(sizer);
 }
 
@@ -123,25 +120,12 @@ void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
   button_panel->SetSizer(button_sizer);
 }
 
-void GamePanel::GenerateChosenMovePanel(wxPanel* chosen_panel)
-{
-  wxSizer *chosen_sizer = new wxGridSizer(2, 0, 5);
-
-  wxStaticText *chosen_move_text = new wxStaticText(chosen_panel, wxID_ANY,
-                                               "Player's move:");
-  button_chosen_text = new wxStaticText(chosen_panel, wxID_ANY, "");
-  button_chosen_text->SetFont(button_chosen_text->GetFont().Larger());
-
-  chosen_sizer->Add(chosen_move_text, 0, wxALIGN_RIGHT, 0);
-  chosen_sizer->Add(button_chosen_text, 0, 0, 0);
-
-  chosen_panel->SetSizer(chosen_sizer);
-}
-
 void GamePanel::GenerateGameInfoPanel()
 {
   wxSizer *game_info_sizer = new wxGridSizer(3, 1, 4);
 
+  wxStaticText *chosen_move_text = new wxStaticText(game_info_panel, wxID_ANY,
+                                               "Player's move:");
   wxStaticText *current_round_label_text 
                   = new wxStaticText(game_info_panel, wxID_ANY,
                                     "Current round:");
@@ -191,6 +175,8 @@ void GamePanel::GenerateGameInfoPanel()
   tie_cnt_text->SetFont(
                           computer_choice_text->GetFont().Larger());
 
+  game_info_sizer->Add(chosen_move_text, 0, wxALIGN_RIGHT, 0);
+  game_info_sizer->AddSpacer(20);
   game_info_sizer->Add(current_round_label_text, 0, wxALIGN_RIGHT, 0);
   game_info_sizer->Add(round_count_text, 0, 0, 0);
   game_info_sizer->AddSpacer(20);
