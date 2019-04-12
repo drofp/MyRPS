@@ -126,6 +126,10 @@ void GamePanel::GenerateGameInfoPanel()
 
   wxStaticText *chosen_move_text = new wxStaticText(game_info_panel, wxID_ANY,
                                                "Player's move:");
+
+  button_chosen_text = new wxStaticText(game_info_panel, wxID_ANY, "");
+  button_chosen_text->SetFont(button_chosen_text->GetFont().Larger());
+
   wxStaticText *current_round_label_text 
                   = new wxStaticText(game_info_panel, wxID_ANY,
                                     "Current round:");
@@ -176,6 +180,7 @@ void GamePanel::GenerateGameInfoPanel()
                           computer_choice_text->GetFont().Larger());
 
   game_info_sizer->Add(chosen_move_text, 0, wxALIGN_RIGHT, 0);
+  game_info_sizer->Add(button_chosen_text, 0, 0, 0);
   game_info_sizer->AddSpacer(20);
   game_info_sizer->Add(current_round_label_text, 0, wxALIGN_RIGHT, 0);
   game_info_sizer->Add(round_count_text, 0, 0, 0);
