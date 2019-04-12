@@ -6,6 +6,7 @@
 // #include "ml_chooser.h"
 
 #include "my_rps.h"
+#include "start_menu_frame.h"
 #include "game_frame.h"
 
 using namespace std;
@@ -19,23 +20,12 @@ bool MyRps::OnInit()
 {
     if (!wxApp::OnInit()) return false;
 
-    GameFrame *frame = new GameFrame("Game Demo!");
+    // GameFrame *gframe = new GameFrame("what");
+    // gframe->Show(true);
+
+    StartMenuFrame *frame = new StartMenuFrame("Rps Demo");
     frame->Show(true);
 
     return true;
 }
 } // namespace myrps
-
-// int main()
-// {
-//   myrps::StartMenu start;
-//   start.DisplayOptions();
-
-//   // myrps::MLChooser ml_chooser;
-//   // unordered_map<string, int> test_map = ml_chooser.GetHistData();
-
-
-//   return 0;
-// }
-
-
