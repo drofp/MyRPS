@@ -8,7 +8,8 @@ namespace myrps
 {
 MoveChoice RandomChooser::DecideMove(MoveChoice player_move)
 {
-  MoveChoice computer_move = static_cast<MoveChoice>(rand() % static_cast<int>(MoveChoice::kScissors));
+  MoveChoice computer_move = static_cast<MoveChoice>(
+                              rand() % static_cast<int>(MoveChoice::length));
 
   return computer_move;
 }

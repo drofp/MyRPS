@@ -14,6 +14,7 @@ enum class MoveChoice
   kRock,
   kPaper,
   kScissors,
+  length
 };
 
 wxString move_to_wxString(MoveChoice move);
