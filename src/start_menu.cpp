@@ -103,5 +103,4 @@ StartOption StartMenu::GetUserChoice()
   }
   return user_choice;
 }
-
 } // namespace myrps

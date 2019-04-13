@@ -17,7 +17,7 @@ class GamePanel : public wxPanel
 public:
   GamePanel(wxFrame *parent) : wxPanel(parent, wxID_ANY)
   {
-    init();
+    Init();
   }
 
   ///// Start Menu Section /////
@@ -61,7 +61,7 @@ private:
 
   int round_count = 1;
 
-  void init();
+  void Init();
   void PlayGame();
   void ResetGame(int num_rounds);
 
