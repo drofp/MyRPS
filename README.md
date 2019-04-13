@@ -26,7 +26,7 @@ make
   - [x] Implement a command-line option, such as -r for random and -m for machine learning. (This is implemented as menu options in our version)
 - [x] The ML version must save its frequency data at the end of each game to be read at the start of the next game.
 
-### v0.3 (Homework 5)
+### v1.0 (Homework 5)
 - Minimum features
   - [x] Which round
   - [x] A way for the user to enter a choice for each round.
