@@ -37,6 +37,8 @@ public:
 private:
   Game* game;
 
+  SettingOption current_difficulty;
+
   wxStaticText *button_chosen_text;
 
   wxStaticText *round_count_text;
@@ -58,6 +60,8 @@ private:
 
   void init();
   void PlayGame();
+  void ResetGame();
+
   MoveChoice GetPlayerMove();
   MoveChoice GetComputerMove();
 

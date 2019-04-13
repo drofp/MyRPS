@@ -39,8 +39,11 @@ void GamePanel::init()
 
   SetGameVisibility(false);
   SetOptionsVisibility(false);
-  
+
   SetSizer(sizer);
+
+  current_difficulty = SettingOption::kRandom;
+
 }
 
 void GamePanel::SetGame(Game* g)
@@ -212,6 +215,11 @@ void GamePanel::GenerateGameButtonPanel()
 //   button_panel->SetSizer(button_sizer);
 // }
 
+void GamePanel::ResetGame()
+{
+  game = new Game(current_difficulty);
+}
+
 void GamePanel::GenerateGameInfoPanel()
 {
   wxSizer *game_info_sizer = new wxGridSizer(3, 1, 4);
@@ -348,7 +356,8 @@ void GamePanel::OnOptions(wxCommandEvent& event)
 void GamePanel::OnRandom(wxCommandEvent& event)
 {
   //make difficulty be random
-  SetComputerMode(SettingOption::kRandom);
+  current_difficulty = SettingOption::kRandom;
+  SetComputerMode(current_difficulty);
   SetStartMenuVisibility(true);
   SetOptionsVisibility(false);
 }
@@ -356,7 +365,8 @@ void GamePanel::OnRandom(wxCommandEvent& event)
 void GamePanel::OnSmart(wxCommandEvent& event)
 {
   //make difficulty be smart
-  SetComputerMode(SettingOption::kSmart);
+  current_difficulty = SettingOption::kSmart;
+  SetComputerMode(current_difficulty);
   SetStartMenuVisibility(true);
   SetOptionsVisibility(false);
 }
@@ -401,24 +411,23 @@ void GamePanel::SetGameVisibility(bool is_shown)
 // necessary cleanup and control passing code.
 void GamePanel::UpdateGameInfoText(const MoveChoice player_move)
 {
+  MoveChoice computer_move = game->GetComputerMove(player_move);
+  MoveChoice computer_prediction = game->GetComputerPrediction(player_move);
+
+  round_count_text->SetLabelText(std::to_string(game->GetRoundCount()));
+  computer_prediction_text->SetLabelText(move_to_wxString(computer_prediction));
+  computer_choice_text->SetLabelText(move_to_wxString(computer_move));
+  display_winner_text->SetLabelText(game->PlayRound(player_move, computer_move));
+  player_win_cnt_text->SetLabelText(std::to_string(game->GetPlayerScore()));
+  comp_win_cnt_text->SetLabelText(std::to_string(game->GetComputerScore()));
+  tie_cnt_text->SetLabelText(std::to_string(game->GetTieGameCnt()));
+  
   if(game->GetRoundCount() > 20)
   {
-    SetStartMenuVisibility(true);
     SetGameVisibility(false);
+    SetStartMenuVisibility(true);
+    
   }
-  else
-  {
-    MoveChoice computer_move = game->GetComputerMove(player_move);
-    MoveChoice computer_prediction = game->GetComputerPrediction(player_move);
-
-    round_count_text->SetLabelText(std::to_string(game->GetRoundCount()));
-    computer_prediction_text->SetLabelText(move_to_wxString(computer_prediction));
-    computer_choice_text->SetLabelText(move_to_wxString(computer_move));
-    display_winner_text->SetLabelText(game->PlayRound(player_move, computer_move));
-    player_win_cnt_text->SetLabelText(std::to_string(game->GetPlayerScore()));
-    comp_win_cnt_text->SetLabelText(std::to_string(game->GetComputerScore()));
-    tie_cnt_text->SetLabelText(std::to_string(game->GetTieGameCnt()));
-  }  
 }
 
 
