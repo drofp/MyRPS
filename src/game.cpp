@@ -164,6 +164,7 @@ void Game::SetComputerMode(SettingOption mode)
 void Game::SetRoundsPerMatch(int rounds_per_match)
 {
   this->rounds_per_match = rounds_per_match;
+  ai.SetRoundsPerMatch(rounds_per_match);
 }
 
 bool Game::IsValidMove(string user_move)

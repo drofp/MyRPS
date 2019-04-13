@@ -63,7 +63,7 @@ private:
 
   void init();
   void PlayGame();
-  void ResetGame();
+  void ResetGame(int num_rounds);
 
   MoveChoice GetPlayerMove();
   MoveChoice GetComputerMove();

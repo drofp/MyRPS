@@ -33,6 +33,7 @@ public:
    */
   MoveChoice DecideMove(MoveChoice player_move);
 
+  void SetRoundsPerMatch(int rounds_per_match);
 
   /**
    * Returns a map which is empty if there is no csv file

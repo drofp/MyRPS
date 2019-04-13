@@ -10,6 +10,7 @@ class RandomChooser : public myrps::Chooser
 public:
   MoveChoice DecideMove(MoveChoice player_move);
   MoveChoice GetPredictedMove(MoveChoice player_move);
+  void SetRoundsPerMatch(int rounds_per_match);
 };
 } // namespace myrps
 #endif

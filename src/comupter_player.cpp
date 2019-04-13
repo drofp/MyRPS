@@ -12,6 +12,12 @@ ComputerPlayer::ComputerPlayer(SettingOption mode, int rounds_per_match)
   this->chooser = ChooserFactory::MakeChooser(mode, rounds_per_match);
 }
 
+void ComputerPlayer::SetRoundsPerMatch(int rounds_per_match)
+{
+  this->rounds_per_match = rounds_per_match;
+  chooser->SetRoundsPerMatch(rounds_per_match);
+}
+
 MoveChoice ComputerPlayer::DecideMove(MoveChoice player_move)
 {
   MoveChoice computer_move = chooser->DecideMove(player_move);

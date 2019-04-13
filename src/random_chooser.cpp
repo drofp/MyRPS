@@ -18,4 +18,9 @@ MoveChoice RandomChooser::GetPredictedMove(MoveChoice player_move)
 {
   return MoveChoice::kScissors;
 }
+
+void RandomChooser::SetRoundsPerMatch(int rounds_per_match)
+{
+  return;
+}
 } // namespace myrps

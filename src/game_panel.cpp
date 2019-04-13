@@ -124,10 +124,11 @@ void GamePanel::GenerateGameButtonPanel()
   game_buttons_panel->SetSizer(game_sizer);
 }
 
-void GamePanel::ResetGame()
+void GamePanel::ResetGame(int num_rounds)
 {
   delete game;
   game = new Game(current_difficulty);
+  game->SetRoundsPerMatch(num_rounds);
 }
 
 void GamePanel::GenerateGameInfoPanel()
@@ -288,6 +289,7 @@ void GamePanel::OnRoundSet(wxCommandEvent& event)
         0, 100);
   game->SetRoundsPerMatch(num_rounds);
 
+  ResetGame(num_rounds);
   SetOptionsVisibility(false);
   SetStartMenuVisibility(true);
 }
@@ -339,7 +341,6 @@ void GamePanel::UpdateGameInfoText(const MoveChoice player_move)
   {
     SetGameVisibility(false);
     SetStartMenuVisibility(true);
-    ResetGame();
   }
 }
 

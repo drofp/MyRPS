@@ -25,6 +25,7 @@ public:
   MoveChoice DecideMove(MoveChoice player_move);
   void SetComputerMode(SettingOption mode);
   MoveChoice GetPredictedMove(MoveChoice player_move);
+  void SetRoundsPerMatch(int rounds_per_match);
 };
 } // namespace myrps
 #endif
