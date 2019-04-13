@@ -61,7 +61,11 @@ private:
   MoveChoice GetPlayerMove();
   MoveChoice GetComputerMove();
 
-  void GenerateButtonPanel(wxPanel* button_panel);
+  void GenerateStartMenuPanel();
+  void GenerateOptionsPanel();
+  void GenerateGameButtonPanel();
+
+  // void GenerateButtonPanel(wxPanel* button_panel);
   void GenerateGameInfoPanel();
   void AddSubPanelsToMainPanel(vector<wxPanel *> panels, wxSizer* sizer);
 
