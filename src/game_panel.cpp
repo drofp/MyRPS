@@ -38,6 +38,8 @@ void GamePanel::init()
   AddSubPanelsToMainPanel(panels, sizer);
 
   SetGameVisibility(false);
+  SetOptionsVisibility(false);
+  
   SetSizer(sizer);
 }
 
@@ -56,11 +58,11 @@ void GamePanel::GenerateStartMenuPanel()
   ///// Start Menu Section /////
   wxSizer *start_sizer = new wxBoxSizer(wxHORIZONTAL);
 
-  wxStaticText *start_text = new wxStaticText(button_panel, wxID_ANY,
+  wxStaticText *start_text = new wxStaticText(start_menu_panel, wxID_ANY,
                                                "Welcome to MyRPS!");
-  wxButton *play_game_button = new wxButton(button_panel, wxID_ANY,
+  wxButton *play_game_button = new wxButton(start_menu_panel, wxID_ANY,
                                        move_to_wxString(StartOption::PLAY_GAME));
-  wxButton *options_button = new wxButton(button_panel, wxID_ANY,
+  wxButton *options_button = new wxButton(start_menu_panel, wxID_ANY,
                                         move_to_wxString(StartOption::OPTIONS));
 
   play_game_button->Bind(wxEVT_BUTTON, &GamePanel::OnPlayGame, this);
@@ -78,11 +80,11 @@ void GamePanel::GenerateOptionsPanel()
 {
   ///// Options Menu Section /////
   wxSizer *options_sizer = new wxBoxSizer(wxHORIZONTAL);
-  wxStaticText *option_text = new wxStaticText(button_panel, wxID_ANY,
+  wxStaticText *option_text = new wxStaticText(options_panel, wxID_ANY,
                                               "Choose difficulty level:");
-  wxButton *random_button = new wxButton(button_panel, wxID_ANY,
+  wxButton *random_button = new wxButton(options_panel, wxID_ANY,
                                             move_to_wxString(SettingOption::kRandom));
-  wxButton *smart_button = new wxButton(button_panel, wxID_ANY,
+  wxButton *smart_button = new wxButton(options_panel, wxID_ANY,
                                             move_to_wxString(SettingOption::kSmart));
 
   random_button->Bind(wxEVT_BUTTON, &GamePanel::OnRandom, this);
@@ -103,13 +105,13 @@ void GamePanel::GenerateGameButtonPanel()
   ///// Game Section /////
   wxSizer *game_sizer = new wxBoxSizer(wxHORIZONTAL);
 
-  wxStaticText *choose_text = new wxStaticText(button_panel, wxID_ANY,
+  wxStaticText *choose_text = new wxStaticText(game_buttons_panel, wxID_ANY,
                                                "Choose:");
-  wxButton *rock_button = new wxButton(button_panel, wxID_ANY,
+  wxButton *rock_button = new wxButton(game_buttons_panel, wxID_ANY,
                                        move_to_wxString(MoveChoice::kRock));
-  wxButton *paper_button = new wxButton(button_panel, wxID_ANY,
+  wxButton *paper_button = new wxButton(game_buttons_panel, wxID_ANY,
                                         move_to_wxString(MoveChoice::kPaper));
-  wxButton *scissors_button = new wxButton(button_panel, wxID_ANY,
+  wxButton *scissors_button = new wxButton(game_buttons_panel, wxID_ANY,
                                            move_to_wxString(MoveChoice::kScissors));
 
   rock_button->Bind(wxEVT_BUTTON, &GamePanel::OnRock, this);
@@ -333,41 +335,61 @@ void GamePanel::UpdateButtonMoveText(const MoveChoice move)
 void GamePanel::OnPlayGame(wxCommandEvent& event)
 {
   SetStartMenuVisibility(false);
+  SetOptionsVisibility(false);
   SetGameVisibility(true);
 }
 
 void GamePanel::OnOptions(wxCommandEvent& event)
 {
-
+  SetStartMenuVisibility(false);
+  SetOptionsVisibility(true);
 }
 
 void GamePanel::OnRandom(wxCommandEvent& event)
 {
-
+  //make difficulty be random
+  SetComputerMode(SettingOption::kRandom);
+  SetStartMenuVisibility(true);
+  SetOptionsVisibility(false);
 }
 
 void GamePanel::OnSmart(wxCommandEvent& event)
 {
-
+  //make difficulty be smart
+  SetComputerMode(SettingOption::kSmart);
+  SetStartMenuVisibility(true);
+  SetOptionsVisibility(false);
 }
 
 
 void GamePanel::SetStartMenuVisibility(bool is_shown)
 {
-  // is_shown ? button_sizer->Enable() : button_sizer->Disable();
-  // button_sizer->Layout();
+  is_shown ? start_menu_panel->Enable() : start_menu_panel->Disable();
+  start_menu_panel->Layout();
 }
 
 void GamePanel::SetOptionsVisibility(bool is_shown)
 {
-  // is_shown ? options_sizer->Enable() : options_sizer->Disable();
-  // options_sizer->Layout();
+  is_shown ? options_panel->Enable() : options_panel->Disable();
+  options_panel->Layout();
 }
 
 void GamePanel::SetGameVisibility(bool is_shown)
 {
-  is_shown ? game_info_panel->Enable() : game_info_panel->Disable();
+  if(is_shown)
+  {
+    game_buttons_panel->Enable();
+    game_info_panel->Enable();
+  }
+  else
+  {
+    game_buttons_panel->Disable();
+    game_info_panel->Disable();
+  }
+  
+  game_buttons_panel->Layout();
   game_info_panel->Layout();
+
 //   button_sizer->Hide(game_sizer, is_shown);
 //   button_sizer->Layout();
 }
@@ -379,16 +401,24 @@ void GamePanel::SetGameVisibility(bool is_shown)
 // necessary cleanup and control passing code.
 void GamePanel::UpdateGameInfoText(const MoveChoice player_move)
 {
-  MoveChoice computer_move = game->GetComputerMove(player_move);
-  MoveChoice computer_prediction = game->GetComputerPrediction(player_move);
+  if(game->GetRoundCount() > 20)
+  {
+    SetStartMenuVisibility(true);
+    SetGameVisibility(false);
+  }
+  else
+  {
+    MoveChoice computer_move = game->GetComputerMove(player_move);
+    MoveChoice computer_prediction = game->GetComputerPrediction(player_move);
 
-  round_count_text->SetLabelText(std::to_string(game->GetRoundCount()));
-  computer_prediction_text->SetLabelText(move_to_wxString(computer_prediction));
-  computer_choice_text->SetLabelText(move_to_wxString(computer_move));
-  display_winner_text->SetLabelText(game->PlayRound(player_move, computer_move));
-  player_win_cnt_text->SetLabelText(std::to_string(game->GetPlayerScore()));
-  comp_win_cnt_text->SetLabelText(std::to_string(game->GetComputerScore()));
-  tie_cnt_text->SetLabelText(std::to_string(game->GetTieGameCnt()));
+    round_count_text->SetLabelText(std::to_string(game->GetRoundCount()));
+    computer_prediction_text->SetLabelText(move_to_wxString(computer_prediction));
+    computer_choice_text->SetLabelText(move_to_wxString(computer_move));
+    display_winner_text->SetLabelText(game->PlayRound(player_move, computer_move));
+    player_win_cnt_text->SetLabelText(std::to_string(game->GetPlayerScore()));
+    comp_win_cnt_text->SetLabelText(std::to_string(game->GetComputerScore()));
+    tie_cnt_text->SetLabelText(std::to_string(game->GetTieGameCnt()));
+  }  
 }
 
 
