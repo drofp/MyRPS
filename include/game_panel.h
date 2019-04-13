@@ -3,6 +3,8 @@
 
 #include "my_rps.h"
 #include "move_choice.h"
+#include "start_option.h"
+#include "setting_option.h"
 #include "game.h"
 
 #include <string>
@@ -17,6 +19,15 @@ public:
     init();
   }
 
+  ///// Start Menu Section /////
+  void OnPlayGame(wxCommandEvent& event);
+  void OnOptions(wxCommandEvent& event);
+
+  ///// Options Menu Section /////
+  void OnRandom(wxCommandEvent& event);
+  void OnSmart(wxCommandEvent& event);
+
+  ///// Game Section /////
   void SetGame(Game* g);
   void SetComputerMode(SettingOption mode);
 
@@ -25,6 +36,8 @@ public:
   void OnScissors(wxCommandEvent& event);
 private:
   Game* game;
+
+  SettingOption current_difficulty;
 
   wxStaticText *button_chosen_text;
 
@@ -36,20 +49,40 @@ private:
   wxStaticText *comp_win_cnt_text;
   wxStaticText *tie_cnt_text;
 
+  //Panels
+
+  wxPanel *start_menu_panel;
+  wxPanel *options_panel;
+  wxPanel *game_buttons_panel;
+  wxPanel *game_info_panel;
+
   int round_count = 1;
 
   void init();
   void PlayGame();
+  void ResetGame();
+
   MoveChoice GetPlayerMove();
   MoveChoice GetComputerMove();
 
-  void GenerateButtonPanel(wxPanel* button_panel);
-  void GenerateChosenMovePanel(wxPanel* chosen_panel);
-  void GenerateGameInfoPanel(wxPanel* game_info_panel);
+  void GenerateStartMenuPanel();
+  void GenerateOptionsPanel();
+  void GenerateGameButtonPanel();
+
+  // void GenerateButtonPanel(wxPanel* button_panel);
+  void GenerateGameInfoPanel();
   void AddSubPanelsToMainPanel(vector<wxPanel *> panels, wxSizer* sizer);
 
+  void SelectPlayGameButton(const StartOption option);
+  void SelectOptionsButton(const StartOption option);
   void UpdateButtonMoveText(const MoveChoice move);
   void UpdateGameInfoText(const MoveChoice move);
+
+  void SetStartMenuVisibility(bool is_shown);
+  void SetOptionsVisibility(bool is_shown);
+  void SetGameVisibility(bool is_shown);
+  
+  void FinishGame();
 };
 } // namespace myrps
 
