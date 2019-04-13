@@ -34,8 +34,6 @@ void GameFrame::init()
   init_sizer();
   InitGame();
 
-  SetComputerMode(SettingOption::kSmart);
-
   wxSize size = GetBestSize();
   SetMinClientSize(size);
 }
