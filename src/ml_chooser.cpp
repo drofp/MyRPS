@@ -5,6 +5,7 @@ namespace myrps
 MLChooser::MLChooser(int rounds_per_match)
 {
   this->n = 5; // default value. must be greater than 1
+  this->round_count = 0;
   this->rounds_per_match = rounds_per_match;
   this->hist_data = MLChooser::GetHistData();
   this->old_hist_data = this->hist_data;
@@ -44,7 +45,6 @@ MoveChoice MLChooser::DecideMove(MoveChoice player_move)
 
   round_count++;
   cout << "rounds_per_match is: " << rounds_per_match << endl;
-  cout << "ROUND COUNT" << round_count << endl;
   if (round_count == rounds_per_match)
     MLChooser::WriteHistData();
   
@@ -298,7 +298,6 @@ string MLChooser::GetLastNMinusOneMoves(queue<MoveChoice> q)
   while (amount_to_copy > 0)
   {
     current_move = copied_q.front();
-    cout << "==================current move is: " << current_move << endl;
 
     if (current_move == MoveChoice::kRock)
       last_n_minus_one_moves += 'r';
