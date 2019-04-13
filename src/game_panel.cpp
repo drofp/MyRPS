@@ -24,7 +24,7 @@ void GamePanel::init()
 
   AddSubPanelsToMainPanel(panels, sizer);
 
-  // SetGameVisibility(false);
+  SetGameVisibility(false);
   SetSizer(sizer);
 }
 
@@ -41,10 +41,10 @@ void GamePanel::SetComputerMode(SettingOption mode)
 void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
 {
   ///// Main Button Sizer /////
-  button_sizer = new wxBoxSizer(wxVERTICAL);
+  wxSizer *button_sizer = new wxBoxSizer(wxVERTICAL);
 
   ///// Start Menu Section /////
-  start_sizer = new wxBoxSizer(wxHORIZONTAL);
+  wxSizer *start_sizer = new wxBoxSizer(wxHORIZONTAL);
 
   wxStaticText *start_text = new wxStaticText(button_panel, wxID_ANY,
                                                "Welcome to MyRPS!");
@@ -66,7 +66,7 @@ void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
   button_sizer->AddSpacer(10);
 
   ///// Options Menu Section /////
-  options_sizer = new wxBoxSizer(wxHORIZONTAL);
+  wxSizer *options_sizer = new wxBoxSizer(wxHORIZONTAL);
   wxStaticText *option_text = new wxStaticText(button_panel, wxID_ANY,
                                               "Choose difficulty level:");
   wxButton *random_button = new wxButton(button_panel, wxID_ANY,
@@ -92,7 +92,7 @@ void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
   button_sizer->AddSpacer(10);
 
   ///// Game Section /////
-  game_sizer = new wxBoxSizer(wxHORIZONTAL);
+  wxSizer *game_sizer = new wxBoxSizer(wxHORIZONTAL);
 
   wxStaticText *choose_text = new wxStaticText(button_panel, wxID_ANY,
                                                "Choose:");
@@ -242,7 +242,8 @@ void GamePanel::UpdateButtonMoveText(const MoveChoice move)
 
 void GamePanel::OnPlayGame(wxCommandEvent& event)
 {
-
+  SetStartMenuVisibility(false);
+  SetGameVisibility(true);
 }
 
 void GamePanel::OnOptions(wxCommandEvent& event)
@@ -263,21 +264,22 @@ void GamePanel::OnSmart(wxCommandEvent& event)
 
 void GamePanel::SetStartMenuVisibility(bool is_shown)
 {
-  button_sizer->Hide(start_sizer, is_shown);
-  button_sizer->Layout();
+  // is_shown ? button_sizer->Enable() : button_sizer->Disable();
+  // button_sizer->Layout();
 }
 
 void GamePanel::SetOptionsVisibility(bool is_shown)
 {
-  button_sizer->Hide(options_sizer, is_shown);
-  button_sizer->Layout();
+  // is_shown ? options_sizer->Enable() : options_sizer->Disable();
+  // options_sizer->Layout();
 }
 
 void GamePanel::SetGameVisibility(bool is_shown)
 {
-  is_shown ? game_info_panel->Show() : game_info_panel->Hide();
-  button_sizer->Hide(game_sizer, is_shown);
-  button_sizer->Layout();
+  is_shown ? game_info_panel->Enable() : game_info_panel->Disable();
+  game_info_panel->Layout();
+//   button_sizer->Hide(game_sizer, is_shown);
+//   button_sizer->Layout();
 }
 
 // Plays game and updates text appropriately

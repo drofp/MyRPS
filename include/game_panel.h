@@ -47,14 +47,6 @@ private:
   wxStaticText *comp_win_cnt_text;
   wxStaticText *tie_cnt_text;
 
-  //Main sizer for GUI Buttons
-  wxSizer *button_sizer;
-
-  //Sizer for start, option and game buttons
-  wxSizer *start_sizer;
-  wxSizer *options_sizer;
-  wxSizer *game_sizer;
-
   wxPanel *game_info_panel;
 
   int round_count = 1;
