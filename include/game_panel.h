@@ -47,6 +47,11 @@ private:
   wxStaticText *comp_win_cnt_text;
   wxStaticText *tie_cnt_text;
 
+  //Panels
+
+  wxPanel *start_menu_panel;
+  wxPanel *options_panel;
+  wxPanel *game_buttons_panel;
   wxPanel *game_info_panel;
 
   int round_count = 1;
