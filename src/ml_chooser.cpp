@@ -5,9 +5,15 @@ namespace myrps
 MLChooser::MLChooser(int rounds_per_match)
 {
   this->n = 5; // default value. must be greater than 1
+  this->round_count = 0;
   this->rounds_per_match = rounds_per_match;
   this->hist_data = MLChooser::GetHistData();
   this->old_hist_data = this->hist_data;
+}
+
+void MLChooser::SetRoundsPerMatch(int rounds_per_match)
+{
+  this->rounds_per_match = rounds_per_match;
 }
 
 MoveChoice MLChooser::DecideMove(MoveChoice player_move)
