@@ -186,5 +186,4 @@ void Game::PrintScore()
   cout << "Computer Score: " << computer_score << endl;
   cout << "Tie Game Count: " << tie_game_cnt << endl;
 }
-
 } // namespace myrps

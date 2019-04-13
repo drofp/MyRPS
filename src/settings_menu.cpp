@@ -82,5 +82,4 @@ SettingOption SettingsMenu::ValidateSetting(string val)
 
   return user_choice;
 }
-
 } // namespace myrps

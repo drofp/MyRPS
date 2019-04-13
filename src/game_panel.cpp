@@ -4,7 +4,7 @@ using myrps::GamePanel;
 
 namespace myrps
 {
-void GamePanel::init()
+void GamePanel::Init()
 {
   wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -342,6 +342,4 @@ void GamePanel::UpdateGameInfoText(const MoveChoice player_move)
     ResetGame();
   }
 }
-
-
 } // namespace myrps

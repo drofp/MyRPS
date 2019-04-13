@@ -4,8 +4,8 @@ using myrps::GameFrame;
 
 // The event table.
 wxBEGIN_EVENT_TABLE(GameFrame, wxFrame)
-  EVT_MENU(GAME_Quit, GameFrame::on_quit)
-  EVT_MENU(GAME_About, GameFrame::on_about)
+  EVT_MENU(GAME_Quit, GameFrame::OnQuit)
+  EVT_MENU(GAME_About, GameFrame::OnAbout)
 wxEND_EVENT_TABLE()
 
 namespace myrps
@@ -16,7 +16,7 @@ GameFrame::GameFrame(const wxString &title)
     : wxFrame(NULL, wxID_ANY, title),
       game_panel(new GamePanel(this))
 {
-  init();
+  Init();
 
   wxSize size = GetSize();
   size.SetWidth(size.GetWidth() + SIDE_MARGINS);
@@ -28,10 +28,10 @@ GameFrame::~GameFrame()
   delete game_panel;
 }
 
-void GameFrame::init()
+void GameFrame::Init()
 {
-  init_menu_bar();
-  init_sizer();
+  InitMenuBar();
+  InitSizer();
   InitGame();
 
   wxSize size = GetBestSize();
@@ -49,7 +49,7 @@ void GameFrame::SetComputerMode(SettingOption mode)
   game_panel->SetComputerMode(mode);
 }
 
-void GameFrame::init_menu_bar()
+void GameFrame::InitMenuBar()
 {
   wxMenu *fileMenu = new wxMenu;
   fileMenu->Append(GAME_Quit, "E&xit\tAlt-X", "Quit program");
@@ -63,7 +63,7 @@ void GameFrame::init_menu_bar()
   SetMenuBar(menuBar);
 }
 
-void GameFrame::init_sizer()
+void GameFrame::InitSizer()
 {
   wxSizer *frame_sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -73,7 +73,7 @@ void GameFrame::init_sizer()
   SetSizerAndFit(frame_sizer);
 }
 
-void GameFrame::on_about(wxCommandEvent & WXUNUSED(event))
+void GameFrame::OnAbout(wxCommandEvent & WXUNUSED(event))
 {
   wxMessageBox(wxString::Format(
                     "This is a button demo\n"
@@ -86,7 +86,7 @@ void GameFrame::on_about(wxCommandEvent & WXUNUSED(event))
                 this);
 }
 
-void GameFrame::on_quit(wxCommandEvent & WXUNUSED(event))
+void GameFrame::OnQuit(wxCommandEvent & WXUNUSED(event))
 {
   Close(true); // true is to force the frame to close
 }
