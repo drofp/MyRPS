@@ -16,7 +16,7 @@ GameFrame::GameFrame(const wxString &title)
     : wxFrame(NULL, wxID_ANY, title),
       game_panel(new GamePanel(this))
 {
-  init();
+  Init();
 
   wxSize size = GetSize();
   size.SetWidth(size.GetWidth() + SIDE_MARGINS);
@@ -28,7 +28,7 @@ GameFrame::~GameFrame()
   delete game_panel;
 }
 
-void GameFrame::init()
+void GameFrame::Init()
 {
   InitMenuBar();
   InitSizer();

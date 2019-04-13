@@ -22,7 +22,7 @@ private:
 
   GamePanel *game_panel;
 
-  void init();
+  void Init();
   void InitMenuBar();
   void InitSizer();
   void InitGame();
