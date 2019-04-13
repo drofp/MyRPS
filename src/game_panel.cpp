@@ -217,6 +217,7 @@ void GamePanel::GenerateGameButtonPanel()
 
 void GamePanel::ResetGame()
 {
+  delete game;
   game = new Game(current_difficulty);
 }
 
@@ -422,11 +423,11 @@ void GamePanel::UpdateGameInfoText(const MoveChoice player_move)
   comp_win_cnt_text->SetLabelText(std::to_string(game->GetComputerScore()));
   tie_cnt_text->SetLabelText(std::to_string(game->GetTieGameCnt()));
   
-  if(game->GetRoundCount() > 20)
+  if (game->GetRoundCount() > 20)
   {
     SetGameVisibility(false);
     SetStartMenuVisibility(true);
-    
+    ResetGame();
   }
 }
 
