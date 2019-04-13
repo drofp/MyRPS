@@ -342,6 +342,4 @@ void GamePanel::UpdateGameInfoText(const MoveChoice player_move)
     ResetGame();
   }
 }
-
-
 } // namespace myrps

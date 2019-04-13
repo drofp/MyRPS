@@ -15,4 +15,3 @@ wxString move_to_wxString(StartOption choice)
     }
 }
 } // namespace myrps
-

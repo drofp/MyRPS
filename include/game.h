@@ -15,18 +15,6 @@ namespace myrps
 {
 class Game
 {
-private:
-  ComputerPlayer ai;
-
-  int rounds_per_match = 20;
-  int round_count = 1;
-  int player_score = 0;
-  int computer_score = 0;
-  int tie_game_cnt = 0;
-
-  bool IsValidMove(string user_move);
-  void PrintScore();
-
 public:
   Game();
   Game(SettingOption mode);
@@ -45,8 +33,19 @@ public:
 
   void SetComputerMode(SettingOption mode);
   void SetRoundsPerMatch(int rounds_per_match);
-};
 
+private:
+  ComputerPlayer ai;
+
+  int rounds_per_match = 20;
+  int round_count = 1;
+  int player_score = 0;
+  int computer_score = 0;
+  int tie_game_cnt = 0;
+
+  bool IsValidMove(string user_move);
+  void PrintScore();
+};
 } // namespace myrps
 
 #endif
