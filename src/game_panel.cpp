@@ -6,26 +6,17 @@ namespace myrps
 {
 void GamePanel::init()
 {
-  // main sizer
   wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 
-  // buttons panel
-  // wxPanel *button_panel = new wxPanel(this, wxID_ANY);
-  // GenerateButtonPanel();
-
-  //Start Menu
   start_menu_panel = new wxPanel(this, wxID_ANY);
   GenerateStartMenuPanel();
 
-  //Options
   options_panel = new wxPanel(this, wxID_ANY);
   GenerateOptionsPanel();
 
-  //Game Buttons
   game_buttons_panel = new wxPanel(this, wxID_ANY);
   GenerateGameButtonPanel();
 
-  // game info panel
   game_info_panel = new wxPanel(this, wxID_ANY);
   GenerateGameInfoPanel();
 
@@ -58,7 +49,6 @@ void GamePanel::SetComputerMode(SettingOption mode)
 
 void GamePanel::GenerateStartMenuPanel()
 {
-  ///// Start Menu Section /////
   wxSizer *start_sizer = new wxBoxSizer(wxHORIZONTAL);
 
   wxStaticText *start_text = new wxStaticText(start_menu_panel, wxID_ANY,
@@ -81,7 +71,6 @@ void GamePanel::GenerateStartMenuPanel()
 
 void GamePanel::GenerateOptionsPanel()
 {
-  ///// Options Menu Section /////
   wxSizer *options_sizer = new wxBoxSizer(wxHORIZONTAL);
   wxStaticText *option_text = new wxStaticText(options_panel, wxID_ANY,
                                               "Choose difficulty level:");
@@ -104,8 +93,6 @@ void GamePanel::GenerateOptionsPanel()
 
 void GamePanel::GenerateGameButtonPanel()
 {
-
-  ///// Game Section /////
   wxSizer *game_sizer = new wxBoxSizer(wxHORIZONTAL);
 
   wxStaticText *choose_text = new wxStaticText(game_buttons_panel, wxID_ANY,
@@ -131,89 +118,6 @@ void GamePanel::GenerateGameButtonPanel()
 
   game_buttons_panel->SetSizer(game_sizer);
 }
-
-
-// void GamePanel::GenerateButtonPanel(wxPanel* button_panel)
-// {
-//   ///// Main Button Sizer /////
-//   wxSizer *button_sizer = new wxBoxSizer(wxVERTICAL);
-
-//   ///// Start Menu Section /////
-//   wxSizer *start_sizer = new wxBoxSizer(wxHORIZONTAL);
-
-//   wxStaticText *start_text = new wxStaticText(button_panel, wxID_ANY,
-//                                                "Welcome to MyRPS!");
-//   wxButton *play_game_button = new wxButton(button_panel, wxID_ANY,
-//                                        move_to_wxString(StartOption::PLAY_GAME));
-//   wxButton *options_button = new wxButton(button_panel, wxID_ANY,
-//                                         move_to_wxString(StartOption::OPTIONS));
-
-//   play_game_button->Bind(wxEVT_BUTTON, &GamePanel::OnPlayGame, this);
-//   options_button->Bind(wxEVT_BUTTON, &GamePanel::OnOptions, this);
-
-//   start_sizer->Add(start_text, 0, 0, 0);
-//   start_sizer->AddSpacer(5);
-//   start_sizer->Add(play_game_button, 0, 0, 0);
-//   start_sizer->AddSpacer(5);
-//   start_sizer->Add(options_button, 0, 0, 0);
-
-//   button_sizer->Add(start_sizer);
-//   button_sizer->AddSpacer(10);
-
-//   ///// Options Menu Section /////
-//   wxSizer *options_sizer = new wxBoxSizer(wxHORIZONTAL);
-//   wxStaticText *option_text = new wxStaticText(button_panel, wxID_ANY,
-//                                               "Choose difficulty level:");
-//   wxButton *random_button = new wxButton(button_panel, wxID_ANY,
-//                                             move_to_wxString(SettingOption::kRandom));
-//   wxButton *smart_button = new wxButton(button_panel, wxID_ANY,
-//                                             move_to_wxString(SettingOption::kSmart));
-
-//   random_button->Bind(wxEVT_BUTTON, &GamePanel::OnRandom, this);
-//   smart_button->Bind(wxEVT_BUTTON, &GamePanel::OnSmart, this);
-  
-//   options_sizer->Add(option_text, 0, 0, 0);
-//   options_sizer->AddSpacer(10);
-//   options_sizer->Add(random_button, 0, 0, 0);
-//   options_sizer->AddSpacer(5);
-//   options_sizer->Add(smart_button, 0, 0, 0);
-
-//   // options_sizer->Hide();
-  
-//   button_sizer->Add(options_sizer);
-  
-//   SetOptionsVisibility(false);
-
-//   button_sizer->AddSpacer(10);
-
-//   ///// Game Section /////
-//   wxSizer *game_sizer = new wxBoxSizer(wxHORIZONTAL);
-
-//   wxStaticText *choose_text = new wxStaticText(button_panel, wxID_ANY,
-//                                                "Choose:");
-//   wxButton *rock_button = new wxButton(button_panel, wxID_ANY,
-//                                        move_to_wxString(MoveChoice::kRock));
-//   wxButton *paper_button = new wxButton(button_panel, wxID_ANY,
-//                                         move_to_wxString(MoveChoice::kPaper));
-//   wxButton *scissors_button = new wxButton(button_panel, wxID_ANY,
-//                                            move_to_wxString(MoveChoice::kScissors));
-
-//   rock_button->Bind(wxEVT_BUTTON, &GamePanel::OnRock, this);
-//   paper_button->Bind(wxEVT_BUTTON, &GamePanel::OnPaper, this);
-//   scissors_button->Bind(wxEVT_BUTTON, &GamePanel::OnScissors, this);
-
-//   game_sizer->Add(choose_text, 0, 0, 0);
-//   game_sizer->AddSpacer(5);
-//   game_sizer->Add(rock_button, 0, 0, 0);
-//   game_sizer->AddSpacer(5);
-//   game_sizer->Add(paper_button, 0, 0, 0);
-//   game_sizer->AddSpacer(5);
-//   game_sizer->Add(scissors_button, 0, 0, 0);
-
-//   button_sizer->Add(game_sizer);
-
-//   button_panel->SetSizer(button_sizer);
-// }
 
 void GamePanel::ResetGame()
 {
@@ -356,7 +260,6 @@ void GamePanel::OnOptions(wxCommandEvent& event)
 
 void GamePanel::OnRandom(wxCommandEvent& event)
 {
-  //make difficulty be random
   current_difficulty = SettingOption::kRandom;
   SetComputerMode(current_difficulty);
   SetStartMenuVisibility(true);
@@ -365,7 +268,6 @@ void GamePanel::OnRandom(wxCommandEvent& event)
 
 void GamePanel::OnSmart(wxCommandEvent& event)
 {
-  //make difficulty be smart
   current_difficulty = SettingOption::kSmart;
   SetComputerMode(current_difficulty);
   SetStartMenuVisibility(true);
@@ -401,15 +303,8 @@ void GamePanel::SetGameVisibility(bool is_shown)
   game_buttons_panel->Layout();
   game_info_panel->Layout();
 
-//   button_sizer->Hide(game_sizer, is_shown);
-//   button_sizer->Layout();
 }
 
-// Plays game and updates text appropriately
-// 
-// NOTE: Should check if round_count has reached max number of rounds at end of 
-// this function. Feel free to use the FinishGame() method to encapsulate all 
-// necessary cleanup and control passing code.
 void GamePanel::UpdateGameInfoText(const MoveChoice player_move)
 {
   MoveChoice computer_move = game->GetComputerMove(player_move);
