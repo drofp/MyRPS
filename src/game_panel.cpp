@@ -283,10 +283,13 @@ void GamePanel::OnRoundSet(wxCommandEvent& event)
 {
 
   num_rounds = wxGetNumberFromUser(
-      wxT("message\n"), wxT("gang "), 
-        wxT("caption"), 20, 
+      wxT("Set Number of Rounds\n"), wxT("Rounds: "), 
+        wxT("MyRPS"), 20, 
         0, 100);
   game->SetRoundsPerMatch(num_rounds);
+
+  SetOptionsVisibility(false);
+  SetStartMenuVisibility(true);
 }
 
 void GamePanel::SetStartMenuVisibility(bool is_shown)
@@ -332,7 +335,7 @@ void GamePanel::UpdateGameInfoText(const MoveChoice player_move)
   comp_win_cnt_text->SetLabelText(std::to_string(game->GetComputerScore()));
   tie_cnt_text->SetLabelText(std::to_string(game->GetTieGameCnt()));
   
-  if (game->GetRoundCount() > 20)
+  if (game->GetRoundCount() > num_rounds)
   {
     SetGameVisibility(false);
     SetStartMenuVisibility(true);
