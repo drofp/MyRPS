@@ -6,6 +6,7 @@
 #include "start_option.h"
 #include "setting_option.h"
 #include "game.h"
+#include <wx/numdlg.h> 
 
 #include <string>
 
@@ -26,6 +27,7 @@ public:
   ///// Options Menu Section /////
   void OnRandom(wxCommandEvent& event);
   void OnSmart(wxCommandEvent& event);
+  void OnRoundSet(wxCommandEvent& event);
 
   ///// Game Section /////
   void SetGame(Game* g);
@@ -37,6 +39,7 @@ public:
 private:
   Game* game;
 
+  long num_rounds;
   SettingOption current_difficulty;
 
   wxStaticText *button_chosen_text;

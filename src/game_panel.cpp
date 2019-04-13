@@ -34,7 +34,7 @@ void GamePanel::init()
   SetSizer(sizer);
 
   current_difficulty = SettingOption::kRandom;
-
+  num_rounds = 20;
 }
 
 void GamePanel::SetGame(Game* g)
@@ -78,15 +78,20 @@ void GamePanel::GenerateOptionsPanel()
                                             move_to_wxString(SettingOption::kRandom));
   wxButton *smart_button = new wxButton(options_panel, wxID_ANY,
                                             move_to_wxString(SettingOption::kSmart));
+  wxButton *round_button = new wxButton(options_panel, wxID_ANY,
+                                            "Set # rounds");
 
   random_button->Bind(wxEVT_BUTTON, &GamePanel::OnRandom, this);
   smart_button->Bind(wxEVT_BUTTON, &GamePanel::OnSmart, this);
+  round_button->Bind(wxEVT_BUTTON, &GamePanel::OnRoundSet, this);
   
   options_sizer->Add(option_text, 0, 0, 0);
   options_sizer->AddSpacer(10);
   options_sizer->Add(random_button, 0, 0, 0);
   options_sizer->AddSpacer(5);
   options_sizer->Add(smart_button, 0, 0, 0);
+  options_sizer->AddSpacer(5);
+  options_sizer->Add(round_button, 0, 0, 0);
 
   options_panel->SetSizer(options_sizer);
 }
@@ -274,6 +279,15 @@ void GamePanel::OnSmart(wxCommandEvent& event)
   SetOptionsVisibility(false);
 }
 
+void GamePanel::OnRoundSet(wxCommandEvent& event)
+{
+
+  num_rounds = wxGetNumberFromUser(
+      wxT("message\n"), wxT("gang "), 
+        wxT("caption"), 20, 
+        0, 100);
+  game->SetRoundsPerMatch(num_rounds);
+}
 
 void GamePanel::SetStartMenuVisibility(bool is_shown)
 {
