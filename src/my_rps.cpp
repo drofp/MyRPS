@@ -19,7 +19,7 @@ bool MyRps::OnInit()
 {
     if (!wxApp::OnInit()) return false;
 
-    GameFrame *gframe = new GameFrame("what");
+    GameFrame *gframe = new GameFrame("MyRPS");
     gframe->Show(true);
 
     return true;

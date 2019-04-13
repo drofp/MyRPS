@@ -86,7 +86,7 @@ void GamePanel::GenerateOptionsPanel()
   round_button->Bind(wxEVT_BUTTON, &GamePanel::OnRoundSet, this);
   
   options_sizer->Add(option_text, 0, 0, 0);
-  options_sizer->AddSpacer(10);
+  options_sizer->AddSpacer(5);
   options_sizer->Add(random_button, 0, 0, 0);
   options_sizer->AddSpacer(5);
   options_sizer->Add(smart_button, 0, 0, 0);
