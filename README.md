@@ -1,13 +1,15 @@
 # MyRPS - A Simple Rock Paper Scissors Game
 **NOTE:** This project is purely for academic purposes for satisfying program requirements for [CMPE 135](http://www.cs.sjsu.edu/~mak/CMPE135/index.html) at San Jose State University  
 
+## Prerequisites
+Please have [wxWidgets](http://www.cs.sjsu.edu/~mak/tutorials/InstallwxWidgets.pdf) and [Boost](https://www.boost.org/) installed before attempting to build the project.
+
 ## How to Run
 Run these commands at root of project to compile and run
 ```bash
 make
 ./bin/main
 ```
-
 
 ## Assignment Tasks
 ### v0.1 (Homework 3)
